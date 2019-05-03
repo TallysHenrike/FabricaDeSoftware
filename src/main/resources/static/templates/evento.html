@@ -1,0 +1,78 @@
+<br>
+<div class="row mx-1">
+	<div class="col-sm-12 mb-4">
+		<form name="form-evento" id="form-evento" class="card" ng-submit="salvar(form)">
+			<div class="card-header">
+				<h4>Evento</h4>
+			</div>
+			<div class="card-body">
+				<div class="form-group">
+					<label for="">Titulo</label>
+					<input type="text" class="form-control" id="" placeholder="Titulo" required="true" ng-model="form.titulo">
+				</div>
+				<div class="form-group">
+					<label for="">Descrição</label>
+					<textarea class="form-control" id="" placeholder="Descrição" required="true" ng-model="form.descricao"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="">Imagem Principal</label>
+					<input type="file" class="form-control" id="">
+				</div>
+                <div class="row">
+                    <div class="form-group col-md-3 col-sm-4">
+                        <label for="">Quantidade de vagas</label>
+                        <input type="number" class="form-control" id="" required="true" ng-model="form.quantidadeDeVagas">
+                    </div>
+                    <div class="form-group col-md-9 col-sm-8">
+                        <label for="">URL do Google Maps</label>
+                        <input type="text" class="form-control" id="" required="true" ng-model="form.urlDoGoogleMaps">
+                    </div>                
+                </div>
+                <div class="form-group">
+                    <label for="">Corpo</label>
+                    <text-angular id="" ng-model="form.corpo"></text-angular>
+                </div>
+			</div>
+			<div class="card-footer">
+				<input type="submit" class="btn" value="{{operacao.btn}}" ng-disabled="!form-evento.$valid"/>
+				<input type="reset" class="btn btn-danger" value="Cancelar" ng-click="resetForm()"/>
+			</div>
+		</form>
+	</div>
+    
+	<div class="col-sm-12">
+		<div class="card">
+			<div class="card-header">
+				<div class="form-group">
+					<label for="">Filtrar</label>
+					<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
+				</div>
+			</div>
+			<table class="card-body table table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Titulo</th>
+						<th scope="col">Vagas</th>
+						<th scope="col">Data</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr dir-paginate="evento in eventos|filter:filtrar|itemsPerPage:5">
+						<th scope="row">
+							<a ng-href="#/ver-evento/{{evento.idEvento}}"><i class="material-icons">add_circle_outline</i></a>
+							<a ng-click="consultar(evento)"><i class="material-icons">edit</i></a>
+							<a ng-click="excluir(evento)"><i class="material-icons">remove_circle_outline</i></a>
+						</th>
+						<td>{{evento.titulo}}</td>
+						<td>{{evento.quantidadeDeVagas}}</td>
+						<td>{{evento.dataDeInicio}}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="card-footer d-flex">
+				<dir-pagination-controls max-size="5" boundary-links="true" class="mx-auto" style="margin-top: 15px;"></dir-pagination-controls>
+			</div>
+		</div>
+	</div>
+</div>
