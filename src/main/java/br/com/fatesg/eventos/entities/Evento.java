@@ -16,6 +16,7 @@ public class Evento {
 	private Long idEvento;
 	@ManyToOne
 	private Administrador administrador;
+	private Categoria categoria;
 	private String titulo;
 	private String descricao;
 	private String corpo;
@@ -38,6 +39,14 @@ public class Evento {
 
 	public void setAdministrador(Administrador administrador) {
 		this.administrador = administrador;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public String getTitulo() {
