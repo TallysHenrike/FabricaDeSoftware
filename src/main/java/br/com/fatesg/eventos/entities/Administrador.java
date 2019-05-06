@@ -14,7 +14,7 @@ public class Administrador {
 	private String nome;
 	private String usuario;
 	private String senha;
-	private String foto;
+	private byte[] foto;
 
 	public Long getIdAdministrador() {
 		return idAdministrador;
@@ -48,11 +48,11 @@ public class Administrador {
 		this.senha = senha;
 	}
 
-	public String getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 }

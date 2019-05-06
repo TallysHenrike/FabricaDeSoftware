@@ -16,6 +16,7 @@ public class Evento {
 	private Long idEvento;
 	@ManyToOne
 	private Administrador administrador;
+	@ManyToOne
 	private Categoria categoria;
 	private String titulo;
 	private String descricao;
