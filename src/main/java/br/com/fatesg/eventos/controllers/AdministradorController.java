@@ -3,6 +3,10 @@ package br.com.fatesg.eventos.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +21,9 @@ import br.com.fatesg.eventos.persistence.AdministradorDao;
 @RequestMapping("/administrador")
 public class AdministradorController {
 
+	@PersistenceContext
+	private EntityManager em;
+
 	@Autowired
 	private AdministradorDao administradorDao;
 
@@ -24,7 +31,7 @@ public class AdministradorController {
 	public List<Administrador> listar() {
 		return administradorDao.findAll();
 	}
-	
+
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)
 	public Optional<Administrador> buscar(@PathVariable Long id) {
 		return administradorDao.findById(id);
@@ -43,6 +50,19 @@ public class AdministradorController {
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
 	public Administrador alterar(@RequestBody Administrador administrador) {
 		return administradorDao.save(administrador);
+	}
+
+	@RequestMapping(value = "acessar", method = RequestMethod.POST)
+	public Administrador acessar(@RequestBody Administrador administrador) {
+		try {
+			Query query = em
+					.createQuery("SELECT u from Administrador u where u.usuario = :usuario and u.senha = :senha")
+					.setParameter("usuario", administrador.getUsuario())
+					.setParameter("senha", administrador.getSenha());
+			return (Administrador) query.getSingleResult();			
+		}catch (Exception e) {
+			return null;
+		}
 	}
 
 }

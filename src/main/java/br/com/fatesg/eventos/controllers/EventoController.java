@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fatesg.eventos.entities.Administrador;
 import br.com.fatesg.eventos.entities.Evento;
 import br.com.fatesg.eventos.persistence.EventoDao;
 
@@ -35,14 +36,19 @@ public class EventoController {
 		eventoDao.deleteById(id);
 	}
 
-	@RequestMapping(value = "inserir", method = RequestMethod.POST)
-	public Evento inserir(@RequestBody Evento categoria) {
-		return eventoDao.save(categoria);
+	@RequestMapping(value = "inserir/{idAdministrador}", method = RequestMethod.POST)
+	public Evento inserir(@RequestBody Evento evento, @PathVariable Long idAdministrador) {
+		Administrador administrador = new Administrador();
+		administrador.setIdAdministrador(idAdministrador);
+		
+		evento.setAdministrador(administrador);
+		System.out.println(evento.toString());
+		return eventoDao.save(evento);
 	}
 
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
-	public Evento alterar(@RequestBody Evento categoria) {
-		return eventoDao.save(categoria);
+	public Evento alterar(@RequestBody Evento evento) {
+		return eventoDao.save(evento);
 	}
 
 }

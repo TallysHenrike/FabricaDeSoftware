@@ -7,13 +7,13 @@ import javax.persistence.Id;
 
 @Entity
 public class Categoria {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idCategoria;
 	private String nome;
 	private String descricao;
-	private String icone;
+	private byte[] icone;
 
 	public Long getIdCategoria() {
 		return idCategoria;
@@ -39,11 +39,11 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 
-	public String getIcone() {
+	public byte[] getIcone() {
 		return icone;
 	}
 
-	public void setIcone(String icone) {
+	public void setIcone(byte[] icone) {
 		this.icone = icone;
 	}
 

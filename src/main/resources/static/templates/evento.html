@@ -15,8 +15,8 @@
 					<textarea class="form-control" id="" placeholder="Descrição" required="true" ng-model="form.descricao"></textarea>
 				</div>
 				<div class="form-group">
-					<label for="">Imagem Principal</label>
-					<input type="file" class="form-control" id="">
+					<label for="imagem-principal">Imagem Principal</label>
+					<input type="file" class="form-control" id="imagem-principal">
 				</div>
                 <div class="row">
                     <div class="form-group col-md-3 col-sm-4">
@@ -26,7 +26,7 @@
                     <div class="form-group col-md-9 col-sm-8">
                         <label for="">URL do Google Maps</label>
                         <input type="text" class="form-control" id="" required="true" ng-model="form.urlDoGoogleMaps">
-                    </div>                
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="">Corpo</label>
@@ -34,7 +34,7 @@
                 </div>
 			</div>
 			<div class="card-footer">
-				<input type="submit" class="btn" value="{{operacao.btn}}" ng-disabled="!form-evento.$valid"/>
+				<input type="submit" class="btn btn-info" value="{{operacao.btn}}" ng-disabled="!form-evento.$valid"/>
 				<input type="reset" class="btn btn-danger" value="Cancelar" ng-click="resetForm()"/>
 			</div>
 		</form>

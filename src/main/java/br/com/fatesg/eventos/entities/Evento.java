@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Evento {
@@ -15,15 +16,11 @@ public class Evento {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idEvento;
 	@ManyToOne
-	private Colaborador colaborador;
-	@ManyToOne
-	private Patrocinador patrocinador;
-	@ManyToOne
 	private Administrador administrador;
 	private String titulo;
 	private String descricao;
 	private String corpo;
-	private String imagemPrincipal;
+	private byte[] imagemPrincipal;
 	private Date dataDeInicio;
 	private int quantidadeDeVagas;
 	private String urlDoGoogleMaps;
@@ -34,22 +31,6 @@ public class Evento {
 
 	public void setIdEvento(Long idEvento) {
 		this.idEvento = idEvento;
-	}
-
-	public Colaborador getColaborador() {
-		return colaborador;
-	}
-
-	public void setColaborador(Colaborador colaborador) {
-		this.colaborador = colaborador;
-	}
-
-	public Patrocinador getPatrocinador() {
-		return patrocinador;
-	}
-
-	public void setPatrocinador(Patrocinador patrocinador) {
-		this.patrocinador = patrocinador;
 	}
 
 	public Administrador getAdministrador() {
@@ -84,11 +65,11 @@ public class Evento {
 		this.corpo = corpo;
 	}
 
-	public String getImagemPrincipal() {
+	public byte[] getImagemPrincipal() {
 		return imagemPrincipal;
 	}
 
-	public void setImagemPrincipal(String imagemPrincipal) {
+	public void setImagemPrincipal(byte[] imagemPrincipal) {
 		this.imagemPrincipal = imagemPrincipal;
 	}
 

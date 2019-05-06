@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Patrocinador {
@@ -11,9 +12,11 @@ public class Patrocinador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idPatrocinador;
+	@ManyToOne
+	private Evento evento;
 	private String nome;
 	private String descricao;
-	private String imagem;
+	private byte[] imagem;
 
 	public Long getIdPatrocinador() {
 		return idPatrocinador;
@@ -21,6 +24,14 @@ public class Patrocinador {
 
 	public void setIdPatrocinador(Long idPatrocinador) {
 		this.idPatrocinador = idPatrocinador;
+	}
+
+	public Evento getEvento() {
+		return evento;
+	}
+
+	public void setEvento(Evento evento) {
+		this.evento = evento;
 	}
 
 	public String getNome() {
@@ -39,11 +50,11 @@ public class Patrocinador {
 		this.descricao = descricao;
 	}
 
-	public String getImagem() {
+	public byte[] getImagem() {
 		return imagem;
 	}
 
-	public void setImagem(String imagem) {
+	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
 	}
 }

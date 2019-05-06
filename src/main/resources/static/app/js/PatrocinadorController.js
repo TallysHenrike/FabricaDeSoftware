@@ -1,22 +1,44 @@
-angular.module("app").controller("PatrocinadorController", function($rootScope, $scope, $http, $location) {
+angular.module("app").controller("PatrocinadorController", function($rootScope, $scope, $http, $location, $routeParams) {
+	if(!sessionStorage.getItem('temAcesso')){
+		$rootScope.navegacao.temAcesso = false;
+		$location.path('/');
+	}
+	
+	let idEvento = $routeParams.idEvento;
+	
 	$rootScope.activetab = $location.path();
+	
+	$scope.form = {};
+	
+	function handleFileSelect(evt) {
+		let f = evt.target.files[0];
+		let reader = new FileReader();
+		
+		reader.onload = (function(theFile) {
+			return function(e) {
+				let binaryData = e.target.result;
+				let base64String = window.btoa(binaryData);
+				
+				$scope.form.imagem = base64String;
+				console.log($scope.form);
+			};
+		})(f);
+		
+		reader.readAsBinaryString(f);
+	}
+	document.getElementById("imagem-patrocinador").addEventListener("change", handleFileSelect, false);
 	
 	$scope.operacao = {
 		alterar: false,
 		btn: 'Cadastrar'
 	}
 	
-	function listar(){
-		$http.get('http://localhost:8080/patrocinador/listar')
-		.then((resposta)=>{
-			$scope.patrocinadores = resposta.data;
-		});
-	}
-	listar();
+	$http.get('http://localhost:8080/patrocinador/listar')
+	.then((resposta)=>{
+		$scope.patrocinadores = resposta.data;
+	});
 	
 	$scope.salvar = (form)=>{
-		form.icone = 'https://picsum.photos/100';
-		
 		if($scope.operacao.alterar){
 			$http.put('http://localhost:8080/patrocinador/alterar', form)
 			.then((resposta)=>{
@@ -24,7 +46,7 @@ angular.module("app").controller("PatrocinadorController", function($rootScope, 
 				console.log(resposta.data);
 			});
 		}else{
-			$http.post('http://localhost:8080/patrocinador/inserir', form)
+			$http.post(`http://localhost:8080/patrocinador/inserir/${idEvento}`, form)
 			.then((resposta)=>{
 				$scope.patrocinadores.push(resposta.data);
 				console.log(resposta.data);
@@ -47,7 +69,7 @@ angular.module("app").controller("PatrocinadorController", function($rootScope, 
 	}
 	
 	$scope.excluir = (patrocinador)=>{
-		$http.delete(`http://localhost:8080/patrocinador/deletar/${patrocinador.idpatrocinador}`)
+		$http.delete(`http://localhost:8080/patrocinador/deletar/${patrocinador.idPatrocinador}`)
 		.then((resposta)=>{
 			$scope.patrocinadores.splice($scope.patrocinadores.indexOf(patrocinador), 1);
 			console.log(resposta.data);

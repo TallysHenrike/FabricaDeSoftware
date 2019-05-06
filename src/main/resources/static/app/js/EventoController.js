@@ -1,5 +1,29 @@
 angular.module("app").controller("EventoController", function($rootScope, $scope, $http, $location) {
+	if(!sessionStorage.getItem('temAcesso')){
+		$rootScope.navegacao.temAcesso = false;
+		$location.path('/');
+	}
+	
 	$rootScope.activetab = $location.path();
+	$scope.form = {};
+	
+	function handleFileSelect(evt) {
+		let f = evt.target.files[0];
+		let reader = new FileReader();
+		
+		reader.onload = (function(theFile) {
+			return function(e) {
+				let binaryData = e.target.result;
+				let base64String = window.btoa(binaryData);
+				
+				$scope.form.imagemPrincipal = base64String;
+				console.log($scope.form);
+			};
+		})(f);
+		
+		reader.readAsBinaryString(f);
+	}
+	document.getElementById("imagem-principal").addEventListener("change", handleFileSelect, false);
 	
 	$scope.operacao = {
 		alterar: false,
@@ -12,7 +36,7 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 	});
 	
 	$scope.salvar = (form)=>{
-		form.icone = 'https://picsum.photos/100';
+		console.log(form)
 		
 		if($scope.operacao.alterar){
 			$http.put('http://localhost:8080/evento/alterar', form)
@@ -21,7 +45,9 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 				console.log(resposta.data);
 			});
 		}else{
-			$http.post('http://localhost:8080/evento/inserir', form)
+			let idAdministrador = $rootScope.navegacao.perfil.idAdministrador;
+			
+			$http.post(`http://localhost:8080/evento/inserir/${idAdministrador}`, form)
 			.then((resposta)=>{
 				$scope.eventos.push(resposta.data);
 				console.log(resposta.data);

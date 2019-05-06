@@ -1,12 +1,14 @@
 angular.module('app').config(function($routeProvider){
 	$routeProvider
+	.when('/', {
+		templateUrl: 'templates/acesso.html',
+		controller: 'NavegacaoController'
+	})
 	.when('/categoria', {
 		templateUrl: 'templates/categoria.html',
 		controller: 'CategoriaController'
-	}).when('/listar-categorias', {
-		templateUrl: 'templates/listar-categorias.html',
-		controller: 'CategoriaController'
-	}).when('/evento', {
+	})
+	.when('/evento', {
 		templateUrl: 'templates/evento.html',
 		controller: 'EventoController'
 	})
@@ -20,5 +22,5 @@ angular.module('app').config(function($routeProvider){
 	.when('/', {
 		templateUrl: 'templates/',
 		controller: 'Controller'
-	})*/.otherwise({ redirectTo: '/presenca' });
+	})*/.otherwise({ redirectTo: '/' });
 });

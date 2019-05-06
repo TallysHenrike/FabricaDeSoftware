@@ -1,17 +1,38 @@
 angular.module("app").controller("NavegacaoController", function($rootScope, $scope, $http, $location){
-	$scope.temAcesso = true;
-	
-	$scope.navegacao = {
+	$rootScope.navegacao = {
 		perfil: {
 			foto: '',
 			nome: '',
 			usuario: ''
-		}
+		},
+		temAcesso: false
 	}
 	
-	$http.get('http://localhost:8080/administrador/buscar/2')
-	.then((resposta)=>{
-		$scope.navegacao.perfil = resposta.data;
-		$scope.navegacao.perfil.foto = 'http://agbrands.com.br/wp-content/uploads/2017/01/perfil.jpg';
-	});
+	$rootScope.navegacao = sessionStorage.getItem('temAcesso') ?
+		JSON.parse(sessionStorage.getItem('temAcesso'))
+		:
+		{
+			perfil: {
+				foto: '',
+				nome: '',
+				usuario: ''
+			},
+			temAcesso: false
+		};
+	
+	$rootScope.acessar = (usuario)=>{
+		$http.post('http://localhost:8080/administrador/acessar', usuario)
+		.then((resposta)=>{
+			//console.log(resposta.data);
+			if(resposta.data != ""){
+				$rootScope.navegacao.perfil = resposta.data;
+				$rootScope.navegacao.temAcesso = true;
+				$location.path('/presenca');
+			}else{
+				$rootScope.navegacao.temAcesso = false;
+			}
+			
+			sessionStorage.setItem('temAcesso', JSON.stringify($rootScope.navegacao));
+		});
+	}
 });

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatesg.eventos.entities.Colaborador;
+import br.com.fatesg.eventos.entities.Evento;
 import br.com.fatesg.eventos.persistence.ColaboradorDao;
 
 @RestController
@@ -35,8 +36,12 @@ public class ColaboradorController {
 		colaboradorDao.deleteById(id);
 	}
 
-	@RequestMapping(value = "inserir", method = RequestMethod.POST)
-	public Colaborador inserir(@RequestBody Colaborador colaborador) {
+	@RequestMapping(value = "inserir/{idEvento}", method = RequestMethod.POST)
+	public Colaborador inserir(@RequestBody Colaborador colaborador, @PathVariable Long idEvento) {
+		Evento evento = new Evento();
+		evento.setIdEvento(idEvento);
+		
+		colaborador.setEvento(evento);
 		return colaboradorDao.save(colaborador);
 	}
 

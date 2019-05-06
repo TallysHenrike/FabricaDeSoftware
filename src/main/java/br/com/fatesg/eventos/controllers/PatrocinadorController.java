@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.fatesg.eventos.entities.Evento;
 import br.com.fatesg.eventos.entities.Patrocinador;
 import br.com.fatesg.eventos.persistence.PatrocinadorDao;
 
@@ -24,7 +25,7 @@ public class PatrocinadorController {
 	public List<Patrocinador> listar() {
 		return patrocinadorDao.findAll();
 	}
-	
+
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)
 	public Optional<Patrocinador> buscar(@PathVariable Long id) {
 		return patrocinadorDao.findById(id);
@@ -35,8 +36,12 @@ public class PatrocinadorController {
 		patrocinadorDao.deleteById(id);
 	}
 
-	@RequestMapping(value = "inserir", method = RequestMethod.POST)
-	public Patrocinador inserir(@RequestBody Patrocinador patrocinador) {
+	@RequestMapping(value = "inserir/{idEvento}", method = RequestMethod.POST)
+	public Patrocinador inserir(@RequestBody Patrocinador patrocinador, @PathVariable Long idEvento) {
+		Evento evento = new Evento();
+		evento.setIdEvento(idEvento);
+
+		patrocinador.setEvento(evento);
 		return patrocinadorDao.save(patrocinador);
 	}
 
