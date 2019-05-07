@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -54,15 +53,7 @@ public class AdministradorController {
 
 	@RequestMapping(value = "acessar", method = RequestMethod.POST)
 	public Administrador acessar(@RequestBody Administrador administrador) {
-		try {
-			Query query = em
-					.createQuery("SELECT u from Administrador u where u.usuario = :usuario and u.senha = :senha")
-					.setParameter("usuario", administrador.getUsuario())
-					.setParameter("senha", administrador.getSenha());
-			return (Administrador) query.getSingleResult();			
-		}catch (Exception e) {
-			return null;
-		}
+		return administradorDao.validarAcesso(administrador.getUsuario(), administrador.getSenha());
 	}
 
 }
