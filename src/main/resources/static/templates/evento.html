@@ -54,7 +54,7 @@
 					<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
 				</div>
 			</div>
-			<table class="card-body table table-bordered">
+			<table class="card-body table table-bordered table-hover">
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col">#</th>
@@ -66,9 +66,9 @@
 				<tbody>
 					<tr dir-paginate="evento in eventos|filter:filtrar|itemsPerPage:5">
 						<th scope="row">
-							<a ng-href="#/ver-evento/{{evento.idEvento}}"><i class="material-icons">add_circle_outline</i></a>
-							<a ng-click="consultar(evento)"><i class="material-icons">edit</i></a>
-							<a ng-click="excluir(evento)"><i class="material-icons">remove_circle_outline</i></a>
+							<a ng-href="#/ver-evento/{{evento.idEvento}}" class="btn btn-info text-light"><i class="material-icons">add_circle_outline</i></a>
+							<a ng-click="consultar(evento)" class="btn btn-warning text-light"><i class="material-icons">edit</i></a>
+							<a ng-click="excluir(evento)" class="btn btn-danger text-light"><i class="material-icons">remove_circle_outline</i></a>
 						</th>
 						<td>{{evento.titulo}}</td>
 						<td>{{evento.quantidadeDeVagas}}</td>

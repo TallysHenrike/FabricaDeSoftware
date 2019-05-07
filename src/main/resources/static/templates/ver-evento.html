@@ -35,7 +35,7 @@
 						<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
 					</div>
 				</div>
-				<table class="card-body table table-bordered">
+				<table class="card-body table table-bordered table-hover">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">#</th>
@@ -98,7 +98,7 @@
 						<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
 					</div>
 				</div>
-				<table class="card-body table table-bordered">
+				<table class="card-body table table-bordered table-hover">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">#</th>
@@ -109,8 +109,8 @@
 					<tbody>
 						<tr dir-paginate="patrocinador in patrocinadores|filter:filtrar|itemsPerPage:3">
 							<th scope="row">
-								<a ng-click="consultar(patrocinador)"><i class="material-icons">edit</i></a>
-								<a ng-click="excluir(patrocinador)"><i class="material-icons">remove_circle_outline</i></a>
+								<a ng-click="consultar(patrocinador)" class="btn btn-warning text-light"><i class="material-icons">edit</i></a>
+								<a ng-click="excluir(patrocinador)" class="btn btn-danger text-light"><i class="material-icons">remove_circle_outline</i></a>
 							</th>
 							<td>{{patrocinador.nome}}</td>
 							<td style="width: 100px"><img src="data:image/jpeg;base64,{{patrocinador.imagem}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>

@@ -9,33 +9,8 @@
 	}
 }
 
-body{
-	background-color: #f6f6f6
-}
-
 #corpo{
 	width: 100%;
-}
-
-#form-categoria{
-	/*background-color: #465a60;
-	color: #fff;*/
-}
-
-#form-categoria input[type = 'submit']{
-	/*background-color: #273133;
-	border: 1px solid #15fcf9;
-	color: #fff;*/
-}
-
-#form-categoria input,
-#form-categoria button,
-#form-categoria textarea {
-	/*border-color: #17fdfa;*/
-}
-
-.pull-right{
-	float: right;
 }
 
 .card table{
