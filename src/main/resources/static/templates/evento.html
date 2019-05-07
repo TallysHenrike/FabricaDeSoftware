@@ -32,6 +32,12 @@
                     <label for="">Corpo</label>
                     <text-angular id="" ng-model="form.corpo"></text-angular>
                 </div>
+				<div class="form-group">
+					<label for="">Categoria do evento</label>
+					<select class="form-control" id="" ng-model="form.idCategoria">
+						<option ng-repeat="categoria in categorias" value="{{categoria.idCategoria}}">{{categoria.nome}}</option>
+					</select>
+				</div>
 			</div>
 			<div class="card-footer">
 				<input type="submit" class="btn btn-info" value="{{operacao.btn}}" ng-disabled="!form-evento.$valid"/>

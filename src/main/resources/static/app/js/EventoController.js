@@ -35,6 +35,11 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 		$scope.eventos = resposta.data;
 	});
 	
+	$http.get('http://localhost:8080/categoria/listar')
+	.then((resposta)=>{
+		$scope.categorias = resposta.data;
+	});
+	
 	$scope.salvar = (form)=>{
 		console.log(form)
 		
