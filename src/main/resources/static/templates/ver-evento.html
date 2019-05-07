@@ -46,11 +46,11 @@
 					<tbody>
 						<tr dir-paginate="colaborador in colaboradores|filter:filtrar|itemsPerPage:3">
 							<th scope="row">
-								<a ng-click="consultar(colaborador)"><i class="material-icons">edit</i></a>
-								<a ng-click="excluir(colaborador)"><i class="material-icons">remove_circle_outline</i></a>
+								<a ng-click="consultar(colaborador)" class="btn-sm btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
+								<a ng-click="excluir(colaborador)" class="btn-sm btn-danger text-light"><i class="fa fa-times"></i></a>
 							</th>
 							<td>{{colaborador.nome}}</td>
-							<td style="width: 100px"><img src="data:image/jpeg;base64,{{colaborador.imagem}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
+							<td style="width: 100px"><img ng-src="data:image/jpeg;base64,{{colaborador.imagem}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
 						</tr>
 					</tbody>
 				</table>
@@ -109,11 +109,11 @@
 					<tbody>
 						<tr dir-paginate="patrocinador in patrocinadores|filter:filtrar|itemsPerPage:3">
 							<th scope="row">
-								<a ng-click="consultar(patrocinador)" class="btn btn-warning text-light"><i class="material-icons">edit</i></a>
-								<a ng-click="excluir(patrocinador)" class="btn btn-danger text-light"><i class="material-icons">remove_circle_outline</i></a>
+								<a ng-click="consultar(patrocinador)" class="btn-sm btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
+								<a ng-click="excluir(patrocinador)" class="btn-sm btn-danger text-light"><i class="fa fa-times"></i></a>
 							</th>
 							<td>{{patrocinador.nome}}</td>
-							<td style="width: 100px"><img src="data:image/jpeg;base64,{{patrocinador.imagem}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
+							<td style="width: 100px"><img ng-src="data:image/jpeg;base64,{{patrocinador.imagem}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
 						</tr>
 					</tbody>
 				</table>
