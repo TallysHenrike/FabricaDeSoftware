@@ -33,7 +33,7 @@ angular.module("app").controller("PatrocinadorController", function($rootScope, 
 		btn: 'Cadastrar'
 	}
 	
-	$http.get('http://localhost:8080/patrocinador/listar')
+	$http.get(`http://localhost:8080/patrocinador/listar/${idEvento}`)
 	.then((resposta)=>{
 		$scope.patrocinadores = resposta.data;
 	});

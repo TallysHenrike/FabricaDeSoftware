@@ -33,7 +33,7 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 		btn: 'Cadastrar'
 	}
 	
-	$http.get('http://localhost:8080/colaborador/listar')
+	$http.get(`http://localhost:8080/colaborador/listar/${idEvento}`)
 	.then((resposta)=>{
 		$scope.colaboradores = resposta.data;
 	});

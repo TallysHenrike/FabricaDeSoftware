@@ -20,10 +20,10 @@ public class PatrocinadorController {
 
 	@Autowired
 	private PatrocinadorDao patrocinadorDao;
-
-	@RequestMapping(value = "listar", method = RequestMethod.GET)
-	public List<Patrocinador> listar() {
-		return patrocinadorDao.findAll();
+	
+	@RequestMapping(value = "listar/{idEvento}", method = RequestMethod.GET)
+	public List<Patrocinador> listar(@PathVariable Long idEvento) {
+		return patrocinadorDao.listarDe(idEvento);
 	}
 
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)

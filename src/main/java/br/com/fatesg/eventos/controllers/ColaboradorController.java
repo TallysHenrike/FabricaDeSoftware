@@ -21,9 +21,9 @@ public class ColaboradorController {
 	@Autowired
 	private ColaboradorDao colaboradorDao;
 
-	@RequestMapping(value = "listar", method = RequestMethod.GET)
-	public List<Colaborador> listar() {
-		return colaboradorDao.findAll();
+	@RequestMapping(value = "listar/{idEvento}", method = RequestMethod.GET)
+	public List<Colaborador> listar(@PathVariable Long idEvento) {
+		return colaboradorDao.listarDe(idEvento);
 	}
 	
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)

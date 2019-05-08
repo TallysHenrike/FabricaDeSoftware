@@ -3,9 +3,6 @@ package br.com.fatesg.eventos.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,9 +16,6 @@ import br.com.fatesg.eventos.persistence.AdministradorDao;
 @RestController
 @RequestMapping("/administrador")
 public class AdministradorController {
-
-	@PersistenceContext
-	private EntityManager em;
 
 	@Autowired
 	private AdministradorDao administradorDao;
