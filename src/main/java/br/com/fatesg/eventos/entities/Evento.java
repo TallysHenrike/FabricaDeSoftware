@@ -25,6 +25,8 @@ public class Evento {
 	private Date dataDeInicio;
 	private int quantidadeDeVagas;
 	private String urlDoGoogleMaps;
+	
+	public Evento() {}
 
 	public Evento(Long idEvento, Administrador administrador, Categoria categoria, String titulo, String descricao,	String corpo, byte[] imagemPrincipal, Date dataDeInicio, int quantidadeDeVagas, String urlDoGoogleMaps) {
 		super();

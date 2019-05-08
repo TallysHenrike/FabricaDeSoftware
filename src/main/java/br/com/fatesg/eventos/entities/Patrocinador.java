@@ -17,6 +17,8 @@ public class Patrocinador {
 	private String nome;
 	private String descricao;
 	private byte[] imagem;
+	
+	public Patrocinador() {}
 
 	public Patrocinador(Long idPatrocinador, Evento evento, String nome, String descricao, byte[] imagem) {
 		super();
