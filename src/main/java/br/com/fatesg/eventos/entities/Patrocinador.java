@@ -18,6 +18,15 @@ public class Patrocinador {
 	private String descricao;
 	private byte[] imagem;
 
+	public Patrocinador(Long idPatrocinador, Evento evento, String nome, String descricao, byte[] imagem) {
+		super();
+		this.idPatrocinador = idPatrocinador;
+		this.evento = evento;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.imagem = imagem;
+	}
+
 	public Long getIdPatrocinador() {
 		return idPatrocinador;
 	}

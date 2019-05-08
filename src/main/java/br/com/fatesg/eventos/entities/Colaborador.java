@@ -17,6 +17,17 @@ public class Colaborador {
 	private String nome;
 	private String descricao;
 	private byte[] imagem;
+	
+	public Colaborador() {}
+
+	public Colaborador(Long idColaborador, Evento evento, String nome, String descricao, byte[] imagem) {
+		super();
+		this.idColaborador = idColaborador;
+		this.evento = evento;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.imagem = imagem;
+	}
 
 	public Long getIdColaborador() {
 		return idColaborador;

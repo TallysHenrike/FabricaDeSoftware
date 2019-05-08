@@ -14,6 +14,16 @@ public class Categoria {
 	private String nome;
 	private String descricao;
 	private byte[] icone;
+	
+	public Categoria() {}
+
+	public Categoria(Long idCategoria, String nome, String descricao, byte[] icone) {
+		super();
+		this.idCategoria = idCategoria;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.icone = icone;
+	}
 
 	public Long getIdCategoria() {
 		return idCategoria;

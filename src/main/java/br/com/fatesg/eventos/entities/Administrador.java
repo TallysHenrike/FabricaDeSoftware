@@ -15,6 +15,25 @@ public class Administrador {
 	private String usuario;
 	private String senha;
 	private byte[] foto;
+	
+	public Administrador() {}
+
+	public Administrador(Long idAdministrador, String nome, String usuario, String senha, byte[] foto) {
+		super();
+		this.idAdministrador = idAdministrador;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+	}
+	
+	public Administrador(Long idAdministrador, String nome, String usuario, byte[] foto) {
+		super();
+		this.idAdministrador = idAdministrador;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.foto = foto;
+	}
 
 	public Long getIdAdministrador() {
 		return idAdministrador;
