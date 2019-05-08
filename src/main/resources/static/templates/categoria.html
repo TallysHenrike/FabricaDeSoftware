@@ -34,7 +34,7 @@
                     <input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
                 </div>
             </div>
-            <table class="card-body table table-bordered table-hover">
+            <table class="card-body table table-bordered table-hover text-center">
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">#</th>
@@ -44,11 +44,11 @@
                 </thead>
                 <tbody>
                     <tr dir-paginate="categoria in categorias|filter:filtrar|itemsPerPage:3">
-                        <th scope="row">
-                            <a ng-click="consultar(categoria)" class="btn-sm btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
-                            <a ng-click="excluir(categoria)" class="btn-sm btn-danger text-light"><i class="fa fa-times"></i></a>
+                        <th scope="row" class="align-middle" style="width: 150px">
+                            <a ng-click="consultar(categoria)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
+                            <a ng-click="excluir(categoria)" class="btn btn-danger text-light"><i class="fa fa-times"></i></a>
                         </th>
-                        <td>{{categoria.nome}}</td>
+                        <td class="align-middle">{{categoria.nome}}</td>
                         <td style="width: 100px"><img ng-src="data:image/jpeg;base64,{{categoria.icone}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
                     </tr>
                 </tbody>

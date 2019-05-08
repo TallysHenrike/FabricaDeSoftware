@@ -26,7 +26,7 @@
 				</div>
 			</form>
 		</div>
-		<br>
+
 		<div class="col-12">
 			<div class="card">
 				<div class="card-header">
@@ -35,7 +35,7 @@
 						<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
 					</div>
 				</div>
-				<table class="card-body table table-bordered table-hover">
+				<table class="card-body table table-bordered table-hover text-center">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">#</th>
@@ -45,11 +45,11 @@
 					</thead>
 					<tbody>
 						<tr dir-paginate="colaborador in colaboradores|filter:filtrar|itemsPerPage:3">
-							<th scope="row">
-								<a ng-click="consultar(colaborador)" class="btn-sm btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
-								<a ng-click="excluir(colaborador)" class="btn-sm btn-danger text-light"><i class="fa fa-times"></i></a>
+							<th scope="row" class="align-middle" style="width: 150px">
+								<a ng-click="consultar(colaborador)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
+								<a ng-click="excluir(colaborador)" class="btn btn-danger text-light"><i class="fa fa-times"></i></a>
 							</th>
-							<td>{{colaborador.nome}}</td>
+							<td class="align-middle">{{colaborador.nome}}</td>
 							<td style="width: 100px"><img ng-src="data:image/jpeg;base64,{{colaborador.imagem}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
 						</tr>
 					</tbody>
@@ -89,7 +89,7 @@
 				</div>
 			</form>
 		</div>
-		<br>
+
 		<div class="col-12">
 			<div class="card">
 				<div class="card-header">
@@ -98,7 +98,7 @@
 						<input type="text" class="form-control" id="" placeholder="Filtrar" ng-model="filtrar">
 					</div>
 				</div>
-				<table class="card-body table table-bordered table-hover">
+				<table class="card-body table table-bordered table-hover text-center">
 					<thead class="thead-dark">
 						<tr>
 							<th scope="col">#</th>
@@ -108,11 +108,11 @@
 					</thead>
 					<tbody>
 						<tr dir-paginate="patrocinador in patrocinadores|filter:filtrar|itemsPerPage:3">
-							<th scope="row">
-								<a ng-click="consultar(patrocinador)" class="btn-sm btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
-								<a ng-click="excluir(patrocinador)" class="btn-sm btn-danger text-light"><i class="fa fa-times"></i></a>
+							<th scope="row" class="align-middle" style="width: 150px">
+								<a ng-click="consultar(patrocinador)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
+								<a ng-click="excluir(patrocinador)" class="btn btn-danger text-light"><i class="fa fa-times"></i></a>
 							</th>
-							<td>{{patrocinador.nome}}</td>
+							<td class="align-middle">{{patrocinador.nome}}</td>
 							<td style="width: 100px"><img ng-src="data:image/jpeg;base64,{{patrocinador.imagem}}" class="img-fluid img-thumbnail rounded mx-auto" style="max-height: 100px; max-width: 100px"></td>
 						</tr>
 					</tbody>
