@@ -23,7 +23,7 @@ public class ColaboradorController {
 
 	@RequestMapping(value = "listar/{idEvento}", method = RequestMethod.GET)
 	public List<Colaborador> listar(@PathVariable Long idEvento) {
-		return colaboradorDao.listarDe(idEvento);
+		return colaboradorDao.findAllByIdEvento(idEvento);
 	}
 	
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)

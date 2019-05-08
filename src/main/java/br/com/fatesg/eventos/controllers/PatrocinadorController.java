@@ -23,7 +23,7 @@ public class PatrocinadorController {
 	
 	@RequestMapping(value = "listar/{idEvento}", method = RequestMethod.GET)
 	public List<Patrocinador> listar(@PathVariable Long idEvento) {
-		return patrocinadorDao.listarDe(idEvento);
+		return patrocinadorDao.findAllByIdEvento(idEvento);
 	}
 
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)

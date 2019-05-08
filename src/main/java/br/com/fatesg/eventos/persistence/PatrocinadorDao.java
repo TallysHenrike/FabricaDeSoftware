@@ -10,6 +10,6 @@ import br.com.fatesg.eventos.entities.Patrocinador;
 
 public interface PatrocinadorDao extends JpaRepository<Patrocinador, Long> {
 	
-	@Query(value = "SELECT * from Patrocinador p where p.evento_id_evento = :idEvento", nativeQuery=true)
-	public List<Patrocinador> listarDe(@Param("idEvento") long idPatrocinador);
+	@Query(value = "SELECT * FROM public.patrocinador WHERE evento_id_evento = :idEvento", nativeQuery=true)
+	public List<Patrocinador> findAllByIdEvento(@Param("idEvento") long idPatrocinador);
 }

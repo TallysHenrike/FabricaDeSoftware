@@ -10,6 +10,6 @@ import br.com.fatesg.eventos.entities.Colaborador;
 
 public interface ColaboradorDao extends JpaRepository<Colaborador, Long> {
 	
-	@Query(value = "SELECT * from Colaborador c where c.evento_id_evento = :idEvento", nativeQuery=true)
-	public List<Colaborador> listarDe(@Param("idEvento") long idEvento);
+	@Query(value = "SELECT * FROM public.colaborador WHERE evento_id_evento = :idEvento", nativeQuery=true)
+	public List<Colaborador> findAllByIdEvento(@Param("idEvento") long idEvento);
 }
