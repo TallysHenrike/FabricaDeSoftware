@@ -30,6 +30,11 @@
 	align-items: center
 }
 
+.pull-right {
+    float: right;
+    cursor: pointer;
+}
+
 #sidenav .logo a {
 	color: #fff;
 	font-size: 30px
