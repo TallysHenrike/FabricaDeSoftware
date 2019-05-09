@@ -62,7 +62,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr dir-paginate="evento in eventos|filter:filtrar|itemsPerPage:5">
+					<tr dir-paginate="evento in eventos|filter:filtrar|itemsPerPage:10">
 						<th scope="row" class="align-middle" style="width: 180px">
 							<a ng-href="#/ver-evento/{{evento.idEvento}}" class="btn btn-info text-light"><i class="fa fa-plus"></i></a>
 							<a ng-click="consultar(evento)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
@@ -70,7 +70,7 @@
 						</th>
 						<td class="align-middle">{{evento.titulo}}</td>
 						<td class="align-middle">{{evento.quantidadeDeVagas}}</td>
-						<td class="align-middle">{{evento.dataDeInicio}}</td>
+						<td class="align-middle">{{evento.dataDeCadastro}}</td>
 					</tr>
 				</tbody>
 			</table>

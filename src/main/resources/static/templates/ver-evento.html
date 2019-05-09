@@ -41,7 +41,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr dir-paginate="colaborador in colaboradores|filter:filtrar|itemsPerPage:3">
+					<tr dir-paginate="colaborador in colaboradores|filter:filtrar|itemsPerPage:2">
 						<th scope="row" class="align-middle" style="width: 150px">
 							<a ng-click="consultar(colaborador)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
 							<a ng-click="excluir(colaborador)" class="btn btn-danger text-light"><i class="fa fa-times"></i></a>
@@ -101,7 +101,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr dir-paginate="patrocinador in patrocinadores|filter:filtrar|itemsPerPage:3">
+					<tr dir-paginate="patrocinador in patrocinadores|filter:filtrar|itemsPerPage:2">
 						<th scope="row" class="align-middle" style="width: 150px">
 							<a ng-click="consultar(patrocinador)" class="btn btn-warning text-light"><i class="fas fa-pen-alt"></i></a>
 							<a ng-click="excluir(patrocinador)" class="btn btn-danger text-light"><i class="fa fa-times"></i></a>
