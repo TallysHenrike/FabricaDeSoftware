@@ -11,6 +11,8 @@
 
 #corpo{
 	width: 100%;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
 }
 
 .card table{
@@ -18,10 +20,14 @@
 }
 
 .card-header, .card-footer {
-	background-color: rgba(70, 90, 97, .8) !important;
+	background-color: rgba(23, 162, 184, .7) !important;
 	color: #fff !important;
 }
 
-.form-control, .card {
-	border: 1px solid #465a61 !important;
+.form-control {
+	border: 1px solid rgb(35, 167, 153) !important;
+}
+
+.card {
+	border: 2px solid rgba(23, 162, 184, .7) !important;
 }
