@@ -5,17 +5,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotEmpty;
+
 
 @Entity
 public class Patrocinador {
 
+	@NotEmpty
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator="patrocinador_seq",strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="patrocinador_seq", sequenceName="patrocinador_seq", allocationSize=1, initialValue=1)
 	private Long idPatrocinador;
+	
+	@NotEmpty
 	@ManyToOne
 	private Evento evento;
+	
+	@NotEmpty
 	private String nome;
+	
+	@NotEmpty
 	private String descricao;
+	
+	@NotEmpty
 	private byte[] imagem;
 
 	public Long getIdPatrocinador() {

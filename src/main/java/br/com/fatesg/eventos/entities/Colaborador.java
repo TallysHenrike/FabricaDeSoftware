@@ -5,18 +5,34 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Colaborador {
 
+	@NotNull
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idColaborador;
+	
+	@NotNull
 	@ManyToOne
 	private Evento evento;
+	@NotNull
 	private String nome;
+	@NotNull
 	private String descricao;
+	@NotNull
 	private byte[] imagem;
+
+	public Colaborador(@NotNull Long idColaborador, @NotNull Evento evento, @NotNull String nome,
+			@NotNull String descricao, @NotNull byte[] imagem) {
+		this.idColaborador = idColaborador;
+		this.evento = evento;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.imagem = imagem;
+	}
 
 	public Long getIdColaborador() {
 		return idColaborador;
