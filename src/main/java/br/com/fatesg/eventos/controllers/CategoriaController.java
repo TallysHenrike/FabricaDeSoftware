@@ -1,5 +1,6 @@
 package br.com.fatesg.eventos.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,11 +38,13 @@ public class CategoriaController {
 
 	@RequestMapping(value = "inserir", method = RequestMethod.POST)
 	public Categoria inserir(@RequestBody Categoria categoria) {
+		categoria.setDataDeCadastro(new Date());
 		return categoriaDao.save(categoria);
 	}
 
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
 	public Categoria alterar(@RequestBody Categoria categoria) {
+		categoria.setDataDeAtualizacao(new Date());
 		return categoriaDao.save(categoria);
 	}
 

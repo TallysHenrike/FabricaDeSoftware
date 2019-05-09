@@ -1,5 +1,7 @@
 package br.com.fatesg.eventos.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +16,9 @@ public class Categoria {
 	private String nome;
 	private String descricao;
 	private byte[] icone;
-	
+	private Date dataDeCadastro;
+	private Date dataDeAtualizacao;
+
 	public Categoria() {}
 
 	public Categoria(Long idCategoria, String nome, String descricao, byte[] icone) {
@@ -57,4 +61,19 @@ public class Categoria {
 		this.icone = icone;
 	}
 
+	public Date getDataDeCadastro() {
+		return dataDeCadastro;
+	}
+
+	public void setDataDeCadastro(Date dataDeCadastro) {
+		this.dataDeCadastro = dataDeCadastro;
+	}
+
+	public Date getDataDeAtualizacao() {
+		return dataDeAtualizacao;
+	}
+
+	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
+		this.dataDeAtualizacao = dataDeAtualizacao;
+	}
 }

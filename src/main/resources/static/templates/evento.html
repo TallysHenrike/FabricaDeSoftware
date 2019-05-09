@@ -1,6 +1,6 @@
 <div class="row mx-1">
-	<div class="col-sm-12 mb-4">
-		<form name="form-evento" id="form-evento" class="card" ng-submit="salvar(form)">
+	<div class="col-sm-12">
+		<form name="form-evento" id="form-evento" class="card mb-1" ng-submit="salvar(form)">
 			<div class="card-header">
 				<h4>Evento</h4>
 			</div>
@@ -17,20 +17,20 @@
 					<label for="imagem-principal">Imagem Principal</label>
 					<input type="file" class="form-control" id="imagem-principal">
 				</div>
-                <div class="row">
-                    <div class="form-group col-md-3 col-sm-4">
-                        <label for="">Quantidade de vagas</label>
-                        <input type="number" class="form-control" id="" required="true" ng-model="form.quantidadeDeVagas">
-                    </div>
-                    <div class="form-group col-md-9 col-sm-8">
-                        <label for="">URL do Google Maps</label>
-                        <input type="text" class="form-control" id="" required="true" ng-model="form.urlDoGoogleMaps">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="">Corpo</label>
-                    <text-angular id="" ng-model="form.corpo"></text-angular>
-                </div>
+				<div class="row">
+					<div class="form-group col-md-3 col-sm-4">
+						<label for="">Quantidade de vagas</label>
+						<input type="number" class="form-control" id="" required="true" ng-model="form.quantidadeDeVagas">
+					</div>
+					<div class="form-group col-md-9 col-sm-8">
+						<label for="">URL do Google Maps</label>
+						<input type="text" class="form-control" id="" required="true" ng-model="form.urlDoGoogleMaps">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="">Corpo</label>
+					<text-angular id="" ng-model="form.corpo"></text-angular>
+				</div>
 				<div class="form-group">
 					<label for="">Categoria do evento</label>
 					<select class="form-control" id="" ng-model="form.idCategoria">
@@ -39,12 +39,11 @@
 				</div>
 			</div>
 			<div class="card-footer">
-				<input type="submit" class="btn btn-info" value="{{operacao.btn}}" ng-disabled="!form-evento.$valid"/>
-				<input type="reset" class="btn btn-danger" value="Cancelar" ng-click="resetForm()"/>
+				<input type="submit" class="btn btn-info" value="{{operacao.btn}}" ng-disabled="!form-evento.$valid" />
+				<input type="reset" class="btn btn-danger" value="Cancelar" ng-click="resetForm()" />
 			</div>
 		</form>
 	</div>
-    
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-header">

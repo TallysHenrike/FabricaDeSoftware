@@ -1,5 +1,6 @@
 package br.com.fatesg.eventos.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,11 +43,13 @@ public class ColaboradorController {
 		evento.setIdEvento(idEvento);
 		
 		colaborador.setEvento(evento);
+		colaborador.setDataDeCadastro(new Date());
 		return colaboradorDao.save(colaborador);
 	}
 
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
 	public Colaborador alterar(@RequestBody Colaborador colaborador) {
+		colaborador.setDataDeCadastro(new Date());
 		return colaboradorDao.save(colaborador);
 	}
 

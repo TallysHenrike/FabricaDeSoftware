@@ -1,5 +1,6 @@
 package br.com.fatesg.eventos.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,11 +38,13 @@ public class AdministradorController {
 
 	@RequestMapping(value = "inserir", method = RequestMethod.POST)
 	public Administrador inserir(@RequestBody Administrador administrador) {
+		administrador.setDataDeCadastro(new Date());
 		return administradorDao.save(administrador);
 	}
 
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
 	public Administrador alterar(@RequestBody Administrador administrador) {
+		administrador.setDataDeAtualizacao(new Date());
 		return administradorDao.save(administrador);
 	}
 

@@ -1,5 +1,6 @@
 package br.com.fatesg.eventos.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,12 +43,13 @@ public class EventoController {
 		administrador.setIdAdministrador(idAdministrador);
 		
 		evento.setAdministrador(administrador);
-		System.out.println(evento.toString());
+		evento.setDataDeCadastro(new Date());
 		return eventoDao.save(evento);
 	}
 
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
 	public Evento alterar(@RequestBody Evento evento) {
+		evento.setDataDeAtualizacao(new Date());
 		return eventoDao.save(evento);
 	}
 
