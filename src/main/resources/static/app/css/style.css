@@ -18,6 +18,10 @@
 }
 
 .card-header, .card-footer {
-	background-color: rgba(27, 180, 208, 0.8) !important;
+	background-color: rgba(70, 90, 97, .8) !important;
 	color: #fff !important;
+}
+
+.form-control, .card {
+	border: 1px solid #465a61 !important;
 }
