@@ -8,6 +8,16 @@ angular.module("app").controller("NavegacaoController", function($rootScope, $sc
 		temAcesso: false
 	}
 	
+	if(!sessionStorage.getItem('temAcesso')){
+		$rootScope.navegacao.temAcesso = false;
+		$location.path('/acesso');
+	}
+	
+	$scope.fecharSessao = ()=>{
+		sessionStorage.removeItem('temAcesso');
+		//$rootScope.navegacao.temAcesso = false;
+	}
+	
 	$rootScope.navegacao = sessionStorage.getItem('temAcesso') ?
 		JSON.parse(sessionStorage.getItem('temAcesso'))
 		:

@@ -25,6 +25,25 @@ public class Evento {
 	private Date dataDeInicio;
 	private int quantidadeDeVagas;
 	private String urlDoGoogleMaps;
+	private Date dataDeCadastro;
+	private Date dataDeAtualizacao;
+
+	public Evento() {}
+
+	public Evento(Long idEvento, Administrador administrador, Categoria categoria, String titulo, String descricao,
+			String corpo, byte[] imagemPrincipal, Date dataDeInicio, int quantidadeDeVagas, String urlDoGoogleMaps) {
+		super();
+		this.idEvento = idEvento;
+		this.administrador = administrador;
+		this.categoria = categoria;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.corpo = corpo;
+		this.imagemPrincipal = imagemPrincipal;
+		this.dataDeInicio = dataDeInicio;
+		this.quantidadeDeVagas = quantidadeDeVagas;
+		this.urlDoGoogleMaps = urlDoGoogleMaps;
+	}
 
 	public Long getIdEvento() {
 		return idEvento;
@@ -104,5 +123,21 @@ public class Evento {
 
 	public void setUrlDoGoogleMaps(String urlDoGoogleMaps) {
 		this.urlDoGoogleMaps = urlDoGoogleMaps;
+	}
+
+	public Date getDataDeCadastro() {
+		return dataDeCadastro;
+	}
+
+	public void setDataDeCadastro(Date dataDeCadastro) {
+		this.dataDeCadastro = dataDeCadastro;
+	}
+
+	public Date getDataDeAtualizacao() {
+		return dataDeAtualizacao;
+	}
+
+	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
+		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
 }

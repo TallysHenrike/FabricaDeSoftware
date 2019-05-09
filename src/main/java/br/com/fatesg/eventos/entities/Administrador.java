@@ -1,5 +1,7 @@
 package br.com.fatesg.eventos.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +17,19 @@ public class Administrador {
 	private String usuario;
 	private String senha;
 	private byte[] foto;
+	private Date dataDeCadastro;
+	private Date dataDeAtualizacao;
+
+	public Administrador() {}
+
+	public Administrador(Long idAdministrador, String nome, String usuario, String senha, byte[] foto) {
+		super();
+		this.idAdministrador = idAdministrador;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+		this.foto = foto;
+	}
 
 	public Long getIdAdministrador() {
 		return idAdministrador;
@@ -54,5 +69,21 @@ public class Administrador {
 
 	public void setFoto(byte[] foto) {
 		this.foto = foto;
+	}
+
+	public Date getDataDeCadastro() {
+		return dataDeCadastro;
+	}
+
+	public void setDataDeCadastro(Date dataDeCadastro) {
+		this.dataDeCadastro = dataDeCadastro;
+	}
+
+	public Date getDataDeAtualizacao() {
+		return dataDeAtualizacao;
+	}
+
+	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
+		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
 }

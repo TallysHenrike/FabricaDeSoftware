@@ -1,11 +1,8 @@
 package br.com.fatesg.eventos.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,9 +17,6 @@ import br.com.fatesg.eventos.persistence.AdministradorDao;
 @RestController
 @RequestMapping("/administrador")
 public class AdministradorController {
-
-	@PersistenceContext
-	private EntityManager em;
 
 	@Autowired
 	private AdministradorDao administradorDao;
@@ -44,25 +38,19 @@ public class AdministradorController {
 
 	@RequestMapping(value = "inserir", method = RequestMethod.POST)
 	public Administrador inserir(@RequestBody Administrador administrador) {
+		administrador.setDataDeCadastro(new Date());
 		return administradorDao.save(administrador);
 	}
 
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
 	public Administrador alterar(@RequestBody Administrador administrador) {
+		administrador.setDataDeAtualizacao(new Date());
 		return administradorDao.save(administrador);
 	}
 
 	@RequestMapping(value = "acessar", method = RequestMethod.POST)
 	public Administrador acessar(@RequestBody Administrador administrador) {
-		try {
-			Query query = em
-					.createQuery("SELECT u from Administrador u where u.usuario = :usuario and u.senha = :senha")
-					.setParameter("usuario", administrador.getUsuario())
-					.setParameter("senha", administrador.getSenha());
-			return (Administrador) query.getSingleResult();			
-		}catch (Exception e) {
-			return null;
-		}
+		return administradorDao.validarAcesso(administrador.getUsuario(), administrador.getSenha());
 	}
 
 }

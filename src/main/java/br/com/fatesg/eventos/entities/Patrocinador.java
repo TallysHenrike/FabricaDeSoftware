@@ -1,5 +1,7 @@
 package br.com.fatesg.eventos.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +19,19 @@ public class Patrocinador {
 	private String nome;
 	private String descricao;
 	private byte[] imagem;
+	private Date dataDeCadastro;
+	private Date dataDeAtualizacao;
+
+	public Patrocinador() {}
+
+	public Patrocinador(Long idPatrocinador, Evento evento, String nome, String descricao, byte[] imagem) {
+		super();
+		this.idPatrocinador = idPatrocinador;
+		this.evento = evento;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.imagem = imagem;
+	}
 
 	public Long getIdPatrocinador() {
 		return idPatrocinador;
@@ -56,5 +71,21 @@ public class Patrocinador {
 
 	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
+	}
+
+	public Date getDataDeCadastro() {
+		return dataDeCadastro;
+	}
+
+	public void setDataDeCadastro(Date dataDeCadastro) {
+		this.dataDeCadastro = dataDeCadastro;
+	}
+
+	public Date getDataDeAtualizacao() {
+		return dataDeAtualizacao;
+	}
+
+	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
+		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
 }

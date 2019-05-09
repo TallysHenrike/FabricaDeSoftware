@@ -3,8 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 		<link rel="stylesheet" href="app/lib/bootstrap.min.css"/>
 		<link rel="stylesheet" href="app/css/nav.css"/>
 		<link rel="stylesheet" href="app/css/style.css"/>
@@ -29,7 +28,7 @@
 						<h4>{{navegacao.perfil.nome}}</h4>
 						<p>{{navegacao.perfil.usuario}}</p>
 					</div>
-					<a ng-click="openMenu=!openMenu" class="nav-icon pull-right"><i class="material-icons">format_list_bulleted</i></a>
+					<a ng-click="openMenu=!openMenu" class="nav-icon pull-right"><i class="fas fa-bars"></i></a>
 				</div>
 				<div class="menu" ng-class="{'open' : openMenu}">
 					<ul>
@@ -37,6 +36,8 @@
 						<li ng-class="{active: activetab == '/evento'}"><a href="#/evento">Controle de Evento</a></li>
 						<li ng-class="{active: activetab == '/presenca'}"><a href="#/presenca">Controle de Presenca</a></li>
 						<li ng-class="{active: activetab == '/configuracao'}"><a href="#/configuracao">Configuração</a></li>
+                        <hr class="border-top border-light">
+						<li ng-click="fecharSessao()"><a href="#/acesso" class="btn btn-danger">Sair</a></li>
 					</ul>
 				</div>
 			</div>
