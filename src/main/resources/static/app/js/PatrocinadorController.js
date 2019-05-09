@@ -1,7 +1,7 @@
 angular.module("app").controller("PatrocinadorController", function($rootScope, $scope, $http, $location, $routeParams) {
 	if(!sessionStorage.getItem('temAcesso')){
 		$rootScope.navegacao.temAcesso = false;
-		$location.path('/');
+		$location.path('/acesso');
 	}
 	
 	let idEvento = $routeParams.idEvento;
