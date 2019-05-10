@@ -4,7 +4,12 @@ import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
@@ -16,37 +21,58 @@ public class Evento {
 	@SequenceGenerator(name = "evento_seq", sequenceName = "evento_seq", allocationSize = 1, initialValue = 1)
 	@NotEmpty(message = "Campo idEvento não pode ser vazio!")
 	private Long idEvento;
+	
 	@ManyToOne
 	@NotEmpty(message = "Campo Administrador não pode ser vazio!")
 	private Administrador administrador;
+	
 	@ManyToOne
 	@NotEmpty(message = "Campo Categoria não pode ser vazio!")
 	private Categoria categoria;
+	
 	@NotEmpty(message = "Campo Título não pode ser vazio!")
 	private String titulo;
+	
 	@NotEmpty(message = "Campo Descrição não pode ser vazio!")
 	private String descricao;
+	
 	@NotEmpty(message = "Campo Corpo não pode ser vazio!")
 	private String corpo;
+	
 	private byte[] imagemPrincipal;
+	
 	@NotEmpty(message = "Campo Data de Início não pode ser vazio!")
 	private Date dataDeInicio;
+	
 	@NotEmpty(message = "Campo Quantidade de Vagas não pode ser vazio!")
 	private int quantidadeDeVagas;
+	
 	@URL(message = "URL inválida!")
 	@URL(host = "google.com")
 	private String urlDoGoogleMaps;
+	
 	@CreatedDate
 	private Date dataDeCadastro;
+	
 	@LastModifiedDate
 	private Date dataDeAtualizacao;
 
 	public Evento() {}
 
-
-	public Evento(Long idEvento, Administrador administrador, Categoria categoria, String titulo, String descricao,
-	              String corpo, byte[] imagemPrincipal, Date dataDeInicio, int quantidadeDeVagas, String urlDoGoogleMaps,
-	              Date dataDeCadastro, Date dataDeAtualizacao) {
+	public Evento(
+			Long idEvento,
+			Administrador administrador,
+			Categoria categoria,
+			String titulo,
+			String descricao,
+			String corpo,
+			byte[] imagemPrincipal,
+			Date dataDeInicio,
+			int quantidadeDeVagas,
+			String urlDoGoogleMaps,
+			Date dataDeCadastro,
+			Date dataDeAtualizacao
+	) {
 		this.idEvento = idEvento;
 		this.administrador = administrador;
 		this.categoria = categoria;
