@@ -5,61 +5,35 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-<<<<<<< HEAD
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.NotEmpty;
-=======
-import javax.validation.constraints.NotNull;
->>>>>>> refs/remotes/origin/validacao-eventos
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Colaborador {
-<<<<<<< HEAD
 	
-	
-=======
-
-	@NotNull
->>>>>>> refs/remotes/origin/validacao-eventos
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@NotEmpty(message= "identificador de colaborador não pode ser nulo.")
+	@GeneratedValue(generator="colaborador_seq",strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="colaborador_seq", sequenceName="colaborador_seq", allocationSize=1, initialValue=1)
+	@NotEmpty(message = "identificador de colaborador não pode ser nulo.")
 	private Long idColaborador;
-	
-<<<<<<< HEAD
-=======
-	@NotNull
->>>>>>> refs/remotes/origin/validacao-eventos
+
 	@ManyToOne
 	private Evento evento;
-<<<<<<< HEAD
-	
-	@Size(min=2, max= 50)
-	@NotEmpty(message= "o nome do colaborador não pode estar vazio.")
-=======
-	@NotNull
->>>>>>> refs/remotes/origin/validacao-eventos
+
+	@Size(min = 1, max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
+	@NotEmpty(message = "O nome do colaborador não pode estar vazio.")
 	private String nome;
-<<<<<<< HEAD
-	
-	@Size(min=2, max=50)
-	@NotEmpty(message= "a descrição do colaborador não pode estar vazia.")
-=======
-	@NotNull
->>>>>>> refs/remotes/origin/validacao-eventos
+
+	@Size(min = 1, max = 50, message= "O campo descrição deve ter no máximo 50 caracteres.")
+	@NotEmpty(message = "A descrição do colaborador não pode estar vazia.")
 	private String descricao;
-<<<<<<< HEAD
-	
-	@Size(min=1, max=5)
-	@NotEmpty(message= "Ao menos uma imagem do colaborador deve ser cadastrada.")
-=======
-	@NotNull
->>>>>>> refs/remotes/origin/validacao-eventos
+
+	@Size(min = 1, max = 5, message= "A quantidade de imagens cadastradas não pode exceder a 5.")
+	@NotEmpty(message = "Ao menos uma imagem do colaborador deve ser cadastrada.")
 	private byte[] imagem;
 
-	public Colaborador(@NotNull Long idColaborador, @NotNull Evento evento, @NotNull String nome,
-			@NotNull String descricao, @NotNull byte[] imagem) {
+	public Colaborador(Long idColaborador, Evento evento, String nome, String descricao, byte[] imagem) {
 		this.idColaborador = idColaborador;
 		this.evento = evento;
 		this.nome = nome;
