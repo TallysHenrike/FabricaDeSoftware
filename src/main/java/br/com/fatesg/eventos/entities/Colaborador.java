@@ -1,37 +1,44 @@
 package br.com.fatesg.eventos.entities;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.validation.constraints.Size;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Colaborador {
-	
-	@Id
-	@GeneratedValue(generator="colaborador_seq",strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name="colaborador_seq", sequenceName="colaborador_seq", allocationSize=1, initialValue=1)
-	@NotEmpty(message = "identificador de colaborador não pode ser nulo.")
-	private Long idColaborador;
 
+	@Id
+	@GeneratedValue(generator = "colaborador_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "colaborador_seq", sequenceName = "colaborador_seq", allocationSize = 1, initialValue = 1)
+	@NotNull(message = "O idColaborador não pode ser nulo!")
+	private Long idColaborador;
+	
 	@ManyToOne
 	private Evento evento;
-
+	
 	@Size(min = 1, max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
-	@NotEmpty(message = "O nome do colaborador não pode estar vazio.")
+	@NotEmpty(message= "O campo nome não pode ser cadastrado em branco.")
 	private String nome;
-
+	
 	@Size(min = 1, max = 50, message= "O campo descrição deve ter no máximo 50 caracteres.")
-	@NotEmpty(message = "A descrição do colaborador não pode estar vazia.")
+	@NotEmpty(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
-
-	@Size(min = 1, max = 5, message= "A quantidade de imagens cadastradas não pode exceder a 5.")
-	@NotEmpty(message = "Ao menos uma imagem do colaborador deve ser cadastrada.")
+	
 	private byte[] imagem;
+	
+	private Date dataDeCadastro;
+	
+	private Date dataDeAtualizacao;
+
+	public Colaborador() {}
 
 	public Colaborador(Long idColaborador, Evento evento, String nome, String descricao, byte[] imagem) {
 		this.idColaborador = idColaborador;
@@ -79,5 +86,21 @@ public class Colaborador {
 
 	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
+	}
+
+	public Date getDataDeCadastro() {
+		return dataDeCadastro;
+	}
+
+	public void setDataDeCadastro(Date dataDeCadastro) {
+		this.dataDeCadastro = dataDeCadastro;
+	}
+
+	public Date getDataDeAtualizacao() {
+		return dataDeAtualizacao;
+	}
+
+	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
+		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
 }
