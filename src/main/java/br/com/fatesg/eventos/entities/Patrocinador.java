@@ -7,19 +7,32 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Patrocinador {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "patrocinador_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "patrocinador_seq", sequenceName = "patrocinador_seq", allocationSize = 1, initialValue = 1)
+	@NotNull(message = "O idPatrocinador não pode ser nulo!")
 	private Long idPatrocinador;
+
 	@ManyToOne
 	private Evento evento;
+
+	@NotNull(message = "O campo nome não pode ser nulo!")
 	private String nome;
+
+	@NotNull(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
+
+	@NotNull(message = "O campo imagem não pode ser nulo!")
 	private byte[] imagem;
+
 	private Date dataDeCadastro;
+
 	private Date dataDeAtualizacao;
 
 	public Patrocinador() {}

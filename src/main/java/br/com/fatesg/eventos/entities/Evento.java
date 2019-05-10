@@ -3,7 +3,12 @@ package br.com.fatesg.eventos.entities;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,15 +20,13 @@ public class Evento {
 	@Id
 	@GeneratedValue(generator = "evento_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "evento_seq", sequenceName = "evento_seq", allocationSize = 1, initialValue = 1)
-	@NotNull(message = "O id do evento não pode ser nulo!")
+	@NotNull(message = "O idEvento não pode ser nulo!")
 	private Long idEvento;
 
 	@ManyToOne
-	@NotNull(message = "O campo Administrador não pode ser vazio!")
 	private Administrador administrador;
 
 	@ManyToOne
-	//@NotNull(message = "O campo Categoria não pode ser vazio!")
 	private Categoria categoria;
 
 	@Size(min = 1, max = 50)
@@ -58,9 +61,19 @@ public class Evento {
 
 	public Evento() {}
 
-	public Evento(Long idEvento, Administrador administrador, Categoria categoria, String titulo, String descricao,
-	              String corpo, byte[] imagemPrincipal, Date dataDeInicio, int quantidadeDeVagas, String urlDoGoogleMaps,
-	              Date dataDeCadastro, Date dataDeAtualizacao) {
+	public Evento(
+			Long idEvento,
+			Administrador administrador,
+			Categoria categoria,
+			String titulo,
+			String descricao,
+			String corpo,
+			byte[] imagemPrincipal,
+			Date dataDeInicio,
+			int quantidadeDeVagas,
+			String urlDoGoogleMaps,
+			Date dataDeCadastro, Date dataDeAtualizacao
+	) {
 		this.idEvento = idEvento;
 		this.administrador = administrador;
 		this.categoria = categoria;
@@ -75,8 +88,16 @@ public class Evento {
 		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
 
-	public Evento(Long idEvento, Administrador administrador, Categoria categoria, String titulo, String descricao,
-	              String corpo, int quantidadeDeVagas, String urlDoGoogleMaps) {
+	public Evento(
+			Long idEvento,
+			Administrador administrador,
+			Categoria categoria,
+			String titulo,
+			String descricao,
+			String corpo,
+			int quantidadeDeVagas,
+			String urlDoGoogleMaps
+	) {
 		this.idEvento = idEvento;
 		this.administrador = administrador;
 		this.categoria = categoria;
@@ -86,7 +107,6 @@ public class Evento {
 		this.quantidadeDeVagas = quantidadeDeVagas;
 		this.urlDoGoogleMaps = urlDoGoogleMaps;
 	}
-
 
 	public Long getIdEvento() {
 		return idEvento;

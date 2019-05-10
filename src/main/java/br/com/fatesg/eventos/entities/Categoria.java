@@ -6,17 +6,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Categoria {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "categoria_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "categoria_seq", sequenceName = "categoria_seq", allocationSize = 1, initialValue = 1)
+	@NotNull(message = "O idCategoria não pode ser nulo!")
 	private Long idCategoria;
+
+	@NotNull(message = "O campo nome não pode ser nulo!")
 	private String nome;
+
+	@NotNull(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
+
+	@NotNull(message = "O campo icone não pode ser nulo!")
 	private byte[] icone;
+
 	private Date dataDeCadastro;
+
 	private Date dataDeAtualizacao;
 
 	public Categoria() {}
