@@ -5,14 +5,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 @Entity
 public class Categoria {
 
+	@NotEmpty(message= "Código de categoria não pode ser cadastrado como nulo.")
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idCategoria;
+	@NotEmpty(message= "Nome da categoria é obrigatório.")
 	private String nome;
+	@NotEmpty(message= "Descrição da categoria é obrigatória.")
 	private String descricao;
+	@NotEmpty(message= "Ícone da categoria é obrigatório.")
 	private byte[] icone;
 
 	public Long getIdCategoria() {
