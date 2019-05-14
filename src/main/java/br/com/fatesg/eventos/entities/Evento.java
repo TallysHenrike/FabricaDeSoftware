@@ -1,11 +1,17 @@
 package br.com.fatesg.eventos.entities;
 
-import org.hibernate.validator.constraints.URL;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -14,39 +20,60 @@ public class Evento {
 	@Id
 	@GeneratedValue(generator = "evento_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "evento_seq", sequenceName = "evento_seq", allocationSize = 1, initialValue = 1)
-	@NotEmpty(message = "Campo idEvento não pode ser vazio!")
+	@NotNull(message = "O idEvento não pode ser nulo!")
 	private Long idEvento;
+
 	@ManyToOne
-	@NotEmpty(message = "Campo Administrador não pode ser vazio!")
 	private Administrador administrador;
+
 	@ManyToOne
-	@NotEmpty(message = "Campo Categoria não pode ser vazio!")
 	private Categoria categoria;
-	@NotEmpty(message = "Campo Título não pode ser vazio!")
+
+	@Size(min = 1, max = 50)
+	@NotEmpty(message = "O campo Título não pode ser vazio!")
 	private String titulo;
-	@NotEmpty(message = "Campo Descrição não pode ser vazio!")
+
+	@Size(min = 1, max = 250, message = "A quantidade máxima é de 250 caracteres.")
+	@NotEmpty(message = "O campo Descrição não pode ser vazio!")
 	private String descricao;
-	@NotEmpty(message = "Campo Corpo não pode ser vazio!")
+
+	@Size(min = 1, max = 2000, message = "A quantidade máxima é de 2000 caracteres.")
+	@NotEmpty(message = "O campo Corpo não pode ser vazio!")
 	private String corpo;
+
 	private byte[] imagemPrincipal;
-	@NotEmpty(message = "Campo Data de Início não pode ser vazio!")
+
+	//@NotEmpty(message = "O campo Data de Início não pode ser vazio!")
 	private Date dataDeInicio;
-	@NotEmpty(message = "Campo Quantidade de Vagas não pode ser vazio!")
+
+	@NotNull(message = "O campo Quantidade de Vagas não pode ser vazio!")
 	private int quantidadeDeVagas;
-	@URL(message = "URL inválida!")
-	@URL(host = "google.com")
+
+	/*@URL(message = "URL inválida!")
+	@URL(host = "google.com/maps")*/
 	private String urlDoGoogleMaps;
+
 	@CreatedDate
 	private Date dataDeCadastro;
+
 	@LastModifiedDate
 	private Date dataDeAtualizacao;
 
 	public Evento() {}
 
-
-	public Evento(Long idEvento, Administrador administrador, Categoria categoria, String titulo, String descricao,
-	              String corpo, byte[] imagemPrincipal, Date dataDeInicio, int quantidadeDeVagas, String urlDoGoogleMaps,
-	              Date dataDeCadastro, Date dataDeAtualizacao) {
+	public Evento(
+			Long idEvento,
+			Administrador administrador,
+			Categoria categoria,
+			String titulo,
+			String descricao,
+			String corpo,
+			byte[] imagemPrincipal,
+			Date dataDeInicio,
+			int quantidadeDeVagas,
+			String urlDoGoogleMaps,
+			Date dataDeCadastro, Date dataDeAtualizacao
+	) {
 		this.idEvento = idEvento;
 		this.administrador = administrador;
 		this.categoria = categoria;
@@ -59,6 +86,26 @@ public class Evento {
 		this.urlDoGoogleMaps = urlDoGoogleMaps;
 		this.dataDeCadastro = dataDeCadastro;
 		this.dataDeAtualizacao = dataDeAtualizacao;
+	}
+
+	public Evento(
+			Long idEvento,
+			Administrador administrador,
+			Categoria categoria,
+			String titulo,
+			String descricao,
+			String corpo,
+			int quantidadeDeVagas,
+			String urlDoGoogleMaps
+	) {
+		this.idEvento = idEvento;
+		this.administrador = administrador;
+		this.categoria = categoria;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.corpo = corpo;
+		this.quantidadeDeVagas = quantidadeDeVagas;
+		this.urlDoGoogleMaps = urlDoGoogleMaps;
 	}
 
 	public Long getIdEvento() {
