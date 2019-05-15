@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -20,7 +21,7 @@ public class Evento {
 	@Id
 	@GeneratedValue(generator = "evento_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "evento_seq", sequenceName = "evento_seq", allocationSize = 1, initialValue = 1)
-	@NotNull(message = "O idEvento não pode ser nulo!")
+	@NotNull(message = "O id do evento não pode ser null!")
 	private Long idEvento;
 
 	@ManyToOne
@@ -29,15 +30,18 @@ public class Evento {
 	@ManyToOne
 	private Categoria categoria;
 
-	@Size(min = 1, max = 50)
+	@Size(min = 3, message = "A quantidade minima é de 3 caracteres.")
+	@Size(max=50, message = "A quantidade máxima é de 50 caracteres.")
 	@NotEmpty(message = "O campo Título não pode ser vazio!")
 	private String titulo;
 
-	@Size(min = 1, max = 250, message = "A quantidade máxima é de 250 caracteres.")
+	@Size(min = 2, message = "A quantidade minima é de 2 caracteres.")
+	@Size(max=250, message = "A quantidade máxima é de 250 caracteres.")
 	@NotEmpty(message = "O campo Descrição não pode ser vazio!")
 	private String descricao;
 
-	@Size(min = 1, max = 2000, message = "A quantidade máxima é de 2000 caracteres.")
+	@Size(min = 2, message = "A quantidade minima é de 2 caracteres.")
+	@Size(max=2000, message = "A quantidade máxima é de 2000 caracteres.")
 	@NotEmpty(message = "O campo Corpo não pode ser vazio!")
 	private String corpo;
 
@@ -46,7 +50,7 @@ public class Evento {
 	//@NotEmpty(message = "O campo Data de Início não pode ser vazio!")
 	private Date dataDeInicio;
 
-	@NotNull(message = "O campo Quantidade de Vagas não pode ser vazio!")
+	@Min(value = 1, message = "O campo Quantidade de Vagas não pode ser 0!")
 	private int quantidadeDeVagas;
 
 	/*@URL(message = "URL inválida!")
