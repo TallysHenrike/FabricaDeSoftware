@@ -1,15 +1,10 @@
 package br.com.fatesg.eventos.entities;
 
-import java.util.Date;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class Categoria {
@@ -28,8 +23,6 @@ public class Categoria {
 	@NotEmpty(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
 
-	@NotNull(message = "O idCategoria não pode ser nulo!")
-	private Long idCategoria;
 
 	@NotNull(message = "O campo icone não pode ser nulo!")
 	private byte[] icone;
@@ -40,16 +33,16 @@ public class Categoria {
 
 	public Categoria(Long idCategoria, String nome, String descricao, byte[] icone, Date dataDeCadastro,
 			Date dataDeAtualizacao) {
-	public Categoria() {}
-
-	public Categoria(Long idCategoria, String nome, String descricao, byte[] icone) {
-		super();
 		this.idCategoria = idCategoria;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.icone = icone;
 		this.dataDeCadastro = dataDeCadastro;
 		this.dataDeAtualizacao = dataDeAtualizacao;
+	}
+
+	public Categoria(){
+
 	}
 
 	public Long getIdCategoria() {
