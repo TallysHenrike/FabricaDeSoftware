@@ -8,7 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Colaborador {
@@ -22,10 +24,12 @@ public class Colaborador {
 	@ManyToOne
 	private Evento evento;
 	
-	@NotNull(message = "O campo nome não pode ser nulo!")
+	@Size(min = 1, max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
+	@NotEmpty(message= "O campo nome não pode ser cadastrado em branco.")
 	private String nome;
 	
-	@NotNull(message = "O campo descricao não pode ser nulo!")
+	@Size(min = 1, max = 50, message= "O campo descrição deve ter no máximo 50 caracteres.")
+	@NotEmpty(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
 	
 	@NotNull(message = "O campo imagem não pode ser nulo!")

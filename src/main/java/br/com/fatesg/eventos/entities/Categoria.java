@@ -7,7 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Categoria {
@@ -15,14 +17,19 @@ public class Categoria {
 	@Id
 	@GeneratedValue(generator = "categoria_seq", strategy = GenerationType.SEQUENCE)
 	@SequenceGenerator(name = "categoria_seq", sequenceName = "categoria_seq", allocationSize = 1, initialValue = 1)
-	@NotNull(message = "O idCategoria não pode ser nulo!")
+	@NotNull(message = "Código de categoria não pode ser cadastrado como nulo.")
 	private Long idCategoria;
 
-	@NotNull(message = "O campo nome não pode ser nulo!")
+	@Size(min = 1, max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
+	@NotEmpty(message= "O campo nome não pode ser cadastrado em branco.")
 	private String nome;
 
-	@NotNull(message = "O campo descricao não pode ser nulo!")
+	@Size(min = 1, max = 50, message= "O campo descrição deve ter no máximo 50 caracteres.")
+	@NotEmpty(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
+
+	@NotNull(message = "O idCategoria não pode ser nulo!")
+	private Long idCategoria;
 
 	@NotNull(message = "O campo icone não pode ser nulo!")
 	private byte[] icone;
@@ -31,6 +38,8 @@ public class Categoria {
 
 	private Date dataDeAtualizacao;
 
+	public Categoria(Long idCategoria, String nome, String descricao, byte[] icone, Date dataDeCadastro,
+			Date dataDeAtualizacao) {
 	public Categoria() {}
 
 	public Categoria(Long idCategoria, String nome, String descricao, byte[] icone) {
@@ -39,6 +48,8 @@ public class Categoria {
 		this.nome = nome;
 		this.descricao = descricao;
 		this.icone = icone;
+		this.dataDeCadastro = dataDeCadastro;
+		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
 
 	public Long getIdCategoria() {
