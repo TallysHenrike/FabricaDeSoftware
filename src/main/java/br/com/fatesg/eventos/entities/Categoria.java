@@ -20,11 +20,11 @@ public class Categoria {
 	@NotNull(message = "Código de categoria não pode ser cadastrado como nulo.")
 	private Long idCategoria;
 
-	@Size(min = 1, max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
+	@Size(max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
 	@NotEmpty(message= "O campo nome não pode ser cadastrado em branco.")
 	private String nome;
 
-	@Size(min = 1, max = 50, message= "O campo descrição deve ter no máximo 50 caracteres.")
+	@Size(max = 50, message= "O campo descrição deve ter no máximo 50 caracteres.")
 	@NotEmpty(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
 

@@ -18,7 +18,7 @@ public class Login {
 	@NotNull(message= "Identificador do usuário não pode ser cadastrado como nulo.")
 	private String usuario;
 
-	@Size(min = 1, max = 15, message= "O campo telefone deve ter no máximo 15 caracteres.")
+	@Size(max = 15, message= "O campo telefone deve ter no máximo 15 caracteres.")
 	@NotEmpty(message= "Senha inválida.")
 	private String senha;
 	

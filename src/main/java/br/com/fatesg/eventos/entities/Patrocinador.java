@@ -25,11 +25,11 @@ public class Patrocinador {
 	private Evento evento;
 
 	@NotEmpty(message = "O campo nome não pode ser cadastrado em branco.")
-	@Size(min = 1, max = 50, message = "O campo nome deve ter no máximo 50 caracteres.")
+	@Size(max = 50, message = "O campo nome deve ter no máximo 50 caracteres.")
 	private String nome;
 
 	@NotEmpty(message = "O campo descrição não pode ser cadastrado em branco.")
-	@Size(min = 1, max = 50, message = "O campo descrição deve ter no máximo 50 caracteres.")
+	@Size(max = 50, message = "O campo descrição deve ter no máximo 50 caracteres.")
 	private String descricao;
 
 	private byte[] imagem;

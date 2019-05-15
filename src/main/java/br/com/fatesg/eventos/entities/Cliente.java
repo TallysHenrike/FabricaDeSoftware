@@ -21,24 +21,24 @@ public class Cliente {
 	@NotNull(message= "Identificador do cliente não pode ser cadastrado como nulo.")
 	private long idCliente;
 	
-	@Size(min = 1, max = 20, message= "O campo telefone deve ter no máximo 20 caracteres.")
+	@Size(max = 20, message= "O campo telefone deve ter no máximo 20 caracteres.")
 	@NotEmpty(message= "Um telefone deve ser cadastrado.")
 	private String telefone;
 	
-	@Size(min = 1, max = 50, message= "O campo endereço deve ter no máximo 50 caracteres.")
+	@Size(max = 50, message= "O campo endereço deve ter no máximo 50 caracteres.")
 	@NotEmpty(message= "Um endereço deve ser cadastrado.")
 	private String endereco;
 	
-	@Size(min = 14, max = 14, message= "O campo CPF deve ter no máximo 14 caracteres.")
+	@Size(max = 14, message= "O campo CPF deve ter no máximo 14 caracteres.")
 	@NotEmpty(message= "Um CPF deve ser cadastrado.")
 	@CPF(message= "CPF inválido.")
 	private String cpf;
 	
-	@Size(min = 1, max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
+	@Size(max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
 	@NotEmpty(message= "Um nome deve ser cadastrado.")
 	private String nome;
 	
-	@Size(min = 1, max = 30, message= "O campo email deve ter no máximo 30 caracteres.")
+	@Size(max = 30, message= "O campo email deve ter no máximo 30 caracteres.")
 	@NotEmpty(message= "Um email deve ser cadastrado.")
 	@Email(message= "Um email válido deve ser cadastrado.")
 	private String email;
