@@ -30,17 +30,14 @@ public class Evento {
 	@ManyToOne
 	private Categoria categoria;
 
-	@Size(min = 3, message = "A quantidade minima é de 3 caracteres.")
 	@Size(max=50, message = "A quantidade máxima é de 50 caracteres.")
 	@NotEmpty(message = "O campo Título não pode ser vazio!")
 	private String titulo;
 
-	@Size(min = 2, message = "A quantidade minima é de 2 caracteres.")
 	@Size(max=250, message = "A quantidade máxima é de 250 caracteres.")
 	@NotEmpty(message = "O campo Descrição não pode ser vazio!")
 	private String descricao;
 
-	@Size(min = 2, message = "A quantidade minima é de 2 caracteres.")
 	@Size(max=2000, message = "A quantidade máxima é de 2000 caracteres.")
 	@NotEmpty(message = "O campo Corpo não pode ser vazio!")
 	private String corpo;

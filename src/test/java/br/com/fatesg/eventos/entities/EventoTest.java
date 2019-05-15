@@ -56,23 +56,6 @@ public class EventoTest {
 	}
 
 	@Test
-	public void tituloWrongSizeMin() {
-		Administrador adm = new Administrador();
-		adm.setNome("Adm");
-
-		Categoria ctg = new Categoria();
-		ctg.setNome("Ctg");
-
-		Evento evento = new Evento((long) 1, adm, ctg, "T", "Descricão evento teste",
-				"Corpo de teste da categoria Evento", 50, "google.com/maps");
-
-		Set<ConstraintViolation<Evento>> constraintViolations = validador.validate(evento);
-
-		assertEquals(1, constraintViolations.size());
-		assertEquals("A quantidade minima é de 3 caracteres.", constraintViolations.iterator().next().getMessage());
-	}
-
-	@Test
 	public void tituloWrongSizeMax() {
 		Administrador adm = new Administrador();
 		adm.setNome("Adm");
@@ -105,23 +88,6 @@ public class EventoTest {
 
 		assertEquals(1, constraintViolations.size());
 		assertEquals("O campo Descrição não pode ser vazio!", constraintViolations.iterator().next().getMessage());
-	}
-
-	@Test
-	public void descricaoWrongSizeMin() {
-		Administrador adm = new Administrador();
-		adm.setNome("Adm");
-
-		Categoria ctg = new Categoria();
-		ctg.setNome("Ctg");
-
-		Evento evento = new Evento((long) 1, adm, ctg, "Titulo Evento", "A",
-				"Corpo de teste da categoria Evento", 50, "google.com/maps");
-
-		Set<ConstraintViolation<Evento>> constraintViolations = validador.validate(evento);
-
-		assertEquals(1, constraintViolations.size());
-		assertEquals("A quantidade minima é de 2 caracteres.", constraintViolations.iterator().next().getMessage());
 	}
 
 	@Test
@@ -159,23 +125,6 @@ public class EventoTest {
 
 		assertEquals(1, constraintViolations.size());
 		assertEquals("O campo Corpo não pode ser vazio!", constraintViolations.iterator().next().getMessage());
-	}
-
-	@Test
-	public void corpoWrongSizeMin() {
-		Administrador adm = new Administrador();
-		adm.setNome("Adm");
-
-		Categoria ctg = new Categoria();
-		ctg.setNome("Ctg");
-
-		Evento evento = new Evento((long) 1, adm, ctg, "Titulo Evento", "Descrição evento",
-				"A", 50, "google.com/maps");
-
-		Set<ConstraintViolation<Evento>> constraintViolations = validador.validate(evento);
-
-		assertEquals(1, constraintViolations.size());
-		assertEquals("A quantidade minima é de 2 caracteres.", constraintViolations.iterator().next().getMessage());
 	}
 
 	@Test
