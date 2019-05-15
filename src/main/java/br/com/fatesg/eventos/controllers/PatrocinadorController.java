@@ -1,5 +1,6 @@
 package br.com.fatesg.eventos.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,10 +21,10 @@ public class PatrocinadorController {
 
 	@Autowired
 	private PatrocinadorDao patrocinadorDao;
-
-	@RequestMapping(value = "listar", method = RequestMethod.GET)
-	public List<Patrocinador> listar() {
-		return patrocinadorDao.findAll();
+	
+	@RequestMapping(value = "listar/{idEvento}", method = RequestMethod.GET)
+	public List<Patrocinador> listar(@PathVariable Long idEvento) {
+		return patrocinadorDao.findAllByIdEvento(idEvento);
 	}
 
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)
@@ -42,11 +43,13 @@ public class PatrocinadorController {
 		evento.setIdEvento(idEvento);
 
 		patrocinador.setEvento(evento);
+		patrocinador.setDataDeCadastro(new Date());
 		return patrocinadorDao.save(patrocinador);
 	}
 
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
 	public Patrocinador alterar(@RequestBody Patrocinador patrocinador) {
+		patrocinador.setDataDeAtualizacao(new Date());
 		return patrocinadorDao.save(patrocinador);
 	}
 

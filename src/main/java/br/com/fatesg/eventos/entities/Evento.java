@@ -1,30 +1,112 @@
 package br.com.fatesg.eventos.entities;
 
-import java.util.Date;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class Evento {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(generator = "evento_seq", strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name = "evento_seq", sequenceName = "evento_seq", allocationSize = 1, initialValue = 1)
+	@NotNull(message = "O idEvento não pode ser nulo!")
 	private Long idEvento;
+
 	@ManyToOne
 	private Administrador administrador;
+
 	@ManyToOne
 	private Categoria categoria;
+
+	@Size(min = 1, max = 50)
+	@NotEmpty(message = "O campo Título não pode ser vazio!")
 	private String titulo;
+
+	@Size(min = 1, max = 250, message = "A quantidade máxima é de 250 caracteres.")
+	@NotEmpty(message = "O campo Descrição não pode ser vazio!")
 	private String descricao;
+
+	@Size(min = 1, max = 2000, message = "A quantidade máxima é de 2000 caracteres.")
+	@NotEmpty(message = "O campo Corpo não pode ser vazio!")
 	private String corpo;
+
 	private byte[] imagemPrincipal;
+
+	//@NotEmpty(message = "O campo Data de Início não pode ser vazio!")
 	private Date dataDeInicio;
+
+	@NotNull(message = "O campo Quantidade de Vagas não pode ser vazio!")
 	private int quantidadeDeVagas;
+
+	/*@URL(message = "URL inválida!")
+	@URL(host = "google.com/maps")*/
 	private String urlDoGoogleMaps;
+
+	@CreatedDate
+	private Date dataDeCadastro;
+
+	@LastModifiedDate
+	private Date dataDeAtualizacao;
+
+	public Evento() {}
+
+	public Evento(
+			Long idEvento,
+			Administrador administrador,
+			Categoria categoria,
+			String titulo,
+			String descricao,
+			String corpo,
+			byte[] imagemPrincipal,
+			Date dataDeInicio,
+			int quantidadeDeVagas,
+			String urlDoGoogleMaps,
+			Date dataDeCadastro, Date dataDeAtualizacao
+	) {
+		this.idEvento = idEvento;
+		this.administrador = administrador;
+		this.categoria = categoria;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.corpo = corpo;
+		this.imagemPrincipal = imagemPrincipal;
+		this.dataDeInicio = dataDeInicio;
+		this.quantidadeDeVagas = quantidadeDeVagas;
+		this.urlDoGoogleMaps = urlDoGoogleMaps;
+		this.dataDeCadastro = dataDeCadastro;
+		this.dataDeAtualizacao = dataDeAtualizacao;
+	}
+
+	public Evento(
+			Long idEvento,
+			Administrador administrador,
+			Categoria categoria,
+			String titulo,
+			String descricao,
+			String corpo,
+			int quantidadeDeVagas,
+			String urlDoGoogleMaps
+	) {
+		this.idEvento = idEvento;
+		this.administrador = administrador;
+		this.categoria = categoria;
+		this.titulo = titulo;
+		this.descricao = descricao;
+		this.corpo = corpo;
+		this.quantidadeDeVagas = quantidadeDeVagas;
+		this.urlDoGoogleMaps = urlDoGoogleMaps;
+	}
 
 	public Long getIdEvento() {
 		return idEvento;
@@ -104,5 +186,21 @@ public class Evento {
 
 	public void setUrlDoGoogleMaps(String urlDoGoogleMaps) {
 		this.urlDoGoogleMaps = urlDoGoogleMaps;
+	}
+
+	public Date getDataDeCadastro() {
+		return dataDeCadastro;
+	}
+
+	public void setDataDeCadastro(Date dataDeCadastro) {
+		this.dataDeCadastro = dataDeCadastro;
+	}
+
+	public Date getDataDeAtualizacao() {
+		return dataDeAtualizacao;
+	}
+
+	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
+		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
 }

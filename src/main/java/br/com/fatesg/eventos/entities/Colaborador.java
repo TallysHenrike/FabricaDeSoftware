@@ -32,6 +32,7 @@ public class Colaborador {
 	@NotEmpty(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
 	
+	@NotNull(message = "O campo imagem não pode ser nulo!")
 	private byte[] imagem;
 	
 	private Date dataDeCadastro;
@@ -41,6 +42,7 @@ public class Colaborador {
 	public Colaborador() {}
 
 	public Colaborador(Long idColaborador, Evento evento, String nome, String descricao, byte[] imagem) {
+		super();
 		this.idColaborador = idColaborador;
 		this.evento = evento;
 		this.nome = nome;

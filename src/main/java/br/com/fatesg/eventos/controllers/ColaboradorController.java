@@ -1,5 +1,6 @@
 package br.com.fatesg.eventos.controllers;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +22,9 @@ public class ColaboradorController {
 	@Autowired
 	private ColaboradorDao colaboradorDao;
 
-	@RequestMapping(value = "listar", method = RequestMethod.GET)
-	public List<Colaborador> listar() {
-		return colaboradorDao.findAll();
+	@RequestMapping(value = "listar/{idEvento}", method = RequestMethod.GET)
+	public List<Colaborador> listar(@PathVariable Long idEvento) {
+		return colaboradorDao.findAllByIdEvento(idEvento);
 	}
 	
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)
@@ -42,11 +43,13 @@ public class ColaboradorController {
 		evento.setIdEvento(idEvento);
 		
 		colaborador.setEvento(evento);
+		colaborador.setDataDeCadastro(new Date());
 		return colaboradorDao.save(colaborador);
 	}
 
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
 	public Colaborador alterar(@RequestBody Colaborador colaborador) {
+		colaborador.setDataDeCadastro(new Date());
 		return colaboradorDao.save(colaborador);
 	}
 

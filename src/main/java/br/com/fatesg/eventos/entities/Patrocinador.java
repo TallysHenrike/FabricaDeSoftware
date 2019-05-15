@@ -32,6 +32,7 @@ public class Patrocinador {
 	@Size(min = 1, max = 50, message = "O campo descrição deve ter no máximo 50 caracteres.")
 	private String descricao;
 
+	@NotNull(message = "O campo imagem não pode ser nulo!")
 	private byte[] imagem;
 
 	private Date dataDeCadastro;
@@ -39,7 +40,8 @@ public class Patrocinador {
 	private Date dataDeAtualizacao;
 
 	public Patrocinador(Long idPatrocinador, Evento evento, String nome, String descricao, byte[] imagem,
-			Date dataDeCadastro, Date dataDeAtualizacao) {
+			Date dataDeCadastro, Date dataDeAtualizacao {
+		super();
 		this.idPatrocinador = idPatrocinador;
 		this.evento = evento;
 		this.nome = nome;
@@ -107,6 +109,4 @@ public class Patrocinador {
 	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
 		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
-	
-	
 }

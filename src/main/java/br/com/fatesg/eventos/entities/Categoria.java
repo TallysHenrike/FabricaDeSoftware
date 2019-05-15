@@ -28,6 +28,10 @@ public class Categoria {
 	@NotEmpty(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
 
+	@NotNull(message = "O idCategoria não pode ser nulo!")
+	private Long idCategoria;
+
+	@NotNull(message = "O campo icone não pode ser nulo!")
 	private byte[] icone;
 
 	private Date dataDeCadastro;
@@ -36,6 +40,10 @@ public class Categoria {
 
 	public Categoria(Long idCategoria, String nome, String descricao, byte[] icone, Date dataDeCadastro,
 			Date dataDeAtualizacao) {
+	public Categoria() {}
+
+	public Categoria(Long idCategoria, String nome, String descricao, byte[] icone) {
+		super();
 		this.idCategoria = idCategoria;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -91,5 +99,4 @@ public class Categoria {
 	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
 		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
-
 }

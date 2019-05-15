@@ -28,7 +28,7 @@
 						<h4>{{navegacao.perfil.nome}}</h4>
 						<p>{{navegacao.perfil.usuario}}</p>
 					</div>
-					<a ng-click="openMenu=!openMenu" class="nav-icon pull-right"><i class="material-icons">format_list_bulleted</i></a>
+					<a ng-click="openMenu=!openMenu" class="nav-icon pull-right"><i class="fas fa-bars"></i></a>
 				</div>
 				<div class="menu" ng-class="{'open' : openMenu}">
 					<ul>
@@ -36,6 +36,8 @@
 						<li ng-class="{active: activetab == '/evento'}"><a href="#/evento">Controle de Evento</a></li>
 						<li ng-class="{active: activetab == '/presenca'}"><a href="#/presenca">Controle de Presenca</a></li>
 						<li ng-class="{active: activetab == '/configuracao'}"><a href="#/configuracao">Configuração</a></li>
+                        <hr class="border-top border-light">
+						<li ng-click="fecharSessao()"><a href="#/acesso" class="btn btn-danger">Sair</a></li>
 					</ul>
 				</div>
 			</div>

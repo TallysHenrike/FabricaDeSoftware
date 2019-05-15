@@ -1,7 +1,7 @@
 angular.module("app").controller("PatrocinadorController", function($rootScope, $scope, $http, $location, $routeParams) {
 	if(!sessionStorage.getItem('temAcesso')){
 		$rootScope.navegacao.temAcesso = false;
-		$location.path('/');
+		$location.path('/acesso');
 	}
 	
 	let idEvento = $routeParams.idEvento;
@@ -33,7 +33,7 @@ angular.module("app").controller("PatrocinadorController", function($rootScope, 
 		btn: 'Cadastrar'
 	}
 	
-	$http.get('http://localhost:8080/patrocinador/listar')
+	$http.get(`http://localhost:8080/patrocinador/listar/${idEvento}`)
 	.then((resposta)=>{
 		$scope.patrocinadores = resposta.data;
 	});
