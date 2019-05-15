@@ -6,18 +6,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Administrador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotNull(message = "O idAdministrador não pode ser nulo!")
 	private Long idAdministrador;
+
+	@NotNull(message = "O campo nome não pode ser nulo!")
 	private String nome;
+
+	@NotNull(message = "O campo usuario não pode ser nulo!")
 	private String usuario;
+
+	@NotNull(message = "O campo senha não pode ser nulo!")
 	private String senha;
+
+	@NotNull(message = "O campo foto não pode ser nulo!")
 	private byte[] foto;
+
 	private Date dataDeCadastro;
+
 	private Date dataDeAtualizacao;
 
 	public Administrador() {}
