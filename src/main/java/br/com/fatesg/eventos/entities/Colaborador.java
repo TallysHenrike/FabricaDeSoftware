@@ -1,20 +1,15 @@
 package br.com.fatesg.eventos.entities;
 
 import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-<<<<<<< HEAD
-import javax.validation.constraints.NotNull;
-=======
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
->>>>>>> refs/heads/DevCliente
 
 @Entity
 public class Colaborador {
@@ -28,26 +23,14 @@ public class Colaborador {
 	@ManyToOne
 	private Evento evento;
 	
-<<<<<<< HEAD
-	@NotNull(message = "O campo nome não pode ser nulo!")
-=======
 	@Size(max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
 	@NotEmpty(message= "O campo nome não pode ser cadastrado em branco.")
->>>>>>> refs/heads/DevCliente
 	private String nome;
 	
-<<<<<<< HEAD
-	@NotNull(message = "O campo descricao não pode ser nulo!")
-=======
 	@Size(max = 50, message= "O campo descrição deve ter no máximo 50 caracteres.")
 	@NotEmpty(message = "O campo descricao não pode ser nulo!")
->>>>>>> refs/heads/DevCliente
 	private String descricao;
 	
-<<<<<<< HEAD
-	@NotNull(message = "O campo imagem não pode ser nulo!")
-=======
->>>>>>> refs/heads/DevCliente
 	private byte[] imagem;
 	
 	private Date dataDeCadastro;
@@ -57,10 +40,6 @@ public class Colaborador {
 	public Colaborador() {}
 
 	public Colaborador(Long idColaborador, Evento evento, String nome, String descricao, byte[] imagem) {
-<<<<<<< HEAD
-		super();
-=======
->>>>>>> refs/heads/DevCliente
 		this.idColaborador = idColaborador;
 		this.evento = evento;
 		this.nome = nome;
