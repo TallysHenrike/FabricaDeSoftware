@@ -21,5 +21,10 @@ angular.module('app').config(function($routeProvider){
 	.when('/acesso', {
 		templateUrl: 'templates/acesso.html',
 		controller: 'NavegacaoController'
+	})
+	.when('/administrador',{
+		templateUrl: 'templates/administrador.html',
+		controller: 'AdministradorController'
 	}).otherwise({ redirectTo: '/' });
+	
 });
