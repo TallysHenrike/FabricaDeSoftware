@@ -25,7 +25,7 @@ public class Administrador {
 	@NotNull(message = "O campo senha não pode ser nulo!")
 	private String senha;
 
-	@NotNull(message = "O campo foto não pode ser nulo!")
+	//@NotNull(message = "O campo foto não pode ser nulo!")
 	private byte[] foto;
 
 	private Date dataDeCadastro;
