@@ -20,7 +20,7 @@ import br.com.fatesg.eventos.entities.Categoria;
 import br.com.fatesg.eventos.persistence.CategoriaDao;
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/restrito/categoria")
 public class CategoriaController {
 
 	@Autowired

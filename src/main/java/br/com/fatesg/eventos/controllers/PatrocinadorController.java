@@ -16,7 +16,7 @@ import br.com.fatesg.eventos.entities.Patrocinador;
 import br.com.fatesg.eventos.persistence.PatrocinadorDao;
 
 @RestController
-@RequestMapping("/patrocinador")
+@RequestMapping("/restrito/patrocinador")
 public class PatrocinadorController {
 
 	@Autowired

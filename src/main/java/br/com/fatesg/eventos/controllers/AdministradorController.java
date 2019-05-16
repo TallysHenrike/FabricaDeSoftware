@@ -1,5 +1,6 @@
 package br.com.fatesg.eventos.controllers;
 
+import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.fatesg.eventos.entities.Administrador;
 import br.com.fatesg.eventos.persistence.AdministradorDao;
 import br.com.fatesg.eventos.util.LoginResponse;
-import io.jsonwebtoken.*;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 
 @RestController
 @RequestMapping("/administrador")
@@ -79,7 +82,7 @@ public class AdministradorController {
 	*/
 
 	@RequestMapping(value = "acessar", method = RequestMethod.POST)
-	public LoginResponse acessar(@RequestBody Map<String, String> objeto) throws ServletException {
+	public Map<String, Object> acessar(@RequestBody Map<String, String> objeto) throws ServletException {
 		administrador.setUsuario(objeto.get("usuario"));
 		administrador.setSenha(objeto.get("senha"));
 		
@@ -89,14 +92,25 @@ public class AdministradorController {
 			throw new ServletException("USUARIO NÃO ENCONTRADO");
 		}
 		
-		//Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+		Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 		String token = Jwts.builder()
 				.setSubject(adm.getNome())
-				.signWith(SignatureAlgorithm.HS512, "Tallys")
+				.signWith(key)
+				.setId("Tallys")
 				.setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
 				.compact();
 		
+		if(adm.getNome() != null) {
+			mapeamento.put("idAdministrador", adm.getIdAdministrador());
+			mapeamento.put("nome", adm.getNome());
+			mapeamento.put("usuario", adm.getUsuario());
+			mapeamento.put("senha", adm.getSenha());
+			mapeamento.put("foto", adm.getFoto());
+			mapeamento.put("acesso", new LoginResponse(token));
+		}else {
+			mapeamento.put("erro", "Login invalido");
+		}
 		
-		return new LoginResponse(token);
+		return mapeamento;
 	}
 }

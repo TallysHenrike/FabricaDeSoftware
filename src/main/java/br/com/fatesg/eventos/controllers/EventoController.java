@@ -16,7 +16,7 @@ import br.com.fatesg.eventos.entities.Evento;
 import br.com.fatesg.eventos.persistence.EventoDao;
 
 @RestController
-@RequestMapping("/evento")
+@RequestMapping("/restrito/evento")
 public class EventoController {
 
 	@Autowired

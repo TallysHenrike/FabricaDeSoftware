@@ -16,7 +16,7 @@ import br.com.fatesg.eventos.entities.Evento;
 import br.com.fatesg.eventos.persistence.ColaboradorDao;
 
 @RestController
-@RequestMapping("/colaborador")
+@RequestMapping("/restrito/colaborador")
 public class ColaboradorController {
 
 	@Autowired
