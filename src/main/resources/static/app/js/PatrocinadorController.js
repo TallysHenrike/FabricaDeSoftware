@@ -36,6 +36,8 @@ angular.module("app").controller("PatrocinadorController", function($rootScope, 
 	$http.get(`http://localhost:8080/patrocinador/listar/${idEvento}`)
 	.then((resposta)=>{
 		$scope.patrocinadores = resposta.data;
+	}, (resposta)=>{
+		console.log(resposta.data);
 	});
 	
 	$scope.salvar = (form)=>{
@@ -44,11 +46,15 @@ angular.module("app").controller("PatrocinadorController", function($rootScope, 
 			.then((resposta)=>{
 				$scope.patrocinadores[form] = resposta.data;
 				console.log(resposta.data);
+			}, (resposta)=>{
+				console.log(resposta.data);
 			});
 		}else{
 			$http.post(`http://localhost:8080/patrocinador/inserir/${idEvento}`, form)
 			.then((resposta)=>{
 				$scope.patrocinadores.push(resposta.data);
+				console.log(resposta.data);
+			}, (resposta)=>{
 				console.log(resposta.data);
 			});
 		}
@@ -72,6 +78,8 @@ angular.module("app").controller("PatrocinadorController", function($rootScope, 
 		$http.delete(`http://localhost:8080/patrocinador/deletar/${patrocinador.idPatrocinador}`)
 		.then((resposta)=>{
 			$scope.patrocinadores.splice($scope.patrocinadores.indexOf(patrocinador), 1);
+			console.log(resposta.data);
+		}, (resposta)=>{
 			console.log(resposta.data);
 		});
 	}

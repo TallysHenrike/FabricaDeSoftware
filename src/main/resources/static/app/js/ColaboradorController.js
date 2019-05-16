@@ -36,6 +36,8 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 	$http.get(`http://localhost:8080/colaborador/listar/${idEvento}`)
 	.then((resposta)=>{
 		$scope.colaboradores = resposta.data;
+	}, (resposta)=>{
+		console.log(resposta.data);
 	});
 	
 	$scope.salvar = (form)=>{
@@ -44,11 +46,15 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 			.then((resposta)=>{
 				$scope.colaboradores[form] = resposta.data;
 				console.log(resposta.data);
+			}, (resposta)=>{
+				console.log(resposta.data);
 			});
 		}else{
 			$http.post(`http://localhost:8080/colaborador/inserir/${idEvento}`, form)
 			.then((resposta)=>{
 				$scope.colaboradores.push(resposta.data);
+				console.log(resposta.data);
+			}, (resposta)=>{
 				console.log(resposta.data);
 			});
 		}
@@ -72,6 +78,8 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 		$http.delete(`http://localhost:8080/colaborador/deletar/${colaborador.idColaborador}`)
 		.then((resposta)=>{
 			$scope.colaboradores.splice($scope.colaboradores.indexOf(colaborador), 1);
+			console.log(resposta.data);
+		}, (resposta)=>{
 			console.log(resposta.data);
 		});
 	}

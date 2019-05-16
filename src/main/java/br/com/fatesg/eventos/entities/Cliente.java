@@ -110,6 +110,5 @@ public class Cliente {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-	
 
 }

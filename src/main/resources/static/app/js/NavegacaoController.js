@@ -33,7 +33,9 @@ angular.module("app").controller("NavegacaoController", function($rootScope, $sc
 	$rootScope.acessar = (usuario)=>{
 		$http.post('http://localhost:8080/administrador/acessar', usuario)
 		.then((resposta)=>{
-			//console.log(resposta.data);
+			
+			sessionStorage.setItem("token", resposta.data.token);
+			
 			if(resposta.data != ""){
 				$rootScope.navegacao.perfil = resposta.data;
 				$rootScope.navegacao.temAcesso = true;
@@ -43,6 +45,8 @@ angular.module("app").controller("NavegacaoController", function($rootScope, $sc
 			}
 			
 			sessionStorage.setItem('temAcesso', JSON.stringify($rootScope.navegacao));
+		}, (resposta)=>{
+			console.log(resposta.data);
 		});
 	}
 });

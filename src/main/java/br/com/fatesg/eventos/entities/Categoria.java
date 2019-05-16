@@ -19,11 +19,11 @@ public class Categoria {
 	@NotNull(message = "Código de categoria não pode ser cadastrado como nulo.")
 	private Long idCategoria;
 
-	@Size(max = 50, message= "O campo nome deve ter no máximo 50 caracteres.")
-	@NotEmpty(message= "O campo nome não pode ser cadastrado em branco.")
+	@Size(max = 50, message = "O campo nome deve ter no máximo 50 caracteres.")
+	@NotEmpty(message = "O campo nome não pode ser cadastrado em branco.")
 	private String nome;
 
-	@Size(max = 50, message= "O campo descrição deve ter no máximo 50 caracteres.")
+	@Size(max = 300, message = "O campo descrição deve ter no máximo 50 caracteres.")
 	@NotEmpty(message = "O campo descricao não pode ser nulo!")
 	private String descricao;
 
@@ -33,8 +33,16 @@ public class Categoria {
 
 	private Date dataDeAtualizacao;
 
-	public Categoria(Long idCategoria, String nome, String descricao, byte[] icone, Date dataDeCadastro,
-			Date dataDeAtualizacao) {
+	public Categoria() {}
+
+	public Categoria(
+		Long idCategoria,
+		String nome,
+		String descricao,
+		byte[] icone,
+		Date dataDeCadastro,
+		Date dataDeAtualizacao
+	) {
 		this.idCategoria = idCategoria;
 		this.nome = nome;
 		this.descricao = descricao;
@@ -42,8 +50,6 @@ public class Categoria {
 		this.dataDeCadastro = dataDeCadastro;
 		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
-
-	public Categoria() {}
 
 	public Long getIdCategoria() {
 		return idCategoria;

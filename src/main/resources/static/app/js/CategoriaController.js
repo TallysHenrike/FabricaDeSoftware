@@ -30,25 +30,31 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 		btn: 'Cadastrar'
 	}
 	
-	function listar(){
-		$http.get('http://localhost:8080/categoria/listar')
-		.then((resposta)=>{
-			$scope.categorias = resposta.data;
-		});
-	}
-	listar();
+	$http.get('http://localhost:8080/categoria/listar')
+	.then((resposta)=>{
+		$scope.categorias = resposta.data;
+	}, (resposta)=>{
+		console.log(resposta.data);
+	});
 	
 	$scope.salvar = (form)=>{
+		form.token = sessionStorage.getItem("token");
+		form.idAdministrador = $rootScope.navegacao.perfil.idAdministrador;
+		
 		if($scope.operacao.alterar){
-			$http.put('http://localhost:8080/categoria/alterar', form)
+			$http.put(`http://localhost:8080/categoria/alterar`, form)
 			.then((resposta)=>{
 				$scope.categorias[form] = resposta.data;
 				console.log(resposta.data);
+			}, (resposta)=>{
+				console.log(resposta.data);
 			});
 		}else{
-			$http.post('http://localhost:8080/categoria/inserir', form)
+			$http.post(`http://localhost:8080/categoria/inserir`, form)
 			.then((resposta)=>{
 				$scope.categorias.push(resposta.data);
+				console.log(resposta.data);
+			}, (resposta)=>{
 				console.log(resposta.data);
 			});
 		}
@@ -72,6 +78,8 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 		$http.delete(`http://localhost:8080/categoria/deletar/${categoria.idCategoria}`)
 		.then((resposta)=>{
 			$scope.categorias.splice($scope.categorias.indexOf(categoria), 1);
+			console.log(resposta.data);
+		}, (resposta)=>{
 			console.log(resposta.data);
 		});
 	}

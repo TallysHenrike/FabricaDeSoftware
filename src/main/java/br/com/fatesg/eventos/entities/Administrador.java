@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OrderColumn;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -30,7 +31,10 @@ public class Administrador {
 
 	private Date dataDeCadastro;
 
+	@OrderColumn
 	private Date dataDeAtualizacao;
+	
+	private long token;
 
 	public Administrador() {}
 
@@ -97,5 +101,13 @@ public class Administrador {
 
 	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
 		this.dataDeAtualizacao = dataDeAtualizacao;
+	}
+
+	public long getToken() {
+		return token;
+	}
+
+	public void setToken(long token) {
+		this.token = token;
 	}
 }

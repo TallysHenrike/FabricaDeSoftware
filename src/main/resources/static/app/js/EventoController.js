@@ -33,11 +33,15 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 	$http.get('http://localhost:8080/evento/listar')
 	.then((resposta)=>{
 		$scope.eventos = resposta.data;
+	}, (resposta)=>{
+		console.log(resposta.data);
 	});
 	
 	$http.get('http://localhost:8080/categoria/listar')
 	.then((resposta)=>{
 		$scope.categorias = resposta.data;
+	}, (resposta)=>{
+		console.log(resposta.data);
 	});
 	
 	$scope.salvar = (form)=>{
@@ -48,6 +52,8 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 			.then((resposta)=>{
 				$scope.eventos[form] = resposta.data;
 				console.log(resposta.data);
+			}, (resposta)=>{
+				console.log(resposta.data);
 			});
 		}else{
 			let idAdministrador = $rootScope.navegacao.perfil.idAdministrador;
@@ -55,6 +61,8 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 			$http.post(`http://localhost:8080/evento/inserir/${idAdministrador}`, form)
 			.then((resposta)=>{
 				$scope.eventos.push(resposta.data);
+				console.log(resposta.data);
+			}, (resposta)=>{
 				console.log(resposta.data);
 			});
 		}
@@ -78,6 +86,8 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 		$http.delete(`http://localhost:8080/evento/deletar/${evento.idEvento}`)
 		.then((resposta)=>{
 			$scope.eventos.splice($scope.eventos.indexOf(evento), 1);
+			console.log(resposta.data);
+		}, (resposta)=>{
 			console.log(resposta.data);
 		});
 	}
