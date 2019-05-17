@@ -1,5 +1,11 @@
 angular.module("app").controller("PresencaController", function($rootScope, $scope, $http, $location) {
-	if(!sessionStorage.getItem('token')){
+	$http.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+	
+	if(sessionStorage.getItem('token')){
+		$rootScope.navegacao.temAcesso = true;
+	}else{
+		sessionStorage.clear();
+		$rootScope.navegacao.temAcesso = false;
 		$location.path('/acesso');
 	}
 	

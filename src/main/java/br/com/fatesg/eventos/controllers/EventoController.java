@@ -44,6 +44,7 @@ public class EventoController {
 		
 		evento.setAdministrador(administrador);
 		evento.setDataDeCadastro(new Date());
+		
 		return eventoDao.save(evento);
 	}
 

@@ -1,8 +1,17 @@
-angular.module("app").controller("CategoriaController", function($rootScope, $scope, $http, $location) {
+angular.module("app").controller("CategoriaController", function($rootScope, $scope, $http, $location, $timeout) {
 	$http.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+	
+	if(sessionStorage.getItem('token')){
+		$rootScope.navegacao.temAcesso = true;
+	}else{
+		sessionStorage.clear();
+		$rootScope.navegacao.temAcesso = false;
+		$location.path('/acesso');
+	}
     
     $rootScope.activetab = $location.path();
 	$scope.form = {};
+	$scope.alerta = {abrir: false}
 	
 	function handleFileSelect(evt) {
 		let f = evt.target.files[0];
@@ -32,6 +41,11 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 		$scope.categorias = resposta.data;
 	}, (resposta)=>{
 		console.log(resposta.data);
+		$scope.alerta.mensagem = resposta.data.message;
+		$scope.alerta.abrir = true;
+		$timeout(function(){
+			$scope.alerta.abrir = false;
+		}, 2000);
 	});
 	
 	$scope.salvar = (form)=>{
@@ -45,6 +59,11 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2000);
 			});
 		}else{
 			$http.post(`http://localhost:8080/restrito/categoria/inserir`, form)
@@ -53,6 +72,11 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2000);
 			});
 		}
 		
@@ -78,6 +102,11 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 			console.log(resposta.data);
 		}, (resposta)=>{
 			console.log(resposta.data);
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2000);
 		});
 	}
 	

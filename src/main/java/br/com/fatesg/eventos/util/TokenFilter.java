@@ -20,14 +20,15 @@ public class TokenFilter extends GenericFilterBean {
 		
 		String header = req.getHeader("Authorization");
 		
-		if(header == null || header.startsWith("Bearer ")) {
+		if(header.equals("Bearer ") || header.isEmpty()) {
 			throw new ServletException("Token inexistente ou invalido");
 		}
 		
 		String token = header.substring(7);
+		System.out.println("token: " + token);
 
 		try {
-			Jwts.parser().setSigningKey("Tallys").parseClaimsJws(token).getBody();
+			Jwts.parser().setSigningKey("abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890").parseClaimsJws(token).getBody();
 		}catch (Exception e) {
 			throw new ServletException("Token inválido");
 		}

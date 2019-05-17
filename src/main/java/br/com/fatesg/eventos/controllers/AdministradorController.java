@@ -1,6 +1,5 @@
 package br.com.fatesg.eventos.controllers;
 
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +20,6 @@ import br.com.fatesg.eventos.persistence.AdministradorDao;
 import br.com.fatesg.eventos.util.LoginResponse;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
 @RestController
 @RequestMapping("/administrador")
@@ -59,58 +57,28 @@ public class AdministradorController {
 		return administradorDao.save(administrador);
 	}
 
-	/*
 	@RequestMapping(value = "acessar", method = RequestMethod.POST)
-	public Map<String, Object> acessar(HttpServletResponse response, HttpServletRequest request, @RequestBody Map<String, String> objeto) {
-		administrador.setUsuario(objeto.get("usuario"));
-		administrador.setSenha(objeto.get("senha"));
-		
-		Administrador adm = administradorDao.validarAcesso(administrador.getUsuario(), administrador.getSenha());
-		
-		if(adm.getNome() != null) {
-			mapeamento.put("idAdministrador", adm.getIdAdministrador());
-			mapeamento.put("nome", adm.getNome());
-			mapeamento.put("usuario", adm.getUsuario());
-			mapeamento.put("senha", adm.getSenha());
-			mapeamento.put("foto", adm.getFoto());
-		}else {
-			mapeamento.put("erro", "Login invalido");
-		}
-		
-		return mapeamento;
-	}
-	*/
-
-	@RequestMapping(value = "acessar", method = RequestMethod.POST)
-	public Map<String, Object> acessar(@RequestBody Map<String, String> objeto) throws ServletException {
-		administrador.setUsuario(objeto.get("usuario"));
-		administrador.setSenha(objeto.get("senha"));
-		
+	public Map<String, Object> acessar(@RequestBody Administrador administrador) throws ServletException {
 		Administrador adm = administradorDao.validarAcesso(administrador.getUsuario(), administrador.getSenha());
 		
 		if(adm.getNome() == null) {
 			throw new ServletException("USUARIO NÃO ENCONTRADO");
-		}
-		
-		Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-		String token = Jwts.builder()
+		}else {
+			//Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+			String token = Jwts.builder()
 				.setSubject(adm.getNome())
-				.signWith(key)
-				.setId("Tallys")
+				.signWith(SignatureAlgorithm.HS256, "abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890")
 				.setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
 				.compact();
-		
-		if(adm.getNome() != null) {
+			
 			mapeamento.put("idAdministrador", adm.getIdAdministrador());
 			mapeamento.put("nome", adm.getNome());
 			mapeamento.put("usuario", adm.getUsuario());
-			mapeamento.put("senha", adm.getSenha());
+			//mapeamento.put("senha", adm.getSenha());
 			mapeamento.put("foto", adm.getFoto());
 			mapeamento.put("acesso", new LoginResponse(token));
-		}else {
-			mapeamento.put("erro", "Login invalido");
+			
+			return mapeamento;
 		}
-		
-		return mapeamento;
 	}
 }
