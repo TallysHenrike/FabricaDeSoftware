@@ -33,8 +33,6 @@ public class Administrador {
 
 	@OrderColumn
 	private Date dataDeAtualizacao;
-	
-	private long token;
 
 	public Administrador() {}
 
@@ -101,13 +99,5 @@ public class Administrador {
 
 	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
 		this.dataDeAtualizacao = dataDeAtualizacao;
-	}
-
-	public long getToken() {
-		return token;
-	}
-
-	public void setToken(long token) {
-		this.token = token;
 	}
 }
