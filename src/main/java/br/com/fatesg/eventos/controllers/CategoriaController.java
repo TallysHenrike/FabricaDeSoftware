@@ -57,7 +57,6 @@ public class CategoriaController {
 		mapeamento.put("descricao", values.getDescricao());
 		mapeamento.put("icone", values.getIcone());
 		mapeamento.put("dataDeCadastro", values.getDataDeCadastro());
-		mapeamento.put("token", System.currentTimeMillis());
 
 		return mapeamento;
 	}
@@ -76,7 +75,6 @@ public class CategoriaController {
 		mapeamento.put("descricao", values.getDescricao());
 		mapeamento.put("icone", values.getIcone());
 		mapeamento.put("dataDeCadastro", values.getDataDeCadastro());
-		mapeamento.put("token", System.currentTimeMillis());
 
 		return mapeamento;
 	}

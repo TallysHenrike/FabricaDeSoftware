@@ -1,9 +1,6 @@
 angular.module("app").controller("EventoController", function($rootScope, $scope, $http, $location) {
-	if(!sessionStorage.getItem('temAcesso')){
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/acesso');
-	}
-	
+    $http.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+    
 	$rootScope.activetab = $location.path();
 	$scope.form = {};
 	

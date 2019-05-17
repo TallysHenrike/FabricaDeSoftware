@@ -1,10 +1,7 @@
 angular.module("app").controller("CategoriaController", function($rootScope, $scope, $http, $location) {
-	if(!sessionStorage.getItem('temAcesso')){
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/acesso');
-	}
-	
-	$rootScope.activetab = $location.path();
+	$http.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
+    
+    $rootScope.activetab = $location.path();
 	$scope.form = {};
 	
 	function handleFileSelect(evt) {
@@ -30,7 +27,7 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 		btn: 'Cadastrar'
 	}
 	
-	$http.get('http://localhost:8080/categoria/listar')
+	$http.get('http://localhost:8080/restrito/categoria/listar')
 	.then((resposta)=>{
 		$scope.categorias = resposta.data;
 	}, (resposta)=>{
@@ -42,7 +39,7 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 		form.idAdministrador = $rootScope.navegacao.perfil.idAdministrador;
 		
 		if($scope.operacao.alterar){
-			$http.put(`http://localhost:8080/categoria/alterar`, form)
+			$http.put(`http://localhost:8080/restrito/categoria/alterar`, form)
 			.then((resposta)=>{
 				$scope.categorias[form] = resposta.data;
 				console.log(resposta.data);
@@ -50,7 +47,7 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 				console.log(resposta.data);
 			});
 		}else{
-			$http.post(`http://localhost:8080/categoria/inserir`, form)
+			$http.post(`http://localhost:8080/restrito/categoria/inserir`, form)
 			.then((resposta)=>{
 				$scope.categorias.push(resposta.data);
 				console.log(resposta.data);
@@ -75,7 +72,7 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 	}
 	
 	$scope.excluir = (categoria)=>{
-		$http.delete(`http://localhost:8080/categoria/deletar/${categoria.idCategoria}`)
+		$http.delete(`http://localhost:8080/restrito/categoria/deletar/${categoria.idCategoria}`)
 		.then((resposta)=>{
 			$scope.categorias.splice($scope.categorias.indexOf(categoria), 1);
 			console.log(resposta.data);

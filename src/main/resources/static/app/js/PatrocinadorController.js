@@ -1,9 +1,4 @@
 angular.module("app").controller("PatrocinadorController", function($rootScope, $scope, $http, $location, $routeParams) {
-	if(!sessionStorage.getItem('temAcesso')){
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/acesso');
-	}
-	
 	let idEvento = $routeParams.idEvento;
 	
 	$rootScope.activetab = $location.path();
