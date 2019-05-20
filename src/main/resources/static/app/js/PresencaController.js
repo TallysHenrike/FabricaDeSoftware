@@ -9,6 +9,10 @@ angular.module("app").controller("PresencaController", function($rootScope, $sco
 			$rootScope.navegacao.temAcesso = false;
 			$location.path('/acesso');
 		}
+	}else{
+		localStorage.clear();
+		$rootScope.navegacao.temAcesso = false;
+		$location.path('/acesso');
 	}
 	
 	$rootScope.activetab = $location.path();

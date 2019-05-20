@@ -2,7 +2,6 @@ angular.module("app").controller("NavegacaoController", function($rootScope, $sc
 	$rootScope.navegacao = {}
 	$scope.alerta = {abrir: false}
 	
-	/*
 	if(localStorage.getItem('sessao')){
 		let sessao = JSON.parse(localStorage.getItem('sessao'));
 		if(sessao.token && sessao.expiracao >= new Date().getTime()){
@@ -10,10 +9,13 @@ angular.module("app").controller("NavegacaoController", function($rootScope, $sc
 		}else{
 			sessionStorage.clear();
 			$rootScope.navegacao.temAcesso = false;
-			//$location.path('/acesso');
+			$location.path('/acesso');
 		}
+	}else{
+		sessionStorage.clear();
+		$rootScope.navegacao.temAcesso = false;
+		$location.path('/acesso');
 	}
-	*/
 	
 	$scope.fecharSessao = ()=>{
 		localStorage.clear();

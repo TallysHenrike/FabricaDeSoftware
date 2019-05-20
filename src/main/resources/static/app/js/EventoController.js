@@ -9,6 +9,10 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 			$rootScope.navegacao.temAcesso = false;
 			$location.path('/acesso');
 		}
+	}else{
+		localStorage.clear();
+		$rootScope.navegacao.temAcesso = false;
+		$location.path('/acesso');
 	}
     
 	$rootScope.activetab = $location.path();

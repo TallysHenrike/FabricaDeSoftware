@@ -9,6 +9,10 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 			$rootScope.navegacao.temAcesso = false;
 			$location.path('/acesso');
 		}
+	}else{
+		localStorage.clear();
+		$rootScope.navegacao.temAcesso = false;
+		$location.path('/acesso');
 	}
 	
 	let idEvento = $routeParams.idEvento;
