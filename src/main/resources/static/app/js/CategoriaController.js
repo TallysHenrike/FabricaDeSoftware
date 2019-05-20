@@ -1,12 +1,14 @@
 angular.module("app").controller("CategoriaController", function($rootScope, $scope, $http, $location, $timeout) {
-	$http.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
-	
-	if(sessionStorage.getItem('token')){
-		$rootScope.navegacao.temAcesso = true;
-	}else{
-		sessionStorage.clear();
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/acesso');
+	if(sessionStorage.getItem('sessao')){
+		let sessao = JSON.parse(sessionStorage.getItem('sessao'));
+		if(sessao.token && sessao.expiracao >= new Date().getTime()){
+			$http.defaults.headers.common['Authorization'] = `Bearer ${sessao.token}`;
+			$rootScope.navegacao.temAcesso = true;
+		}else{
+			sessionStorage.clear();
+			$rootScope.navegacao.temAcesso = false;
+			$location.path('/acesso');
+		}
 	}
     
     $rootScope.activetab = $location.path();
@@ -45,12 +47,12 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 		$scope.alerta.abrir = true;
 		$timeout(function(){
 			$scope.alerta.abrir = false;
-		}, 2000);
+		}, 2500);
 	});
 	
 	$scope.salvar = (form)=>{
-		form.token = sessionStorage.getItem("token");
-		form.idAdministrador = $rootScope.navegacao.perfil.idAdministrador;
+		let perfil = JSON.parse(localStorage.getItem('perfil'));
+		form.idAdministrador = perfil.idAdministrador;
 		
 		if($scope.operacao.alterar){
 			$http.put(`http://localhost:8080/restrito/categoria/alterar`, form)
@@ -63,7 +65,7 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 				$scope.alerta.abrir = true;
 				$timeout(function(){
 					$scope.alerta.abrir = false;
-				}, 2000);
+				}, 2500);
 			});
 		}else{
 			$http.post(`http://localhost:8080/restrito/categoria/inserir`, form)
@@ -76,7 +78,7 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 				$scope.alerta.abrir = true;
 				$timeout(function(){
 					$scope.alerta.abrir = false;
-				}, 2000);
+				}, 2500);
 			});
 		}
 		
@@ -106,7 +108,7 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 			$scope.alerta.abrir = true;
 			$timeout(function(){
 				$scope.alerta.abrir = false;
-			}, 2000);
+			}, 2500);
 		});
 	}
 	

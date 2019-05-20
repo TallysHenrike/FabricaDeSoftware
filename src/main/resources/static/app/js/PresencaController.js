@@ -1,12 +1,14 @@
 angular.module("app").controller("PresencaController", function($rootScope, $scope, $http, $location) {
-	$http.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
-	
-	if(sessionStorage.getItem('token')){
-		$rootScope.navegacao.temAcesso = true;
-	}else{
-		sessionStorage.clear();
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/acesso');
+	if(sessionStorage.getItem('sessao')){
+		let sessao = JSON.parse(sessionStorage.getItem('sessao'));
+		if(sessao.token && sessao.expiracao >= new Date().getTime()){
+			$http.defaults.headers.common['Authorization'] = `Bearer ${sessao.token}`;
+			$rootScope.navegacao.temAcesso = true;
+		}else{
+			sessionStorage.clear();
+			$rootScope.navegacao.temAcesso = false;
+			$location.path('/acesso');
+		}
 	}
 	
 	$rootScope.activetab = $location.path();

@@ -1,5 +1,5 @@
-angular.module("app").controller("EventoController", function($rootScope, $scope, $http, $location, $timeout) {
-    if(sessionStorage.getItem('sessao')){
+angular.module("app").controller("AdministradorController", function($rootScope, $scope, $http, $location, $timeout) {
+	if(sessionStorage.getItem('sessao')){
 		let sessao = JSON.parse(sessionStorage.getItem('sessao'));
 		if(sessao.token && sessao.expiracao >= new Date().getTime()){
 			$http.defaults.headers.common['Authorization'] = `Bearer ${sessao.token}`;
@@ -11,7 +11,7 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 		}
 	}
     
-	$rootScope.activetab = $location.path();
+    $rootScope.activetab = $location.path();
 	$scope.form = {};
 	$scope.alerta = {abrir: false}
 	
@@ -24,35 +24,23 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 				let binaryData = e.target.result;
 				let base64String = window.btoa(binaryData);
 				
-				$scope.form.imagemPrincipal = base64String;
+				$scope.form.foto = base64String;
 				console.log($scope.form);
 			};
 		})(f);
 		
 		reader.readAsBinaryString(f);
 	}
-	document.getElementById("imagem-principal").addEventListener("change", handleFileSelect, false);
+	document.getElementById("foto").addEventListener("change", handleFileSelect, false);
 	
 	$scope.operacao = {
 		alterar: false,
 		btn: 'Cadastrar'
 	}
 	
-	$http.get('http://localhost:8080/restrito/evento/listar')
+	$http.get('http://localhost:8080/restrito/administrador/listar')
 	.then((resposta)=>{
-		$scope.eventos = resposta.data;
-	}, (resposta)=>{
-		console.log(resposta.data);
-		$scope.alerta.mensagem = resposta.data.message;
-		$scope.alerta.abrir = true;
-		$timeout(function(){
-			$scope.alerta.abrir = false;
-		}, 2500);
-	});
-	
-	$http.get('http://localhost:8080/restrito/categoria/listar')
-	.then((resposta)=>{
-		$scope.categorias = resposta.data;
+		$scope.administradores = resposta.data;
 	}, (resposta)=>{
 		console.log(resposta.data);
 		$scope.alerta.mensagem = resposta.data.message;
@@ -63,12 +51,10 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 	});
 	
 	$scope.salvar = (form)=>{
-		console.log(form)
-		
 		if($scope.operacao.alterar){
-			$http.put('http://localhost:8080/restrito/evento/alterar', form)
+			$http.put(`http://localhost:8080/restrito/administrador/alterar`, form)
 			.then((resposta)=>{
-				$scope.eventos[form] = resposta.data;
+				$scope.administradores[form] = resposta.data;
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -79,11 +65,9 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 				}, 2500);
 			});
 		}else{
-			let idAdministrador = $rootScope.navegacao.perfil.idAdministrador;
-			
-			$http.post(`http://localhost:8080/restrito/evento/inserir/${idAdministrador}`, form)
+			$http.post(`http://localhost:8080/restrito/administrador/inserir`, form)
 			.then((resposta)=>{
-				$scope.eventos.push(resposta.data);
+				$scope.administradores.push(resposta.data);
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -102,18 +86,18 @@ angular.module("app").controller("EventoController", function($rootScope, $scope
 		}
 	}
 	
-	$scope.consultar = (evento)=>{
-		$scope.form = evento;
+	$scope.consultar = (administrador)=>{
+		$scope.form = administrador;
 		$scope.operacao = {
 			alterar: true,
 			btn: 'Editar'
 		}
 	}
 	
-	$scope.excluir = (evento)=>{
-		$http.delete(`http://localhost:8080/restrito/evento/deletar/${evento.idEvento}`)
+	$scope.excluir = (administrador)=>{
+		$http.delete(`http://localhost:8080/restrito/administrador/deletar/${administrador.idAdministrador}`)
 		.then((resposta)=>{
-			$scope.eventos.splice($scope.eventos.indexOf(evento), 1);
+			$scope.administradores.splice($scope.administradores.indexOf(administrador), 1);
 			console.log(resposta.data);
 		}, (resposta)=>{
 			console.log(resposta.data);

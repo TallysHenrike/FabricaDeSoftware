@@ -1,12 +1,14 @@
 angular.module("app").controller("ColaboradorController", function($rootScope, $scope, $http, $location, $routeParams, $timeout) {
-	$http.defaults.headers.common['Authorization'] = `Bearer ${sessionStorage.getItem('token')}`;
-	
-	if(sessionStorage.getItem('token')){
-		$rootScope.navegacao.temAcesso = true;
-	}else{
-		sessionStorage.clear();
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/acesso');
+	if(sessionStorage.getItem('sessao')){
+		let sessao = JSON.parse(sessionStorage.getItem('sessao'));
+		if(sessao.token && sessao.expiracao >= new Date().getTime()){
+			$http.defaults.headers.common['Authorization'] = `Bearer ${sessao.token}`;
+			$rootScope.navegacao.temAcesso = true;
+		}else{
+			sessionStorage.clear();
+			$rootScope.navegacao.temAcesso = false;
+			$location.path('/acesso');
+		}
 	}
 	
 	let idEvento = $routeParams.idEvento;
@@ -48,7 +50,7 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 		$scope.alerta.abrir = true;
 		$timeout(function(){
 			$scope.alerta.abrir = false;
-		}, 2000);
+		}, 2500);
 	});
 	
 	$scope.salvar = (form)=>{
@@ -63,7 +65,7 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 				$scope.alerta.abrir = true;
 				$timeout(function(){
 					$scope.alerta.abrir = false;
-				}, 2000);
+				}, 2500);
 			});
 		}else{
 			$http.post(`http://localhost:8080/restrito/colaborador/inserir/${idEvento}`, form)
@@ -76,7 +78,7 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 				$scope.alerta.abrir = true;
 				$timeout(function(){
 					$scope.alerta.abrir = false;
-				}, 2000);
+				}, 2500);
 			});
 		}
 		
@@ -106,7 +108,7 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 			$scope.alerta.abrir = true;
 			$timeout(function(){
 				$scope.alerta.abrir = false;
-			}, 2000);
+			}, 2500);
 		});
 	}
 	
