@@ -1,20 +1,4 @@
-angular.module("app").controller("ColaboradorController", function($rootScope, $scope, $http, $location, $routeParams, $timeout) {
-	if(localStorage.getItem('sessao')){
-		let sessao = JSON.parse(localStorage.getItem('sessao'));
-		if(sessao.token && sessao.expiracao >= new Date().getTime()){
-			$http.defaults.headers.common['Authorization'] = `Bearer ${sessao.token}`;
-			$rootScope.navegacao.temAcesso = true;
-		}else{
-			localStorage.clear();
-			$rootScope.navegacao.temAcesso = false;
-			$location.path('/acesso');
-		}
-	}else{
-		localStorage.clear();
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/acesso');
-	}
-	
+appEventos.controller('ColaboradorController', function($rootScope, $scope, $http, $location, $routeParams, $timeout) {
 	let idEvento = $routeParams.idEvento;
 	
 	$rootScope.activetab = $location.path();
@@ -38,7 +22,7 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 		
 		reader.readAsBinaryString(f);
 	}
-	document.getElementById("imagem-colaborador").addEventListener("change", handleFileSelect, false);
+	document.getElementById('imagem-colaborador').addEventListener('change', handleFileSelect, false);
 	
 	$scope.operacao = {
 		alterar: false,

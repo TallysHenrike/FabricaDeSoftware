@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.filter.GenericFilterBean;
 
@@ -30,7 +31,7 @@ public class TokenFilter extends GenericFilterBean {
 		try {
 			Jwts.parser().setSigningKey("abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890").parseClaimsJws(token).getBody();
 		}catch (Exception e) {
-			throw new ServletException("Token inválido");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token invalido"); 
 		}
 		
 		chain.doFilter(request, response);

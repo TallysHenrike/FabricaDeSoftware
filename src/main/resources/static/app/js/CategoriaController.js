@@ -1,21 +1,5 @@
-angular.module("app").controller("CategoriaController", function($rootScope, $scope, $http, $location, $timeout) {
-	if(localStorage.getItem('sessao')){
-		let sessao = JSON.parse(localStorage.getItem('sessao'));
-		if(sessao.token && sessao.expiracao >= new Date().getTime()){
-			$http.defaults.headers.common['Authorization'] = `Bearer ${sessao.token}`;
-			$rootScope.navegacao.temAcesso = true;
-		}else{
-			localStorage.clear();
-			$rootScope.navegacao.temAcesso = false;
-			$location.path('/acesso');
-		}
-	}else{
-		localStorage.clear();
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/acesso');
-	}
-    
-    $rootScope.activetab = $location.path();
+appEventos.controller('CategoriaController', function($rootScope, $scope, $http, $location, $timeout) {
+	$rootScope.activetab = $location.path();
 	$scope.form = {};
 	$scope.alerta = {abrir: false}
 	
@@ -35,7 +19,7 @@ angular.module("app").controller("CategoriaController", function($rootScope, $sc
 		
 		reader.readAsBinaryString(f);
 	}
-	document.getElementById("icone").addEventListener("change", handleFileSelect, false);
+	document.getElementById('icone').addEventListener('change', handleFileSelect, false);
 	
 	$scope.operacao = {
 		alterar: false,

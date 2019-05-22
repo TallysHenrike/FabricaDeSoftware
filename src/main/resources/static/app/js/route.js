@@ -1,4 +1,4 @@
-angular.module('app').config(function($routeProvider){
+appEventos.config(function($routeProvider, $httpProvider){
 	$routeProvider
 	.when('/', {
 		controller: 'NavegacaoController'
@@ -26,4 +26,6 @@ angular.module('app').config(function($routeProvider){
 		templateUrl: 'templates/administracao.html',
 		controller: 'AdministradorController'
 	}).otherwise({ redirectTo: '/' });
+	
+	$httpProvider.interceptors.push('tokenInterceptor');
 });
