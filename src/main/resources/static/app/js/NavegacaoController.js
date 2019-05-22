@@ -1,4 +1,4 @@
-appEventos.controller("NavegacaoController", function($rootScope, $scope, $http, $location, $timeout){
+appEventos.controller("NavegacaoController", function($rootScope, $scope, $http, $location, $timeout, Cookie){
 	$rootScope.navegacao = {}
 	$scope.alerta = {abrir: false}
 	
@@ -17,7 +17,8 @@ appEventos.controller("NavegacaoController", function($rootScope, $scope, $http,
             $rootScope.navegacao.perfil = resposta.data;
             $location.path('/presenca');
 			
-			localStorage.setItem("token", resposta.data.acesso.token);
+			//localStorage.setItem("token", resposta.data.acesso.token);
+			Cookie.set('token', resposta.data.acesso.token, new Date(new Date().getTime() + (60 * 60 * 1000)));
 		}, (resposta)=>{
 			localStorage.clear();
             console.log(resposta.data);

@@ -37,7 +37,7 @@ public class AcessoController {
 			String token = Jwts.builder()
 				.setSubject(adm.getNome())
 				.signWith(SignatureAlgorithm.HS256, "abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890")
-				.setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
+				.setExpiration(new Date(System.currentTimeMillis() + (60 * 60 * 1000)))
 				.compact();
 			
 			mapeamento.put("idAdministrador", adm.getIdAdministrador());
