@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatesg.eventos.entities.Evento;
 import br.com.fatesg.eventos.entities.Patrocinador;
-import br.com.fatesg.eventos.persistence.PatrocinadorDao;
+import br.com.fatesg.eventos.persistence.PatrocinadorPersistence;
 
 @RestController
 @RequestMapping("/restrito/patrocinador")
 public class PatrocinadorController {
 
 	@Autowired
-	private PatrocinadorDao patrocinadorDao;
+	private PatrocinadorPersistence patrocinadorDao;
 	
 	@RequestMapping(value = "listar/{idEvento}", method = RequestMethod.GET)
 	public List<Patrocinador> listar(@PathVariable Long idEvento) {

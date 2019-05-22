@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatesg.eventos.entities.Categoria;
-import br.com.fatesg.eventos.persistence.CategoriaDao;
+import br.com.fatesg.eventos.persistence.CategoriaPersistence;
 
 @RestController
 @RequestMapping("/restrito/categoria")
 public class CategoriaController {
 
 	@Autowired
-	private CategoriaDao categoriaDao;
+	private CategoriaPersistence categoriaDao;
 
 	@RequestMapping(value = "listar", method = RequestMethod.GET)
 	public List<Categoria> listar() {

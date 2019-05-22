@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatesg.eventos.entities.Administrador;
-import br.com.fatesg.eventos.persistence.AdministradorDao;
+import br.com.fatesg.eventos.persistence.AdministradorPersistence;
 
 @RestController
 @RequestMapping("/restrito/administrador")
 public class AdministradorController {
 
 	@Autowired
-	private AdministradorDao administradorDao;
+	private AdministradorPersistence administradorDao;
 
 	@RequestMapping(value = "listar", method = RequestMethod.GET)
 	public List<Administrador> listar() {

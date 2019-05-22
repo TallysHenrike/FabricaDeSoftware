@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fatesg.eventos.entities.Administrador;
-import br.com.fatesg.eventos.persistence.AdministradorDao;
+import br.com.fatesg.eventos.persistence.AdministradorPersistence;
 import br.com.fatesg.eventos.util.LoginResponse;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -23,7 +23,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class AcessoController {
 
 	@Autowired
-	private AdministradorDao administradorDao;
+	private AdministradorPersistence administradorDao;
 
 	@RequestMapping(value = "acessar", method = RequestMethod.POST)
 	public Map<String, Object> acessar(@RequestBody Administrador administrador) throws ServletException {

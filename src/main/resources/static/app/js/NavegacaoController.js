@@ -12,16 +12,23 @@ appEventos.controller("NavegacaoController", function($rootScope, $scope, $http,
 	$rootScope.acessar = (usuario)=>{
 		$http.post('http://localhost:8080/acesso/acessar', usuario)
 		.then((resposta)=>{
-			localStorage.setItem("perfil", JSON.stringify(resposta.data));
-			
-            $rootScope.navegacao.perfil = resposta.data;
-            $location.path('/presenca');
-			
-			//localStorage.setItem("token", resposta.data.acesso.token);
-			Cookie.set('token', resposta.data.acesso.token, new Date(new Date().getTime() + (60 * 60 * 1000)));
+			if(resposta.data.error){
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
+			}else{
+				localStorage.setItem("perfil", JSON.stringify(resposta.data));
+
+				$rootScope.navegacao.perfil = resposta.data;
+				$location.path('/presenca');
+
+				//localStorage.setItem("token", resposta.data.acesso.token);
+				Cookie.set('token', resposta.data.acesso.token, new Date(new Date().getTime() + (60 * 60 * 1000)));
+			}
 		}, (resposta)=>{
-			localStorage.clear();
-            console.log(resposta.data);
+			console.log(resposta.data);
 			$scope.alerta.mensagem = resposta.data.message;
 			$scope.alerta.abrir = true;
 			$timeout(function(){

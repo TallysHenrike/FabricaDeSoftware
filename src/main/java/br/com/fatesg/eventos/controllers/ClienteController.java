@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import br.com.fatesg.eventos.entities.Cliente;
-import br.com.fatesg.eventos.persistence.ClienteDao;
+import br.com.fatesg.eventos.persistence.ClientePersistence;
 
 @RestController
 @RequestMapping("/cliente")
 public class ClienteController {
 
 	@Autowired
-	private ClienteDao clienteDao;
+	private ClientePersistence clienteDao;
 
 	@RequestMapping(value = "listar", method = RequestMethod.GET)
 	public List<Cliente> listar() {
