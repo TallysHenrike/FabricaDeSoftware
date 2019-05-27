@@ -28,7 +28,15 @@ appEventos.controller('CategoriaController', function($rootScope, $scope, $http,
 	
 	$http.get('http://localhost:8080/restrito/categoria/listar')
 	.then((resposta)=>{
-		$scope.categorias = resposta.data;
+		if(resposta.data.status == 500){
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2500);
+		}else{
+			$scope.categorias = resposta.data;
+		}
 	}, (resposta)=>{
 		console.log(resposta.data);
 		$scope.alerta.mensagem = resposta.data.message;
@@ -45,7 +53,15 @@ appEventos.controller('CategoriaController', function($rootScope, $scope, $http,
 		if($scope.operacao.alterar){
 			$http.put(`http://localhost:8080/restrito/categoria/alterar`, form)
 			.then((resposta)=>{
-				$scope.categorias[form] = resposta.data;
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.categorias[form] = resposta.data;
+				}
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -58,7 +74,15 @@ appEventos.controller('CategoriaController', function($rootScope, $scope, $http,
 		}else{
 			$http.post(`http://localhost:8080/restrito/categoria/inserir`, form)
 			.then((resposta)=>{
-				$scope.categorias.push(resposta.data);
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.categorias.push(resposta.data);
+				}
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -88,7 +112,15 @@ appEventos.controller('CategoriaController', function($rootScope, $scope, $http,
 	$scope.excluir = (categoria)=>{
 		$http.delete(`http://localhost:8080/restrito/categoria/deletar/${categoria.idCategoria}`)
 		.then((resposta)=>{
-			$scope.categorias.splice($scope.categorias.indexOf(categoria), 1);
+			if(resposta.data.status == 500){
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
+			}else{
+				$scope.categorias.splice($scope.categorias.indexOf(categoria), 1);
+			}
 			console.log(resposta.data);
 		}, (resposta)=>{
 			console.log(resposta.data);
