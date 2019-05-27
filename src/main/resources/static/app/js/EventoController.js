@@ -28,7 +28,15 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 	
 	$http.get('http://localhost:8080/restrito/evento/listar')
 	.then((resposta)=>{
-		$scope.eventos = resposta.data;
+		if(resposta.data.status == 500){
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2500);
+		}else{
+			$scope.eventos = resposta.data;
+		}
 	}, (resposta)=>{
 		console.log(resposta.data);
 		$scope.alerta.mensagem = resposta.data.message;
@@ -40,7 +48,15 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 	
 	$http.get('http://localhost:8080/restrito/categoria/listar')
 	.then((resposta)=>{
-		$scope.categorias = resposta.data;
+		if(resposta.data.status == 500){
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2500);
+		}else{
+			$scope.categorias = resposta.data;
+		}
 	}, (resposta)=>{
 		console.log(resposta.data);
 		$scope.alerta.mensagem = resposta.data.message;
@@ -56,7 +72,15 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 		if($scope.operacao.alterar){
 			$http.put('http://localhost:8080/restrito/evento/alterar', form)
 			.then((resposta)=>{
-				$scope.eventos[form] = resposta.data;
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.eventos[form] = resposta.data;
+				}
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -71,7 +95,15 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 			
 			$http.post(`http://localhost:8080/restrito/evento/inserir/${idAdministrador}`, form)
 			.then((resposta)=>{
-				$scope.eventos.push(resposta.data);
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.eventos.push(resposta.data);
+				}
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -101,7 +133,15 @@ appEventos.controller('EventoController', function($rootScope, $scope, $http, $l
 	$scope.excluir = (evento)=>{
 		$http.delete(`http://localhost:8080/restrito/evento/deletar/${evento.idEvento}`)
 		.then((resposta)=>{
-			$scope.eventos.splice($scope.eventos.indexOf(evento), 1);
+			if(resposta.data.status == 500){
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
+			}else{
+				$scope.eventos.splice($scope.eventos.indexOf(evento), 1);
+			}
 			console.log(resposta.data);
 		}, (resposta)=>{
 			console.log(resposta.data);

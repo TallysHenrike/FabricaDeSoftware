@@ -28,7 +28,15 @@ appEventos.controller('AdministradorController', function($rootScope, $scope, $h
 	
 	$http.get('http://localhost:8080/restrito/administrador/listar')
 	.then((resposta)=>{
-		$scope.administradores = resposta.data;
+		if(resposta.data.status == 500){
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2500);
+		}else{
+			$scope.administradores = resposta.data;
+		}
 	}, (resposta)=>{
 		console.log(resposta.data);
 		$scope.alerta.mensagem = resposta.data.message;
@@ -42,7 +50,15 @@ appEventos.controller('AdministradorController', function($rootScope, $scope, $h
 		if($scope.operacao.alterar){
 			$http.put(`http://localhost:8080/restrito/administrador/alterar`, form)
 			.then((resposta)=>{
-				$scope.administradores[form] = resposta.data;
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.administradores[form] = resposta.data;
+				}
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -55,7 +71,15 @@ appEventos.controller('AdministradorController', function($rootScope, $scope, $h
 		}else{
 			$http.post(`http://localhost:8080/restrito/administrador/inserir`, form)
 			.then((resposta)=>{
-				$scope.administradores.push(resposta.data);
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.administradores.push(resposta.data);
+				}
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -85,7 +109,15 @@ appEventos.controller('AdministradorController', function($rootScope, $scope, $h
 	$scope.excluir = (administrador)=>{
 		$http.delete(`http://localhost:8080/restrito/administrador/deletar/${administrador.idAdministrador}`)
 		.then((resposta)=>{
-			$scope.administradores.splice($scope.administradores.indexOf(administrador), 1);
+			if(resposta.data.status == 500){
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
+			}else{
+				$scope.administradores.splice($scope.administradores.indexOf(administrador), 1);
+			}
 			console.log(resposta.data);
 		}, (resposta)=>{
 			console.log(resposta.data);

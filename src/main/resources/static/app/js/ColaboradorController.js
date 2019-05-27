@@ -31,7 +31,15 @@ appEventos.controller('ColaboradorController', function($rootScope, $scope, $htt
 	
 	$http.get(`http://localhost:8080/restrito/colaborador/listar/${idEvento}`)
 	.then((resposta)=>{
-		$scope.colaboradores = resposta.data;
+		if(resposta.data.status == 500){
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2500);
+		}else{
+			$scope.colaboradores = resposta.data;
+		}
 	}, (resposta)=>{
 		console.log(resposta.data);
 		$scope.alerta.mensagem = resposta.data.message;
@@ -45,7 +53,15 @@ appEventos.controller('ColaboradorController', function($rootScope, $scope, $htt
 		if($scope.operacao.alterar){
 			$http.put('http://localhost:8080/restrito/colaborador/alterar', form)
 			.then((resposta)=>{
-				$scope.colaboradores[form] = resposta.data;
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.colaboradores[form] = resposta.data;
+				}
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -58,7 +74,15 @@ appEventos.controller('ColaboradorController', function($rootScope, $scope, $htt
 		}else{
 			$http.post(`http://localhost:8080/restrito/colaborador/inserir/${idEvento}`, form)
 			.then((resposta)=>{
-				$scope.colaboradores.push(resposta.data);
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.colaboradores.push(resposta.data);
+				}
 				console.log(resposta.data);
 			}, (resposta)=>{
 				console.log(resposta.data);
@@ -88,7 +112,15 @@ appEventos.controller('ColaboradorController', function($rootScope, $scope, $htt
 	$scope.excluir = (colaborador)=>{
 		$http.delete(`http://localhost:8080/restrito/colaborador/deletar/${colaborador.idColaborador}`)
 		.then((resposta)=>{
-			$scope.colaboradores.splice($scope.colaboradores.indexOf(colaborador), 1);
+			if(resposta.data.status == 500){
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
+			}else{
+				$scope.colaboradores.splice($scope.colaboradores.indexOf(colaborador), 1);
+			}
 			console.log(resposta.data);
 		}, (resposta)=>{
 			console.log(resposta.data);
