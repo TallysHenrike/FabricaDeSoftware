@@ -47,49 +47,57 @@ appEventos.controller('AdministradorController', function($rootScope, $scope, $h
 	});
 	
 	$scope.salvar = (form)=>{
-		if($scope.operacao.alterar){
-			$http.put(`http://localhost:8080/restrito/administrador/alterar`, form)
-			.then((resposta)=>{
-				if(resposta.data.status == 500){
-					$scope.alerta.mensagem = resposta.data.message;
-					$scope.alerta.abrir = true;
-					$timeout(function(){
-						$scope.alerta.abrir = false;
-					}, 2500);
-				}else{
-					$scope.administradores[form] = resposta.data;
-				}
-				console.log(resposta.data);
-			}, (resposta)=>{
-				console.log(resposta.data);
-				$scope.alerta.mensagem = resposta.data.message;
-				$scope.alerta.abrir = true;
-				$timeout(function(){
-					$scope.alerta.abrir = false;
-				}, 2500);
-			});
-		}else{
-			$http.post(`http://localhost:8080/restrito/administrador/inserir`, form)
-			.then((resposta)=>{
-				if(resposta.data.status == 500){
-					$scope.alerta.mensagem = resposta.data.message;
-					$scope.alerta.abrir = true;
-					$timeout(function(){
-						$scope.alerta.abrir = false;
-					}, 2500);
-				}else{
-					$scope.administradores.push(resposta.data);
-				}
-				console.log(resposta.data);
-			}, (resposta)=>{
-				console.log(resposta.data);
-				$scope.alerta.mensagem = resposta.data.message;
-				$scope.alerta.abrir = true;
-				$timeout(function(){
-					$scope.alerta.abrir = false;
-				}, 2500);
-			});
-		}
+        if(form.senha !== form.senha2){
+            $scope.alerta.mensagem = 'As senhas não correspondem';
+            $scope.alerta.abrir = true;
+            $timeout(function(){
+                $scope.alerta.abrir = false;
+            }, 2500);
+        }else{
+            if($scope.operacao.alterar){
+                $http.put(`http://localhost:8080/restrito/administrador/alterar`, form)
+                .then((resposta)=>{
+                    if(resposta.data.status == 500){
+                        $scope.alerta.mensagem = resposta.data.message;
+                        $scope.alerta.abrir = true;
+                        $timeout(function(){
+                            $scope.alerta.abrir = false;
+                        }, 2500);
+                    }else{
+                        $scope.administradores[form] = resposta.data;
+                    }
+                    console.log(resposta.data);
+                }, (resposta)=>{
+                    console.log(resposta.data);
+                    $scope.alerta.mensagem = resposta.data.message;
+                    $scope.alerta.abrir = true;
+                    $timeout(function(){
+                        $scope.alerta.abrir = false;
+                    }, 2500);
+                });
+            }else{
+                $http.post(`http://localhost:8080/restrito/administrador/inserir`, form)
+                .then((resposta)=>{
+                    if(resposta.data.status == 500){
+                        $scope.alerta.mensagem = resposta.data.message;
+                        $scope.alerta.abrir = true;
+                        $timeout(function(){
+                            $scope.alerta.abrir = false;
+                        }, 2500);
+                    }else{
+                        $scope.administradores.push(resposta.data);
+                    }
+                    console.log(resposta.data);
+                }, (resposta)=>{
+                    console.log(resposta.data);
+                    $scope.alerta.mensagem = resposta.data.message;
+                    $scope.alerta.abrir = true;
+                    $timeout(function(){
+                        $scope.alerta.abrir = false;
+                    }, 2500);
+                });
+            }
+        }
 		
 		$scope.form = {};
 		$scope.operacao = {

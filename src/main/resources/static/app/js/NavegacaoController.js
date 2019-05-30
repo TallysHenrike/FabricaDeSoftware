@@ -9,6 +9,10 @@ appEventos.controller("NavegacaoController", function($rootScope, $scope, $http,
 	
 	$rootScope.navegacao.perfil = JSON.parse(localStorage.getItem('perfil'));
 	
+	if(Cookie.get('token') == null){
+		$location.path('/acesso');
+	}
+	
 	$rootScope.acessar = (usuario)=>{
 		$http.post('http://localhost:8080/acesso/acessar', usuario)
 		.then((resposta)=>{
