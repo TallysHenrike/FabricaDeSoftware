@@ -24,8 +24,7 @@ public class AdministradorController {
 		try {
 			return administradorDao.findAll();
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível listar os administradores!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível listar os administradores!");
 		}
 		return null;
 	}
@@ -35,8 +34,7 @@ public class AdministradorController {
 		try {
 			return administradorDao.findById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível buscar o administrador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível buscar o administrador!");
 		}
 		return null;
 	}
@@ -46,8 +44,7 @@ public class AdministradorController {
 		try {
 			administradorDao.deleteById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível deletar o administrador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível deletar o administrador!");
 		}
 	}
 
@@ -57,8 +54,7 @@ public class AdministradorController {
 			administrador.setDataDeCadastro(new Date());
 			return administradorDao.save(administrador);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível adicionar o administrador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível adicionar o administrador!");
 		}
 		return null;
 	}
@@ -69,8 +65,7 @@ public class AdministradorController {
 			administrador.setDataDeAtualizacao(new Date());
 			return administradorDao.save(administrador);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível alterar o administrador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível alterar o administrador!");
 		}
 		return null;
 	}

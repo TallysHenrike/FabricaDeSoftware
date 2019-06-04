@@ -25,8 +25,7 @@ public class EventoController {
 		try {
 			return eventoDao.findAll();
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível listar os eventos!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível listar os eventos!");
 		}
 		return null;
 	}
@@ -36,8 +35,7 @@ public class EventoController {
 		try {
 			return eventoDao.findById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível buscar o evento!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível buscar o evento!");
 		}
 		return null;
 	}
@@ -47,8 +45,7 @@ public class EventoController {
 		try {
 			eventoDao.deleteById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível deletar o evento!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível deletar o evento!");
 		}
 	}
 
@@ -63,8 +60,7 @@ public class EventoController {
 
 			return eventoDao.save(evento);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível adicionar o evento!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível adicionar o evento!");
 		}
 		return null;
 	}
@@ -75,8 +71,7 @@ public class EventoController {
 			evento.setDataDeAtualizacao(new Date());
 			return eventoDao.save(evento);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível alterar o evento!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível alterar o evento!");
 		}
 		return null;
 	}

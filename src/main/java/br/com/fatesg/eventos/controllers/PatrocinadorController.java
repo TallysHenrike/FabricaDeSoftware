@@ -25,8 +25,7 @@ public class PatrocinadorController {
 		try {
 			return patrocinadorDao.findAllByIdEvento(idEvento);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível listar os patrocinadores!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível listar os patrocinadores!");
 		}
 		return null;
 	}
@@ -36,8 +35,7 @@ public class PatrocinadorController {
 		try {
 			return patrocinadorDao.findById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível buscar o patrocinador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível buscar o patrocinador!");
 		}
 		return null;
 	}
@@ -47,8 +45,7 @@ public class PatrocinadorController {
 		try {
 			patrocinadorDao.deleteById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível deletar o patrocinador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível deletar o patrocinador!");
 		}
 	}
 
@@ -62,8 +59,7 @@ public class PatrocinadorController {
 			patrocinador.setDataDeCadastro(new Date());
 			return patrocinadorDao.save(patrocinador);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível adicionar o patrocinador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível adicionar o patrocinador!");
 		}
 		return null;
 	}
@@ -74,8 +70,7 @@ public class PatrocinadorController {
 			patrocinador.setDataDeAtualizacao(new Date());
 			return patrocinadorDao.save(patrocinador);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível alterar o patrocinador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível alterar o patrocinador!");
 		}
 		return null;
 	}

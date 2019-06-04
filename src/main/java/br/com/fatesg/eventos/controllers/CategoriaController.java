@@ -24,8 +24,7 @@ public class CategoriaController {
 		try {
 			return categoriaDao.findAll();
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível listar as categorias!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível listar as categorias!");
 		}
 		return null;
 	}
@@ -35,8 +34,7 @@ public class CategoriaController {
 		try {
 			return categoriaDao.findById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível buscar a categorias");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível buscar a categorias");
 		}
 		return null;
 	}
@@ -46,8 +44,7 @@ public class CategoriaController {
 		try {
 			categoriaDao.deleteById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível deletar a categoria!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível deletar a categoria!");
 		}
 	}
 
@@ -57,8 +54,7 @@ public class CategoriaController {
 			categoria.setDataDeCadastro(new Date());
 			return categoriaDao.save(categoria);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível adicionar a categoria!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível adicionar a categoria!");
 		}
 		return null;
 	}
@@ -69,8 +65,7 @@ public class CategoriaController {
 			categoria.setDataDeAtualizacao(new Date());
 			return categoriaDao.save(categoria);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível alterar a categoria!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível alterar a categoria!");
 		}
 		return null;
 	}

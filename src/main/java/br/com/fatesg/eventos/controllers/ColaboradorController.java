@@ -25,8 +25,7 @@ public class ColaboradorController {
 		try {
 			return colaboradorDao.findAllByIdEvento(idEvento);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível listar os colaboradores!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível listar os colaboradores!");
 		}
 		return null;
 	}
@@ -36,8 +35,7 @@ public class ColaboradorController {
 		try {
 			return colaboradorDao.findById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível buscar o colaborador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível buscar o colaborador!");
 		}
 		return null;
 	}
@@ -47,8 +45,7 @@ public class ColaboradorController {
 		try {
 			colaboradorDao.deleteById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível deletar o colaborador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível deletar o colaborador!");
 		}
 	}
 
@@ -63,8 +60,7 @@ public class ColaboradorController {
 			colaborador.setDataDeCadastro(new Date());
 			return colaboradorDao.save(colaborador);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível adicionar o colaborador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível adicionar o colaborador!");
 		}
 		return null;
 	}
@@ -75,8 +71,7 @@ public class ColaboradorController {
 			colaborador.setDataDeCadastro(new Date());
 			return colaboradorDao.save(colaborador);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi " +
-					"possível alterar o colaborador!");
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível alterar o colaborador!");
 		}
 		return null;
 	}

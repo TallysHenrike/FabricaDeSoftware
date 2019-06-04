@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="app/css/style.css"/>
         <link rel="stylesheet" href="http://textangular.com/dist/textAngular.css" type="text/css">
 		<link rel="shortcut icon" type="image/x-icon" href="https://www.friendshipcircle.org/wp-content/uploads/2016/09/fake-logo.png">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 		<title>Fabrica de Softwares</title>
 		<script type="text/javascript" src="app/lib/angularjs.min.js"></script>
 		<script type="text/javascript" src="app/lib/angular-route.min.js"></script>
@@ -23,7 +24,7 @@
 			<div id="sidenav" ng-if="navegacao.temAcesso">
 				<div class="logo">
 					<a href="#">Dashboard</a>
-					<div class="logo-perfil">
+					<div class="logo-perfil animated jello">
 						<img ng-src="data:image/jpeg;base64,{{navegacao.perfil.foto}}" alt="{{navegacao.perfil.nome}}" class="img-thumbnail foto-de-perfil">
 						<h4>{{navegacao.perfil.nome}}</h4>
 						<p>{{navegacao.perfil.usuario}}</p>
