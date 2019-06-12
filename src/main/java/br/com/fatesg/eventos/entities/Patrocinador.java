@@ -1,10 +1,15 @@
 package br.com.fatesg.eventos.entities;
 
-import javax.persistence.*;
+import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.Date;
 
 @Entity
 public class Patrocinador {
@@ -19,14 +24,13 @@ public class Patrocinador {
 	private Evento evento;
 
 	@NotEmpty(message = "O campo nome não pode ser cadastrado em branco.")
-	@Size(min = 1, max = 50, message = "O campo nome deve ter no máximo 50 caracteres.")
+	@Size(max = 50, message = "O campo nome deve ter no máximo 50 caracteres.")
 	private String nome;
 
 	@NotEmpty(message = "O campo descrição não pode ser cadastrado em branco.")
-	@Size(min = 1, max = 50, message = "O campo descrição deve ter no máximo 50 caracteres.")
+	@Size(max = 50, message = "O campo descrição deve ter no máximo 50 caracteres.")
 	private String descricao;
 
-	@NotNull(message = "O campo imagem não pode ser nulo!")
 	private byte[] imagem;
 
 	private Date dataDeCadastro;
@@ -45,8 +49,7 @@ public class Patrocinador {
 		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
 
-	public Patrocinador() {
-	}
+	public Patrocinador() {}
 
 	public Long getIdPatrocinador() {
 		return idPatrocinador;
@@ -103,4 +106,5 @@ public class Patrocinador {
 	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
 		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
+
 }

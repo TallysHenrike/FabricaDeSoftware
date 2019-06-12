@@ -1,14 +1,10 @@
-angular.module("app").controller("PatrocinadorController", function($rootScope, $scope, $http, $location, $routeParams) {
-	if(!sessionStorage.getItem('temAcesso')){
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/acesso');
-	}
-	
+appEventos.controller('PatrocinadorController', function($rootScope, $scope, $http, $location, $routeParams, $timeout) {
 	let idEvento = $routeParams.idEvento;
 	
 	$rootScope.activetab = $location.path();
 	
 	$scope.form = {};
+	$scope.alerta = {abrir: false}
 	
 	function handleFileSelect(evt) {
 		let f = evt.target.files[0];
@@ -26,30 +22,75 @@ angular.module("app").controller("PatrocinadorController", function($rootScope, 
 		
 		reader.readAsBinaryString(f);
 	}
-	document.getElementById("imagem-patrocinador").addEventListener("change", handleFileSelect, false);
+	document.getElementById('imagem-patrocinador').addEventListener('change', handleFileSelect, false);
 	
 	$scope.operacao = {
 		alterar: false,
 		btn: 'Cadastrar'
 	}
 	
-	$http.get(`http://localhost:8080/patrocinador/listar/${idEvento}`)
+	$http.get(`http://localhost:8080/restrito/patrocinador/listar/${idEvento}`)
 	.then((resposta)=>{
-		$scope.patrocinadores = resposta.data;
+		if(resposta.data.status == 500){
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2500);
+		}else{
+			$scope.patrocinadores = resposta.data;
+		}
+	}, (resposta)=>{
+		console.log(resposta.data);
+		$scope.alerta.mensagem = resposta.data.message;
+		$scope.alerta.abrir = true;
+		$timeout(function(){
+			$scope.alerta.abrir = false;
+		}, 2500);
 	});
 	
 	$scope.salvar = (form)=>{
 		if($scope.operacao.alterar){
-			$http.put('http://localhost:8080/patrocinador/alterar', form)
+			$http.put('http://localhost:8080/restrito/patrocinador/alterar', form)
 			.then((resposta)=>{
-				$scope.patrocinadores[form] = resposta.data;
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.patrocinadores[form] = resposta.data;
+				}
 				console.log(resposta.data);
+			}, (resposta)=>{
+				console.log(resposta.data);
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
 			});
 		}else{
-			$http.post(`http://localhost:8080/patrocinador/inserir/${idEvento}`, form)
+			$http.post(`http://localhost:8080/restrito/patrocinador/inserir/${idEvento}`, form)
 			.then((resposta)=>{
-				$scope.patrocinadores.push(resposta.data);
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.patrocinadores.push(resposta.data);
+				}
 				console.log(resposta.data);
+			}, (resposta)=>{
+				console.log(resposta.data);
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
 			});
 		}
 		
@@ -69,10 +110,25 @@ angular.module("app").controller("PatrocinadorController", function($rootScope, 
 	}
 	
 	$scope.excluir = (patrocinador)=>{
-		$http.delete(`http://localhost:8080/patrocinador/deletar/${patrocinador.idPatrocinador}`)
+		$http.delete(`http://localhost:8080/restrito/patrocinador/deletar/${patrocinador.idPatrocinador}`)
 		.then((resposta)=>{
-			$scope.patrocinadores.splice($scope.patrocinadores.indexOf(patrocinador), 1);
+			if(resposta.data.status == 500){
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
+			}else{
+				$scope.patrocinadores.splice($scope.patrocinadores.indexOf(patrocinador), 1);
+			}
 			console.log(resposta.data);
+		}, (resposta)=>{
+			console.log(resposta.data);
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2500);
 		});
 	}
 	

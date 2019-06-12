@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import br.com.fatesg.eventos.entities.Colaborador;
 
-public interface ColaboradorDao extends JpaRepository<Colaborador, Long> {
+public interface ColaboradorPersistence extends JpaRepository<Colaborador, Long> {
 	
 	@Query("select c from Colaborador c where c.evento.idEvento = :idEvento")
 	public List<Colaborador> findAllByIdEvento(@Param("idEvento") long idEvento);

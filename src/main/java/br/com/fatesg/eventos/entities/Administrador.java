@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OrderColumn;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -25,11 +26,12 @@ public class Administrador {
 	@NotNull(message = "O campo senha não pode ser nulo!")
 	private String senha;
 
-	@NotNull(message = "O campo foto não pode ser nulo!")
+	//@NotNull(message = "O campo foto não pode ser nulo!")
 	private byte[] foto;
 
 	private Date dataDeCadastro;
 
+	@OrderColumn
 	private Date dataDeAtualizacao;
 
 	public Administrador() {}

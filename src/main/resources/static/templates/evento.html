@@ -7,11 +7,11 @@
 			<div class="card-body">
 				<div class="form-group">
 					<label for="">Titulo</label>
-					<input type="text" class="form-control" id="" placeholder="Titulo" required="true" ng-model="form.titulo">
+					<input type="text" class="form-control" id="" placeholder="Titulo" required="true" maxlength="50" ng-model="form.titulo">
 				</div>
 				<div class="form-group">
 					<label for="">Descrição</label>
-					<textarea class="form-control" id="" placeholder="Descrição" required="true" ng-model="form.descricao"></textarea>
+					<textarea class="form-control" id="" placeholder="Descrição" required="true" maxlength="50" ng-model="form.descricao"></textarea>
 				</div>
 				<div class="form-group">
 					<label for="imagem-principal">Imagem Principal</label>
@@ -44,6 +44,9 @@
 			</div>
 		</form>
 	</div>
+	<!-- ALERTA -->
+	<div class="row mx-3 alert alert-warning" role="alert" ng-if="alerta.abrir">{{alerta.mensagem}}</div>
+	<!-- ALERTA -->
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-header">
@@ -58,7 +61,6 @@
 						<th scope="col">#</th>
 						<th scope="col">Titulo</th>
 						<th scope="col">Vagas</th>
-						<th scope="col">Data</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -70,7 +72,6 @@
 						</th>
 						<td class="align-middle">{{evento.titulo}}</td>
 						<td class="align-middle">{{evento.quantidadeDeVagas}}</td>
-						<td class="align-middle">{{evento.dataDeCadastro}}</td>
 					</tr>
 				</tbody>
 			</table>

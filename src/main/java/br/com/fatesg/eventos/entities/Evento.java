@@ -2,14 +2,12 @@ package br.com.fatesg.eventos.entities;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -45,9 +43,10 @@ public class Evento {
 	private byte[] imagemPrincipal;
 
 	//@NotEmpty(message = "O campo Data de Início não pode ser vazio!")
-	private Date dataDeInicio;
 
-	@Min(value = 1, message = "O campo Quantidade de Vagas não pode ser 0!")
+	private Date dataDeInicio;
+	
+	//@NotEmpty(message = "Campo Quantidade de Vagas não pode ser vazio!")
 	private int quantidadeDeVagas;
 
 	/*@URL(message = "URL inválida!")
@@ -73,7 +72,8 @@ public class Evento {
 			Date dataDeInicio,
 			int quantidadeDeVagas,
 			String urlDoGoogleMaps,
-			Date dataDeCadastro, Date dataDeAtualizacao
+			Date dataDeCadastro,
+			Date dataDeAtualizacao
 	) {
 		this.idEvento = idEvento;
 		this.administrador = administrador;
