@@ -38,12 +38,14 @@ jobs: # a collection of steps
 
       # build and push docker image to docker hub
       - run: mvn clean compile jib:build -Dimage=strund3r/fatesg-eventos:$CIRCLE_BUILD_NUM
+      - run: mvn clean compile jib:build -Dimage=strund3r/fatesg-eventos:latest
 
   deploy:
     docker:
       - image: circleci/python:2.7-jessie
     working_directory: ~/FabricaDeSoftwares
     steps:
+      - checkout # check out source code to working directory
       - run:
           name: Decrpyt Secrets
           command: openssl enc -d -aes-256-ecb -md md5 -in Jenkins.pem.enc -out Jenkins.pem -k $APPLICATION_PROPERTIES_SECRET_KEY

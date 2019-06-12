@@ -14,7 +14,7 @@ appEventos.controller("NavegacaoController", function($rootScope, $scope, $http,
 	}
 	
 	$rootScope.acessar = (usuario)=>{
-		$http.post('http://localhost:8080/acesso/acessar', usuario)
+		$http.post('./acesso/acessar', usuario)
 		.then((resposta)=>{
 			if(resposta.data.error){
 				$scope.alerta.mensagem = resposta.data.message;

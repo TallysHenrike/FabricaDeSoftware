@@ -104,7 +104,7 @@
 					</from>
 					<container>
 						<ports>
-							<port>8080</port>
+							<port>80</port>
 							<port>15370</port>
 						</ports>
 					</container>
