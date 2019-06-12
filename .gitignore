@@ -39,6 +39,7 @@ hs_err_pid*
 
 # Spring DATASOURCE
 application.properties
+application-prod.properties
 
 ### NetBeans ###
 /nbproject/private/
