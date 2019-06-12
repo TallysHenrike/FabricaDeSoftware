@@ -32,12 +32,14 @@ echo -e "
 @                                                         @
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
 
-export _sshconfig=$(mktemp -u)
-export _ssh_ctrl_socket=$(mktemp -u)
+_sshconfig=$(mktemp -u)
+_ssh_ctrl_socket=$(mktemp -u)
+export _sshconfig
+export _ssh_ctrl_socket
 
-cfn_stack_name= fatesg-eventos
+cfn_stack_name=fatesg-eventos
 
-jqScript=".AutoScalingGroups[] | select(.Tags[].Value == \"${fatesg-eventos}-Manager\").Instances[] | select(.HealthStatus == \"Healthy\").InstanceId"
+jqScript=".AutoScalingGroups[] | select(.Tags[].Value == \"${cfn_stack_name}-Manager\").Instances[] | select(.HealthStatus == \"Healthy\").InstanceId"
 manager_id=$(aws autoscaling describe-auto-scaling-groups | jq -r "${jqScript}" | head -n1)
 manager=$(aws ec2 describe-instances --instance-ids ${manager_id} | jq -r '.Reservations[].Instances[].PublicDnsName')
 
