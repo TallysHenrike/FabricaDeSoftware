@@ -6,6 +6,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 /**
  * Teste Criar Nova Categoria
+ *
  */
 //@WebIntegrationTest(value = "server.port=9000")
 //@SeleniumTest(driver = ChromeDriver.class, baseUrl = "http://localhost:9000")
@@ -45,6 +46,8 @@ public class CategoriaAutoTest {
 
 		driver.findElement(By.className("btn-info")).click();
 		Thread.sleep(3000);
+
+		// (TODO: Add unit test.)
 
 		// Filtrar Categoria
 		driver.findElement(By.id("filtrar-categoria")).sendKeys("Teste Automatizado");
