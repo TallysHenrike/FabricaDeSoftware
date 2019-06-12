@@ -55,8 +55,8 @@ EOF
 chmod 400 ${ssh_key}
 
 # Set up an SSH control socket for tunneling, so that we can cleanly close it when we're done
-ssh -M -F ${_sshconfig} \
-    -fnNT -L localhost:2374:/var/run/docker.sock ${manager}
+ssh -M -F ${_sshconfig} -fnNT -L localhost:2374:/var/run/docker.sock ${manager}
+
 # configure all `docker` commands to communicate through the SSH tunnel instead of any local docker engine
 export DOCKER_HOST=localhost:2374
 

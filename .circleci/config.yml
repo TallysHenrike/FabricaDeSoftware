@@ -38,6 +38,7 @@ jobs: # a collection of steps
 
       # build and push docker image to docker hub
       - run: mvn clean compile jib:build -Dimage=strund3r/fatesg-eventos:$CIRCLE_BUILD_NUM
+      - run: mvn clean compile jib:build -Dimage=strund3r/fatesg-eventos:latest
 
   deploy:
     docker:
