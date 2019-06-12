@@ -2,7 +2,7 @@ appEventos.factory('tokenInterceptor', function($location, $rootScope, Cookie){
 	return {
 		'request': function(config){
 			
-			$rootScope.navegacao.temAcesso = true;
+			//$rootScope.navegacao.temAcesso = true;
 			config.headers['Authorization'] = `Bearer ${Cookie.get('token')}`
 			
 			return config;

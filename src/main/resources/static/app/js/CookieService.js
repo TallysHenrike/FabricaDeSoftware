@@ -29,8 +29,7 @@ appEventos.service('Cookie', function(){
 	}
 	
 	this.delete = (name)=> {
-		if (getCookie(name)) {
-			document.cookie = name + "=" + "; expires=Thu, 01-Jan-70 00:00:01 GMT";
-		}
+        let expires = new Date(new Date().getTime() - 1000000000).toUTCString();
+        document.cookie = `${name}=;expires=${expires}`;
 	}
 });
