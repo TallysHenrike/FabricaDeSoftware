@@ -26,7 +26,7 @@ appEventos.controller('AdministradorController', function($rootScope, $scope, $h
 		btn: 'Cadastrar'
 	}
 	
-	$http.get('http://localhost:8080/restrito/administrador/listar')
+	$http.get('./restrito/administrador/listar')
 	.then((resposta)=>{
 		if(resposta.data.status == 500){
 			$scope.alerta.mensagem = resposta.data.message;
@@ -55,7 +55,7 @@ appEventos.controller('AdministradorController', function($rootScope, $scope, $h
             }, 2500);
         }else{
             if($scope.operacao.alterar){
-                $http.put(`http://localhost:8080/restrito/administrador/alterar`, form)
+                $http.put(`./restrito/administrador/alterar`, form)
                 .then((resposta)=>{
                     if(resposta.data.status == 500){
                         $scope.alerta.mensagem = resposta.data.message;
@@ -76,7 +76,7 @@ appEventos.controller('AdministradorController', function($rootScope, $scope, $h
                     }, 2500);
                 });
             }else{
-                $http.post(`http://localhost:8080/restrito/administrador/inserir`, form)
+                $http.post(`./restrito/administrador/inserir`, form)
                 .then((resposta)=>{
                     if(resposta.data.status == 500){
                         $scope.alerta.mensagem = resposta.data.message;
@@ -115,7 +115,7 @@ appEventos.controller('AdministradorController', function($rootScope, $scope, $h
 	}
 	
 	$scope.excluir = (administrador)=>{
-		$http.delete(`http://localhost:8080/restrito/administrador/deletar/${administrador.idAdministrador}`)
+		$http.delete(`./restrito/administrador/deletar/${administrador.idAdministrador}`)
 		.then((resposta)=>{
 			if(resposta.data.status == 500){
 				$scope.alerta.mensagem = resposta.data.message;

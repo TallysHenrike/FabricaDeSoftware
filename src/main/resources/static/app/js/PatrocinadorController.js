@@ -29,7 +29,7 @@ appEventos.controller('PatrocinadorController', function($rootScope, $scope, $ht
 		btn: 'Cadastrar'
 	}
 	
-	$http.get(`http://localhost:8080/restrito/patrocinador/listar/${idEvento}`)
+	$http.get(`./restrito/patrocinador/listar/${idEvento}`)
 	.then((resposta)=>{
 		if(resposta.data.status == 500){
 			$scope.alerta.mensagem = resposta.data.message;
@@ -51,7 +51,7 @@ appEventos.controller('PatrocinadorController', function($rootScope, $scope, $ht
 	
 	$scope.salvar = (form)=>{
 		if($scope.operacao.alterar){
-			$http.put('http://localhost:8080/restrito/patrocinador/alterar', form)
+			$http.put('./restrito/patrocinador/alterar', form)
 			.then((resposta)=>{
 				if(resposta.data.status == 500){
 					$scope.alerta.mensagem = resposta.data.message;
@@ -72,7 +72,7 @@ appEventos.controller('PatrocinadorController', function($rootScope, $scope, $ht
 				}, 2500);
 			});
 		}else{
-			$http.post(`http://localhost:8080/restrito/patrocinador/inserir/${idEvento}`, form)
+			$http.post(`./restrito/patrocinador/inserir/${idEvento}`, form)
 			.then((resposta)=>{
 				if(resposta.data.status == 500){
 					$scope.alerta.mensagem = resposta.data.message;
@@ -110,7 +110,7 @@ appEventos.controller('PatrocinadorController', function($rootScope, $scope, $ht
 	}
 	
 	$scope.excluir = (patrocinador)=>{
-		$http.delete(`http://localhost:8080/restrito/patrocinador/deletar/${patrocinador.idPatrocinador}`)
+		$http.delete(`./restrito/patrocinador/deletar/${patrocinador.idPatrocinador}`)
 		.then((resposta)=>{
 			if(resposta.data.status == 500){
 				$scope.alerta.mensagem = resposta.data.message;
