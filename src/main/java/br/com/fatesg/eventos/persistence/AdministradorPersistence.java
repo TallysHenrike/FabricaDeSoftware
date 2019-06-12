@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import br.com.fatesg.eventos.entities.Administrador;
 
-public interface AdministradorDao extends JpaRepository<Administrador, Long> {
+public interface AdministradorPersistence extends JpaRepository<Administrador, Long> {
 	
 	@Query("SELECT u from Administrador u where u.usuario = :usuario and u.senha = :senha")
 	public Administrador validarAcesso(@Param("usuario") String usuario, @Param("senha") String senha);

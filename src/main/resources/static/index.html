@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="app/css/style.css"/>
         <link rel="stylesheet" href="http://textangular.com/dist/textAngular.css" type="text/css">
 		<link rel="shortcut icon" type="image/x-icon" href="https://www.friendshipcircle.org/wp-content/uploads/2016/09/fake-logo.png">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 		<title>Fabrica de Softwares</title>
 		<script type="text/javascript" src="app/lib/angularjs.min.js"></script>
 		<script type="text/javascript" src="app/lib/angular-route.min.js"></script>
@@ -23,19 +24,22 @@
 			<div id="sidenav" ng-if="navegacao.temAcesso">
 				<div class="logo">
 					<a href="#">Dashboard</a>
-					<div class="logo-perfil">
+					<div class="logo-perfil animated jello">
 						<img ng-src="data:image/jpeg;base64,{{navegacao.perfil.foto}}" alt="{{navegacao.perfil.nome}}" class="img-thumbnail foto-de-perfil">
 						<h4>{{navegacao.perfil.nome}}</h4>
 						<p>{{navegacao.perfil.usuario}}</p>
 					</div>
-					<a ng-click="openMenu=!openMenu" class="nav-icon pull-right"><i class="material-icons">format_list_bulleted</i></a>
+					<a ng-click="openMenu=!openMenu" class="nav-icon pull-right"><i class="fas fa-bars"></i></a>
 				</div>
 				<div class="menu" ng-class="{'open' : openMenu}">
 					<ul>
-						<li ng-class="{active: activetab == '/categoria'}"><a href="#/categoria">Controle de Categoria</a></li>
+						<li ng-class="{active: activetab == '/categoria'}" id="categoria"><a href="#/categoria">Controle de Categoria</a></li>
 						<li ng-class="{active: activetab == '/evento'}"><a href="#/evento">Controle de Evento</a></li>
 						<li ng-class="{active: activetab == '/presenca'}"><a href="#/presenca">Controle de Presenca</a></li>
+						<li ng-class="{active: activetab == '/administracao'}"><a href="#/administracao">Administração</a></li>
 						<li ng-class="{active: activetab == '/configuracao'}"><a href="#/configuracao">Configuração</a></li>
+                        <hr class="border-top border-light">
+						<li ng-click="fecharSessao()"><a href="#/acesso" class="btn btn-danger">Sair</a></li>
 					</ul>
 				</div>
 			</div>
@@ -45,11 +49,15 @@
 		</div>
 		<script type="text/javascript" src="app/js/app.js"></script>
 		<script type="text/javascript" src="app/js/route.js"></script>
+		<script type="text/javascript" src="app/js/tokenInterceptor.js"></script>
 		<script type="text/javascript" src="app/js/NavegacaoController.js"></script>
 		<script type="text/javascript" src="app/js/CategoriaController.js"></script>
 		<script type="text/javascript" src="app/js/EventoController.js"></script>
         <script type="text/javascript" src="app/js/ColaboradorController.js"></script>
         <script type="text/javascript" src="app/js/PatrocinadorController.js"></script>
 		<script type="text/javascript" src="app/js/PresencaController.js"></script>
+		<script type="text/javascript" src="app/js/AdministradorController.js"></script>
+		
+		<script type="text/javascript" src="app/js/CookieService.js"></script>
 	</body>
 </html>

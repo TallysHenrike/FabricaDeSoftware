@@ -1,7 +1,6 @@
-angular.module('app').config(function($routeProvider){
+appEventos.config(function($routeProvider, $httpProvider){
 	$routeProvider
 	.when('/', {
-		templateUrl: 'templates/acesso.html',
 		controller: 'NavegacaoController'
 	})
 	.when('/categoria', {
@@ -18,9 +17,15 @@ angular.module('app').config(function($routeProvider){
 	.when('/presenca', {
 		templateUrl: 'templates/presenca.html',
 		controller: 'PresencaController'
-	})/*
-	.when('/', {
-		templateUrl: 'templates/',
-		controller: 'Controller'
-	})*/.otherwise({ redirectTo: '/' });
+	})
+	.when('/acesso', {
+		templateUrl: 'templates/acesso.html',
+		controller: 'NavegacaoController'
+	})
+	.when('/administracao', {
+		templateUrl: 'templates/administracao.html',
+		controller: 'AdministradorController'
+	}).otherwise({ redirectTo: '/' });
+	
+	$httpProvider.interceptors.push('tokenInterceptor');
 });

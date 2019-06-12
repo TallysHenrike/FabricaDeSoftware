@@ -1,14 +1,10 @@
-angular.module("app").controller("ColaboradorController", function($rootScope, $scope, $http, $location, $routeParams) {
-	if(!sessionStorage.getItem('temAcesso')){
-		$rootScope.navegacao.temAcesso = false;
-		$location.path('/');
-	}
-	
+appEventos.controller('ColaboradorController', function($rootScope, $scope, $http, $location, $routeParams, $timeout) {
 	let idEvento = $routeParams.idEvento;
 	
 	$rootScope.activetab = $location.path();
 	
 	$scope.form = {};
+	$scope.alerta = {abrir: false}
 	
 	function handleFileSelect(evt) {
 		let f = evt.target.files[0];
@@ -26,30 +22,75 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 		
 		reader.readAsBinaryString(f);
 	}
-	document.getElementById("imagem-colaborador").addEventListener("change", handleFileSelect, false);
+	document.getElementById('imagem-colaborador').addEventListener('change', handleFileSelect, false);
 	
 	$scope.operacao = {
 		alterar: false,
 		btn: 'Cadastrar'
 	}
 	
-	$http.get('http://localhost:8080/colaborador/listar')
+	$http.get(`http://localhost:8080/restrito/colaborador/listar/${idEvento}`)
 	.then((resposta)=>{
-		$scope.colaboradores = resposta.data;
+		if(resposta.data.status == 500){
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2500);
+		}else{
+			$scope.colaboradores = resposta.data;
+		}
+	}, (resposta)=>{
+		console.log(resposta.data);
+		$scope.alerta.mensagem = resposta.data.message;
+		$scope.alerta.abrir = true;
+		$timeout(function(){
+			$scope.alerta.abrir = false;
+		}, 2500);
 	});
 	
 	$scope.salvar = (form)=>{
 		if($scope.operacao.alterar){
-			$http.put('http://localhost:8080/colaborador/alterar', form)
+			$http.put('http://localhost:8080/restrito/colaborador/alterar', form)
 			.then((resposta)=>{
-				$scope.colaboradores[form] = resposta.data;
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.colaboradores[form] = resposta.data;
+				}
 				console.log(resposta.data);
+			}, (resposta)=>{
+				console.log(resposta.data);
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
 			});
 		}else{
-			$http.post(`http://localhost:8080/colaborador/inserir/${idEvento}`, form)
+			$http.post(`http://localhost:8080/restrito/colaborador/inserir/${idEvento}`, form)
 			.then((resposta)=>{
-				$scope.colaboradores.push(resposta.data);
+				if(resposta.data.status == 500){
+					$scope.alerta.mensagem = resposta.data.message;
+					$scope.alerta.abrir = true;
+					$timeout(function(){
+						$scope.alerta.abrir = false;
+					}, 2500);
+				}else{
+					$scope.colaboradores.push(resposta.data);
+				}
 				console.log(resposta.data);
+			}, (resposta)=>{
+				console.log(resposta.data);
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
 			});
 		}
 		
@@ -69,10 +110,25 @@ angular.module("app").controller("ColaboradorController", function($rootScope, $
 	}
 	
 	$scope.excluir = (colaborador)=>{
-		$http.delete(`http://localhost:8080/colaborador/deletar/${colaborador.idColaborador}`)
+		$http.delete(`http://localhost:8080/restrito/colaborador/deletar/${colaborador.idColaborador}`)
 		.then((resposta)=>{
-			$scope.colaboradores.splice($scope.colaboradores.indexOf(colaborador), 1);
+			if(resposta.data.status == 500){
+				$scope.alerta.mensagem = resposta.data.message;
+				$scope.alerta.abrir = true;
+				$timeout(function(){
+					$scope.alerta.abrir = false;
+				}, 2500);
+			}else{
+				$scope.colaboradores.splice($scope.colaboradores.indexOf(colaborador), 1);
+			}
 			console.log(resposta.data);
+		}, (resposta)=>{
+			console.log(resposta.data);
+			$scope.alerta.mensagem = resposta.data.message;
+			$scope.alerta.abrir = true;
+			$timeout(function(){
+				$scope.alerta.abrir = false;
+			}, 2500);
 		});
 	}
 	
