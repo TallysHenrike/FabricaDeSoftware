@@ -45,6 +45,9 @@ jobs: # a collection of steps
     working_directory: ~/FabricaDeSoftwares
     steps:
       - run:
+          name: Test
+          command: ls -al
+      - run:
           name: Decrpyt Secrets
           command: openssl enc -d -aes-256-ecb -md md5 -in Jenkins.pem.enc -out Jenkins.pem -k $APPLICATION_PROPERTIES_SECRET_KEY
       - run:
