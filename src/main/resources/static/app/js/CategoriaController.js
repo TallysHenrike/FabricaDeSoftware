@@ -26,7 +26,7 @@ appEventos.controller('CategoriaController', function($rootScope, $scope, $http,
 		btn: 'Cadastrar'
 	}
 	
-	$http.get('http://localhost:8080/restrito/categoria/listar')
+	$http.get('./restrito/categoria/listar')
 	.then((resposta)=>{
 		if(resposta.data.status == 500){
 			$scope.alerta.mensagem = resposta.data.message;
@@ -51,7 +51,7 @@ appEventos.controller('CategoriaController', function($rootScope, $scope, $http,
 		form.idAdministrador = perfil.idAdministrador;
 		
 		if($scope.operacao.alterar){
-			$http.put(`http://localhost:8080/restrito/categoria/alterar`, form)
+			$http.put(`./restrito/categoria/alterar`, form)
 			.then((resposta)=>{
 				if(resposta.data.status == 500){
 					$scope.alerta.mensagem = resposta.data.message;
@@ -72,7 +72,7 @@ appEventos.controller('CategoriaController', function($rootScope, $scope, $http,
 				}, 2500);
 			});
 		}else{
-			$http.post(`http://localhost:8080/restrito/categoria/inserir`, form)
+			$http.post(`./restrito/categoria/inserir`, form)
 			.then((resposta)=>{
 				if(resposta.data.status == 500){
 					$scope.alerta.mensagem = resposta.data.message;
@@ -110,7 +110,7 @@ appEventos.controller('CategoriaController', function($rootScope, $scope, $http,
 	}
 	
 	$scope.excluir = (categoria)=>{
-		$http.delete(`http://localhost:8080/restrito/categoria/deletar/${categoria.idCategoria}`)
+		$http.delete(`./restrito/categoria/deletar/${categoria.idCategoria}`)
 		.then((resposta)=>{
 			if(resposta.data.status == 500){
 				$scope.alerta.mensagem = resposta.data.message;
