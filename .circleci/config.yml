@@ -36,25 +36,17 @@ jobs: # a collection of steps
             - ~/.m2
           key: FabricaDeSoftwares-{{ checksum "pom.xml" }}
 
-      - run: mvn clean package # run the actual tests
-
       # build and push docker image to docker hub
       - run: mvn clean compile jib:build -Dimage=strund3r/fatesg-eventos:$CIRCLE_BUILD_NUM
-
-      - store_test_results: # uploads the test metadata from the `target/surefire-reports` directory so that it can show up in the CircleCI dashboard.
-          # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
-          path: target/surefire-reports
-
-      - store_artifacts: # store the uberjar as an artifact
-          # Upload test summary for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
-          path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
-      # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
 
   deploy:
     docker:
       - image: circleci/python:2.7-jessie
     working_directory: ~/FabricaDeSoftwares
     steps:
+      - run:
+          name: Decrpyt Secrets
+          command: openssl enc -d -aes-256-ecb -md md5 -in Jenkins.pem.enc -out Jenkins.pem -k $APPLICATION_PROPERTIES_SECRET_KEY
       - run:
           name: Install awscli
           command: sudo pip install awscli
