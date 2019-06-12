@@ -1,14 +1,10 @@
 package br.com.fatesg.eventos.entities;
 
-import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 public class Categoria {
@@ -36,12 +32,12 @@ public class Categoria {
 	public Categoria() {}
 
 	public Categoria(
-		Long idCategoria,
-		String nome,
-		String descricao,
-		byte[] icone,
-		Date dataDeCadastro,
-		Date dataDeAtualizacao
+			Long idCategoria,
+			String nome,
+			String descricao,
+			byte[] icone,
+			Date dataDeCadastro,
+			Date dataDeAtualizacao
 	) {
 		this.idCategoria = idCategoria;
 		this.nome = nome;
@@ -49,10 +45,6 @@ public class Categoria {
 		this.icone = icone;
 		this.dataDeCadastro = dataDeCadastro;
 		this.dataDeAtualizacao = dataDeAtualizacao;
-	}
-
-	public Categoria(){
-
 	}
 
 	public Long getIdCategoria() {

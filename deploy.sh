@@ -4,7 +4,7 @@ set -eo pipefail
 
 ############################ VARIABLES ############################
 # ssh key's location                                              #
-ssh_key="/home/circleci/FabricaDeSoftwares/example.pem"           #
+ssh_key="/home/circleci/FabricaDeSoftwares/Jenkins.pem"           #
 # docker-compose for metrics                                      #
 metrics="/home/circleci/example/<metrics-docker-compose>.yml"     #
 # sleep time                                                      #
