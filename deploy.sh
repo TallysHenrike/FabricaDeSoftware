@@ -54,6 +54,9 @@ EOF
 
 chmod 400 ${ssh_key}
 
+
+echo $manager
+docker info
 # Set up an SSH control socket for tunneling, so that we can cleanly close it when we're done
 ssh -M -F ${_sshconfig} -fnNT -L localhost:2374:/var/run/docker.sock ${manager}
 
