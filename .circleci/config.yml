@@ -60,8 +60,7 @@ jobs: # a collection of steps
           command: sudo pip install awscli
       - run:
         name: Deploy Over SSH
-        command: |
-        chmod +x deploy.sh && ./deploy.sh
+        command: chmod +x deploy.sh && ./deploy.sh
 
 workflows:
   version: 2
