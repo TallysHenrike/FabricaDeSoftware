@@ -4,16 +4,3 @@ services:
     image: strund3r/fatesg-eventos
     ports:
       - "80:80"
-  db:
-    image: postgres:9.6
-    volumes:
-      - db-data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=eventos
-    ports:
-      - "5432:5432"
-volumes:
-  db-data:
-    driver: local
