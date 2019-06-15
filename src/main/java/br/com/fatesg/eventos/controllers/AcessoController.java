@@ -1,10 +1,13 @@
 package br.com.fatesg.eventos.controllers;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,28 +29,32 @@ public class AcessoController {
 	private AdministradorPersistence administradorDao;
 
 	@RequestMapping(value = "acessar", method = RequestMethod.POST)
-	public Map<String, Object> acessar(@RequestBody Administrador administrador) throws ServletException {
-		Administrador adm = administradorDao.validarAcesso(administrador.getUsuario(), administrador.getSenha());
-		Map<String, Object> mapeamento = new HashMap<String, Object>();
-		
-		if(adm.getNome() == null) {
-			throw new ServletException("USUARIO NÃO ENCONTRADO");
-		}else {
-			//Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-			String token = Jwts.builder()
-				.setSubject(adm.getNome())
-				.signWith(SignatureAlgorithm.HS256, "abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890")
-				.setExpiration(new Date(System.currentTimeMillis() + (60 * 60 * 1000)))
-				.compact();
-			
-			mapeamento.put("idAdministrador", adm.getIdAdministrador());
-			mapeamento.put("nome", adm.getNome());
-			mapeamento.put("usuario", adm.getUsuario());
-			//mapeamento.put("senha", adm.getSenha());
-			mapeamento.put("foto", adm.getFoto());
-			mapeamento.put("acesso", new LoginResponse(token));
-			
-			return mapeamento;
+	public Map<String, Object> acessar(@RequestBody Administrador administrador, ServletResponse response) throws ServletException, IOException {
+		try {
+			Administrador adm = administradorDao.validarAcesso(administrador.getUsuario(), administrador.getSenha());
+			Map<String, Object> mapeamento = new HashMap<String, Object>();
+
+			if (adm.getNome() == null) {
+				throw new ServletException("USUARIO NÃO ENCONTRADO");
+			} else {
+				// Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+				String token = Jwts.builder().setSubject(adm.getNome())
+						.signWith(SignatureAlgorithm.HS256,
+								"abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz1234567890")
+						.setExpiration(new Date(System.currentTimeMillis() + (60 * 60 * 1000))).compact();
+
+				mapeamento.put("idAdministrador", adm.getIdAdministrador());
+				mapeamento.put("nome", adm.getNome());
+				mapeamento.put("usuario", adm.getUsuario());
+				// mapeamento.put("senha", adm.getSenha());
+				mapeamento.put("foto", adm.getFoto());
+				mapeamento.put("acesso", new LoginResponse(token));
+
+				return mapeamento;
+			}
+		} catch (Exception e) {
+			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Usuário ou senha invalidos!");
 		}
+		return null;
 	}
 }

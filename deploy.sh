@@ -32,10 +32,8 @@ echo -e "
 @                                                         @
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@\n"
 
-_sshconfig=$(mktemp -u)
-_ssh_ctrl_socket=$(mktemp -u)
-export _sshconfig
-export _ssh_ctrl_socket
+export _sshconfig=$(mktemp -u)
+export _ssh_ctrl_socket=$(mktemp -u)
 
 cfn_stack_name=fatesg-eventos
 
@@ -53,6 +51,8 @@ ControlPath ${_ssh_ctrl_socket}
 EOF
 
 chmod 400 ${ssh_key}
+
+echo $manager
 
 # Set up an SSH control socket for tunneling, so that we can cleanly close it when we're done
 ssh -M -F ${_sshconfig} -fnNT -L localhost:2374:/var/run/docker.sock ${manager}

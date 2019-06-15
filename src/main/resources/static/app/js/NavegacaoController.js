@@ -4,6 +4,7 @@ appEventos.controller("NavegacaoController", function($rootScope, $scope, $http,
 	
 	$scope.fecharSessao = ()=>{
 		localStorage.clear();
+        Cookie.delete('token');
 		$location.path('/acesso');
 	}
 	
@@ -16,13 +17,15 @@ appEventos.controller("NavegacaoController", function($rootScope, $scope, $http,
 	$rootScope.acessar = (usuario)=>{
 		$http.post('./acesso/acessar', usuario)
 		.then((resposta)=>{
-			if(resposta.data.error){
+			if(resposta.data.status == 500){
 				$scope.alerta.mensagem = resposta.data.message;
+                $scope.alerta.mensagem = resposta.data.message;
 				$scope.alerta.abrir = true;
 				$timeout(function(){
 					$scope.alerta.abrir = false;
 				}, 2500);
 			}else{
+                $rootScope.navegacao.temAcesso = true;
 				localStorage.setItem("perfil", JSON.stringify(resposta.data));
 
 				$rootScope.navegacao.perfil = resposta.data;
