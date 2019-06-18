@@ -108,19 +108,18 @@ workflows:
       - test: # run tests
           filters:
             branches:
-              - staging
-              - test
+              only:
+                - test
+                - staging
       - build: # build application
           requires:
             - test
           filters:  # using regex filters requires the entire branch to match
             branches:
               only:  # only branches matching the below regex filters will run
-#                - staging
                 - master
       - deploy: # deploy master branch to the server
           requires:
-#            - merge
             - build
           filters:
             branches:
