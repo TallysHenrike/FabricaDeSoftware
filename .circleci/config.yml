@@ -2,7 +2,7 @@ version: 2.1 # use CircleCI 2.1
 jobs: # a collection of steps
   test:
     docker:
-      - image: circleci/openjdk:8-jdk-browsers
+      - image: circleci/openjdk:8u171-jdk-browsers
         environment:
           # Customize the JVM maximum heap limit
           MAVEN_OPTS: -Xmx3200m
