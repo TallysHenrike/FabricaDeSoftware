@@ -31,15 +31,15 @@ jobs: # a collection of steps
           paths:
             - ~/.m2
           key: FabricaDeSoftwares-{{ checksum "pom.xml" }}
-      - run:
-          name: Build Spring Boot Project with Maven
-          command: mvn install
-      - run:
-          name: Run Spring Boot app using Maven
-          command: mvn spring-boot:run
 #      - run:
-#          name: Run Test
-#          command: mvn -Dtest=ContinuousIntegrationTest test
+#          name: Build Spring Boot Project with Maven
+#          command: mvn install
+#      - run:
+#          name: Run Spring Boot app using Maven
+#          command: mvn spring-boot:run
+      - run:
+          name: Run Test
+          command: mvn -Dtest=ContinuousIntegrationTest test
 
   build: # runs not using Workflows must have a `build` job as entry point
 
