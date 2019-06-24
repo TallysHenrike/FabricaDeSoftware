@@ -8,8 +8,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -28,7 +28,7 @@ public class ContinuousIntegrationTest {
 
 	@BeforeClass
 	public static void setup() {
-		WebDriverManager.chromedriver().setup();
+		WebDriverManager.firefoxdriver().setup();
 	}
 
 	@Before
@@ -36,15 +36,15 @@ public class ContinuousIntegrationTest {
 //		EnvironmentManager.initWebDriver();
 
 		// Using WebDriverManager to fetch the latest ChromeDriver executables
-		WebDriverManager.chromedriver().setup();
+		WebDriverManager.firefoxdriver().setup();
 
 		// Launching the Chrome in incognito mode with maximized view
-		ChromeOptions options = new ChromeOptions();
+		FirefoxOptions options = new FirefoxOptions();
 		options.addArguments("--incognito");
 		options.addArguments("--start-maximized");
 
 		// Initializing the ChromeDriver
-		driver = new ChromeDriver(options);
+		driver = new FirefoxDriver(options);
 	}
 
 //	@Test

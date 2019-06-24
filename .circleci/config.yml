@@ -39,6 +39,7 @@ jobs: # a collection of steps
 #          command: mvn spring-boot:run
       - run:
           name: Run Test
+#          command: mvn -Dtest=EventoUnitTest test
           command: mvn -Dtest=ContinuousIntegrationTest test
 
   build: # runs not using Workflows must have a `build` job as entry point
@@ -106,18 +107,18 @@ workflows:
   test-build-deploy:
     jobs:
       - test: # run tests
-          filters:
-            branches:
-              only:
-                - test
-                - staging
+#          filters:
+#            branches:
+#              only:
+#                - test
+#                - staging
       - build: # build application
-          requires:
-            - test
-          filters:  # using regex filters requires the entire branch to match
-            branches:
-              only:  # only branches matching the below regex filters will run
-                - master
+#          requires:
+#            - test
+#          filters:  # using regex filters requires the entire branch to match
+#            branches:
+#              only:  # only branches matching the below regex filters will run
+#                - master
       - deploy: # deploy master branch to the server
           requires:
             - build

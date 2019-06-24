@@ -1,9 +1,8 @@
-package java;
-
 import br.com.fatesg.eventos.entities.Administrador;
 import br.com.fatesg.eventos.entities.Categoria;
 import br.com.fatesg.eventos.entities.Evento;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.validation.ConstraintViolation;
@@ -170,6 +169,7 @@ public class EventoUnitTest {
 	}
 
 	@Test
+	@Ignore
 	public void quantidadeDeVagasIsEmpty() {
 		Administrador adm = new Administrador();
 		adm.setNome("Adm");
