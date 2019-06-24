@@ -1,15 +1,11 @@
 import br.com.fatesg.eventos.persistence.CategoriaPersistence;
 import environment.EnvironmentManager;
 import environment.RunEnvironment;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -26,25 +22,25 @@ public class ContinuousIntegrationTest {
 	private CategoriaPersistence categoriaDao;
 	private WebDriver driver;
 
-	@BeforeClass
-	public static void setup() {
-		WebDriverManager.firefoxdriver().setup();
-	}
+//	@BeforeClass
+//	public static void setup() {
+//		WebDriverManager.firefoxdriver().setup();
+//	}
 
 	@Before
 	public void startBrowser() {
-//		EnvironmentManager.initWebDriver();
+		EnvironmentManager.initWebDriver();
 
 		// Using WebDriverManager to fetch the latest ChromeDriver executables
-		WebDriverManager.firefoxdriver().setup();
+//		WebDriverManager.firefoxdriver().setup();
 
-		// Launching the Chrome in incognito mode with maximized view
-		FirefoxOptions options = new FirefoxOptions();
-		options.addArguments("--incognito");
-		options.addArguments("--start-maximized");
-
-		// Initializing the ChromeDriver
-		driver = new FirefoxDriver(options);
+//		// Launching the Chrome in incognito mode with maximized view
+//		FirefoxOptions options = new FirefoxOptions();
+//		options.addArguments("--incognito");
+//		options.addArguments("--start-maximized");
+//
+//		// Initializing the ChromeDriver
+//		driver = new FirefoxDriver(options);
 	}
 
 //	@Test

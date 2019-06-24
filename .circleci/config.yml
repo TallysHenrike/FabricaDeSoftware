@@ -39,8 +39,8 @@ jobs: # a collection of steps
 #          command: mvn spring-boot:run
       - run:
           name: Run Test
-#          command: mvn -Dtest=EventoUnitTest test
-          command: mvn -Dtest=ContinuousIntegrationTest test
+          command: mvn -Dtest=EventoUnitTest test
+#          command: mvn -Dtest=ContinuousIntegrationTest test
 
   build: # runs not using Workflows must have a `build` job as entry point
 
@@ -112,6 +112,7 @@ workflows:
               only:
                 - test
                 - staging
+                - master
       - build: # build application
 #          requires:
 #            - test
