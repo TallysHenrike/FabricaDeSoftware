@@ -22,25 +22,9 @@ public class ContinuousIntegrationTest {
 	private CategoriaPersistence categoriaDao;
 	private WebDriver driver;
 
-//	@BeforeClass
-//	public static void setup() {
-//		WebDriverManager.firefoxdriver().setup();
-//	}
-
 	@Before
 	public void startBrowser() {
 		EnvironmentManager.initWebDriver();
-
-		// Using WebDriverManager to fetch the latest ChromeDriver executables
-//		WebDriverManager.firefoxdriver().setup();
-
-//		// Launching the Chrome in incognito mode with maximized view
-//		FirefoxOptions options = new FirefoxOptions();
-//		options.addArguments("--incognito");
-//		options.addArguments("--start-maximized");
-//
-//		// Initializing the ChromeDriver
-//		driver = new FirefoxDriver(options);
 	}
 
 //	@Test
@@ -49,10 +33,6 @@ public class ContinuousIntegrationTest {
 	public void ciTest() throws InterruptedException{
 
 		driver = RunEnvironment.getWebDriver();
-//		System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
-//		WebDriver driver = new SafariDriver();
-//		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
-//		WebDriver driver = new FirefoxDriver();
 
 		driver.get("http://localhost/#/acesso");
 
