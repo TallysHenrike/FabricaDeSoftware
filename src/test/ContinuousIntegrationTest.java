@@ -20,7 +20,7 @@ import org.springframework.test.context.TestPropertySource;
 //@WebIntegrationTest(value = "server.port=9000")
 //@SeleniumTest(driver = ChromeDriver.class, baseUrl = "http://localhost:9000")
 @SpringBootTest
-@TestPropertySource(locations="classpath:application.properties")
+@TestPropertySource(locations="classpath:application-test.properties")
 public class ContinuousIntegrationTest {
 
 	private CategoriaPersistence categoriaDao;
