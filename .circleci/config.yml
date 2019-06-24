@@ -100,7 +100,7 @@ jobs: # a collection of steps
           command: sudo pip install awscli
       - run:
           name: Deploy Over SSH
-          command: chmod +x deploy.sh && .circleci/deploy.sh
+          command: cd .circleci && chmod +x deploy.sh && deploy.sh
 
 workflows:
   version: 2
@@ -114,8 +114,8 @@ workflows:
                 - staging
                 - master
       - build: # build application
-#          requires:
-#            - test
+          requires:
+            - test
           filters:  # using regex filters requires the entire branch to match
             branches:
               only:  # only branches matching the below regex filters will run
