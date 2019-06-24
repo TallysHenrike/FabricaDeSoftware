@@ -1,11 +1,15 @@
 import br.com.fatesg.eventos.persistence.CategoriaPersistence;
 import environment.EnvironmentManager;
 import environment.RunEnvironment;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
@@ -20,10 +24,27 @@ import org.springframework.test.context.TestPropertySource;
 public class ContinuousIntegrationTest {
 
 	private CategoriaPersistence categoriaDao;
+	private WebDriver driver;
+
+	@BeforeClass
+	public static void setup() {
+		WebDriverManager.chromedriver().setup();
+	}
 
 	@Before
 	public void startBrowser() {
-		EnvironmentManager.initWebDriver();
+//		EnvironmentManager.initWebDriver();
+
+		// Using WebDriverManager to fetch the latest ChromeDriver executables
+		WebDriverManager.chromedriver().setup();
+
+		// Launching the Chrome in incognito mode with maximized view
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--incognito");
+		options.addArguments("--start-maximized");
+
+		// Initializing the ChromeDriver
+		driver = new ChromeDriver(options);
 	}
 
 //	@Test
@@ -31,7 +52,7 @@ public class ContinuousIntegrationTest {
 	@Test
 	public void ciTest() throws InterruptedException{
 
-		WebDriver driver = RunEnvironment.getWebDriver();
+		driver = RunEnvironment.getWebDriver();
 //		System.setProperty("webdriver.safari.driver", "/usr/bin/safaridriver");
 //		WebDriver driver = new SafariDriver();
 //		System.setProperty("webdriver.gecko.driver", "/usr/local/bin/geckodriver");
