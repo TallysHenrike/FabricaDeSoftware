@@ -4,6 +4,8 @@ import br.com.fatesg.eventos.entities.Administrador;
 import br.com.fatesg.eventos.entities.Evento;
 import br.com.fatesg.eventos.persistence.EventoPersistence;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletResponse;
@@ -21,23 +23,25 @@ public class EventoController {
 	private EventoPersistence eventoDao;
 
 	@RequestMapping(value = "listar", method = RequestMethod.GET)
-	public List<Evento> listar(ServletResponse response) throws IOException {
+	public ResponseEntity<List<Evento>> listar(ServletResponse response) throws IOException {
 		try {
-			return eventoDao.findAll();
+			List<Evento> eventos = eventoDao.findAll();
+			HttpStatus status = eventos.size() > 0? HttpStatus.OK : HttpStatus.NO_CONTENT;
+			
+			return ResponseEntity.status(status).body(eventos);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível listar os eventos!");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return null;
 	}
 	
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)
-	public Optional<Evento> buscar(@PathVariable Long id, ServletResponse response) throws IOException {
+	public ResponseEntity<Optional<Evento>> buscar(@PathVariable Long id, ServletResponse response) throws IOException {
 		try {
-			return eventoDao.findById(id);
+			Optional<Evento> evento = eventoDao.findById(id);
+			return ResponseEntity.status(HttpStatus.OK).body(evento);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível buscar o evento!");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return null;
 	}
 
 	@RequestMapping(value = "deletar/{id}", method = RequestMethod.DELETE)
@@ -45,34 +49,33 @@ public class EventoController {
 		try {
 			eventoDao.deleteById(id);
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível deletar o evento!");
+			
 		}
 	}
 
 	@RequestMapping(value = "inserir/{idAdministrador}", method = RequestMethod.POST)
-	public Evento inserir(@RequestBody Evento evento, @PathVariable Long idAdministrador, ServletResponse response) throws IOException {
+	public ResponseEntity<Evento> inserir(@RequestBody Evento evento, @PathVariable Long idAdministrador, ServletResponse response) throws IOException {
 		try {
 			Administrador administrador = new Administrador();
 			administrador.setIdAdministrador(idAdministrador);
 
 			evento.setAdministrador(administrador);
 			evento.setDataDeCadastro(new Date());
-
-			return eventoDao.save(evento);
+			
+			administrador.setDataDeCadastro(new Date());
+			return ResponseEntity.status(HttpStatus.CREATED).body(eventoDao.save(evento));
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível adicionar o evento!");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return null;
 	}
 
 	@RequestMapping(value = "alterar", method = RequestMethod.PUT)
-	public Evento alterar(@RequestBody Evento evento, ServletResponse response) throws IOException {
+	public ResponseEntity<Evento> alterar(@RequestBody Evento evento, ServletResponse response) throws IOException {
 		try {
 			evento.setDataDeAtualizacao(new Date());
-			return eventoDao.save(evento);
+			return ResponseEntity.status(HttpStatus.OK).body(eventoDao.save(evento));
 		} catch (Exception e) {
-			((HttpServletResponse) response).sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Não foi possível alterar o evento!");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
-		return null;
 	}
 }
