@@ -34,6 +34,18 @@ public class EventoController {
 		}
 	}
 	
+	@RequestMapping(value = "listarEventosPorCategoria/{idCategoria}", method = RequestMethod.GET)
+	public ResponseEntity<List<Evento>> listarEventosPorCategoria(@PathVariable Long idCategoria, ServletResponse response) throws IOException {
+		try {
+			List<Evento> eventos = eventoDao.listarEventosPorCategoria(idCategoria);
+			HttpStatus status = eventos.size() > 0? HttpStatus.OK : HttpStatus.NO_CONTENT;
+			
+			return ResponseEntity.status(status).body(eventos);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
+	
 	@RequestMapping(value = "buscar/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Optional<Evento>> buscar(@PathVariable Long id, ServletResponse response) throws IOException {
 		try {
