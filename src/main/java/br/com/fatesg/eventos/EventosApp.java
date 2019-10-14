@@ -13,7 +13,7 @@ import br.com.fatesg.eventos.util.TokenFilter;
 
 @SpringBootApplication
 public class EventosApp {
-	
+	/*
 	@Bean
 	public FilterRegistrationBean<TokenFilter> filtroJwt() {
 		FilterRegistrationBean<TokenFilter> filterRegistrationBean = new FilterRegistrationBean<TokenFilter>();
@@ -22,7 +22,7 @@ public class EventosApp {
 		
 		return filterRegistrationBean;
 	}
-	
+	*/
 	@Bean
     public FilterRegistrationBean<CorsFilter> corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
