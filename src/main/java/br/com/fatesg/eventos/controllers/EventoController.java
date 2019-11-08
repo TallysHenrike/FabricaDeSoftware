@@ -1,19 +1,24 @@
 package br.com.fatesg.eventos.controllers;
 
-import br.com.fatesg.eventos.entities.Administrador;
-import br.com.fatesg.eventos.entities.Evento;
-import br.com.fatesg.eventos.persistence.EventoPersistence;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import javax.servlet.ServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import br.com.fatesg.eventos.entities.Administrador;
+import br.com.fatesg.eventos.entities.Evento;
+import br.com.fatesg.eventos.persistence.EventoPersistence;
 
 @RestController
 @RequestMapping("/restrito/evento")
@@ -38,7 +43,7 @@ public class EventoController {
 	public ResponseEntity<List<Evento>> listarEventosPorCategoria(@PathVariable Long idCategoria, ServletResponse response) throws IOException {
 		try {
 			List<Evento> eventos = eventoDao.listarEventosPorCategoria(idCategoria);
-			HttpStatus status = eventos.size() > 0? HttpStatus.OK : HttpStatus.NO_CONTENT;
+			HttpStatus status = eventos.size() > 0? HttpStatus.PARTIAL_CONTENT : HttpStatus.NO_CONTENT;
 			
 			return ResponseEntity.status(status).body(eventos);
 		} catch (Exception e) {
