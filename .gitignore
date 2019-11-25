@@ -264,6 +264,9 @@ hs_err_pid*
 ## ignoring target file
 target/
 
+## ignoring application file
+application.yml
+
 ### macOS ###
 # General
 .DS_Store
