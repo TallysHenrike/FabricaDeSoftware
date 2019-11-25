@@ -4,7 +4,7 @@ set -eo pipefail
 
 ############################ VARIABLES ############################
 # ssh key's location                                              #
-ssh_key="/home/circleci/FabricaDeSoftwares/Jenkins.pem"           #
+ssh_key="/home/circleci/arscrift/arscrift.pem"                    #
 # docker-compose for metrics                                      #
 metrics="/home/circleci/example/<metrics-docker-compose>.yml"     #
 # sleep time                                                      #
@@ -35,7 +35,7 @@ echo -e "
 export _sshconfig=$(mktemp -u)
 export _ssh_ctrl_socket=$(mktemp -u)
 
-cfn_stack_name=fatesg-eventos
+cfn_stack_name=arscrift
 
 jqScript=".AutoScalingGroups[] | select(.Tags[].Value == \"${cfn_stack_name}-Manager\").Instances[] | select(.HealthStatus == \"Healthy\").InstanceId"
 manager_id=$(aws autoscaling describe-auto-scaling-groups | jq -r "${jqScript}" | head -n1)
@@ -61,7 +61,7 @@ ssh -M -F ${_sshconfig} -fnNT -L localhost:2374:/var/run/docker.sock ${manager}
 export DOCKER_HOST=localhost:2374
 
 # now run `docker` commands as normal:
-docker stack deploy -c /home/circleci/FabricaDeSoftwares/docker-compose.yml fatesg-eventos
+docker stack deploy -c /home/circleci/arscrift/docker-compose.yml arscrift
 
 # Close the tunnel
 ssh -F ${_sshconfig} -O exit -

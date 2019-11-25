@@ -51,7 +51,7 @@ jobs: # a collection of steps
       # Customize the JVM maximum heap limit
       MAVEN_OPTS: -Xmx3200m
 
-    working_directory: ~/FabricaDeSoftwares # directory where steps will run
+    working_directory: ~/arscrift # directory where steps will run
 
     steps: # a collection of executable commands
 
@@ -94,7 +94,7 @@ jobs: # a collection of steps
       - checkout # check out source code to working directory
       - run:
           name: Decrpyt Secrets
-          command: openssl enc -d -aes-256-ecb -md md5 -in Jenkins.pem.enc -out Jenkins.pem -k $APPLICATION_PROPERTIES_SECRET_KEY
+          command: openssl enc -d -aes-256-ecb -md md5 -in arscrift.pem.enc -out arscrift.pem -k $APPLICATION_PROPERTIES_SECRET_KEY
       - run:
           name: Install awscli
           command: sudo pip install awscli
