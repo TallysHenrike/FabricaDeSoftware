@@ -12,7 +12,7 @@ jobs: # a collection of steps
           POSTGRES_DB: circle_test
           POSTGRES_PASSWORD: ""
 
-    working_directory: ~/FabricaDeSoftwares # directory where steps will run
+    working_directory: ~/arscrift # directory where steps will run
 
     steps: # a collection of executable commands
 
@@ -30,7 +30,7 @@ jobs: # a collection of steps
       - save_cache: # saves the project dependencies
           paths:
             - ~/.m2
-          key: FabricaDeSoftwares-{{ checksum "pom.xml" }}
+          key: arscrift-{{ checksum "pom.xml" }}
 #      - run:
 #          name: Build Spring Boot Project with Maven
 #          command: mvn install
@@ -69,27 +69,27 @@ jobs: # a collection of steps
 
       - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: FabricaDeSoftwares-{{ checksum "pom.xml" }}
+          key: arscrift-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline # gets the project dependencies
 
       - save_cache: # saves the project dependencies
           paths:
             - ~/.m2
-          key: FabricaDeSoftwares-{{ checksum "pom.xml" }}
+          key: arscrift-{{ checksum "pom.xml" }}
 
       # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=strund3r/api:$CIRCLE_BUILD_NUM
-      - run: mvn clean compile jib:build -Dimage=strund3r/api:latest
+      - run: mvn clean compile jib:build -Dimage=strund3r/arscrift-api:$CIRCLE_BUILD_NUM
+      - run: mvn clean compile jib:build -Dimage=strund3r/arscrift-api:latest
       # store raw contents of src code
       - store_artifacts:
           path: target/classes
-          destination: FabricaDeSoftwares
+          destination: arscrift
 
   deploy:
     machine:
       image: ubuntu-1604:201903-01
-    working_directory: ~/FabricaDeSoftwares
+    working_directory: ~/arscrift
     steps:
       - checkout # check out source code to working directory
       - run:

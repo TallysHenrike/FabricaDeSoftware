@@ -242,6 +242,9 @@ fabric.properties
 
 # Log file
 
+# PEM file
+arscrift.pem
+
 # BlueJ files
 *.ctxt
 
