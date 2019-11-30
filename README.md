@@ -6,5 +6,5 @@
 
 To start the API, run the command:
 ```
-docker run -itd --rm --name api strund3r/arscrift-api
+docker run -itd --rm --name api -p 80:8393 strund3r/arscrift-api
 ```
