@@ -1,98 +1,57 @@
 package br.com.fatesg.eventos.entities;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 
-@Entity
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class Categoria {
-
+	
 	@Id
-	@GeneratedValue(generator = "categoria_seq", strategy = GenerationType.SEQUENCE)
-	@SequenceGenerator(name = "categoria_seq", sequenceName = "categoria_seq", allocationSize = 1, initialValue = 1)
-	@NotNull(message = "Código de categoria não pode ser cadastrado como nulo.")
-	private Long idCategoria;
-
-	@Size(max = 50, message = "O campo nome deve ter no máximo 50 caracteres.")
-	@NotEmpty(message = "O campo nome não pode ser cadastrado em branco.")
-	private String nome;
-
-	@Size(max = 300, message = "O campo descrição deve ter no máximo 50 caracteres.")
-	@NotEmpty(message = "O campo descricao não pode ser nulo!")
-	private String descricao;
-
-	private byte[] icone;
-
-	private Date dataDeCadastro;
-
-	private Date dataDeAtualizacao;
-
-	public Categoria() {}
-
-	public Categoria(
-			Long idCategoria,
-			String nome,
-			String descricao,
-			byte[] icone,
-			Date dataDeCadastro,
-			Date dataDeAtualizacao
-	) {
-		this.idCategoria = idCategoria;
-		this.nome = nome;
-		this.descricao = descricao;
-		this.icone = icone;
-		this.dataDeCadastro = dataDeCadastro;
-		this.dataDeAtualizacao = dataDeAtualizacao;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer codigo = null;
+	private String nome = null;
+	private String descricao = null;
+	private String icone = null;
+	private LocalDateTime dataDeCriacao = null;
+	private LocalDateTime dataDeAtualizacao = null;
+	
+	public Integer getCodigo() {
+		return codigo;
 	}
-
-	public Long getIdCategoria() {
-		return idCategoria;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
-
-	public void setIdCategoria(Long idCategoria) {
-		this.idCategoria = idCategoria;
-	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getDescricao() {
 		return descricao;
 	}
-
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
-	public byte[] getIcone() {
+	public String getIcone() {
 		return icone;
 	}
-
-	public void setIcone(byte[] icone) {
+	public void setIcone(String icone) {
 		this.icone = icone;
 	}
-
-	public Date getDataDeCadastro() {
-		return dataDeCadastro;
+	public LocalDateTime getDataDeCriacao() {
+		return dataDeCriacao;
 	}
-
-	public void setDataDeCadastro(Date dataDeCadastro) {
-		this.dataDeCadastro = dataDeCadastro;
+	public void setDataDeCriacao(LocalDateTime dataDeCriacao) {
+		this.dataDeCriacao = dataDeCriacao;
 	}
-
-	public Date getDataDeAtualizacao() {
+	public LocalDateTime getDataDeAtualizacao() {
 		return dataDeAtualizacao;
 	}
-
-	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
+	public void setDataDeAtualizacao(LocalDateTime dataDeAtualizacao) {
 		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
-
+	
 }

@@ -1,103 +1,66 @@
 package br.com.fatesg.eventos.entities;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OrderColumn;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Administrador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@NotNull(message = "O idAdministrador não pode ser nulo!")
-	private Long idAdministrador;
-
-	@NotNull(message = "O campo nome não pode ser nulo!")
-	private String nome;
-
-	@NotNull(message = "O campo usuario não pode ser nulo!")
-	private String usuario;
-
-	@NotNull(message = "O campo senha não pode ser nulo!")
-	private String senha;
-
-	//@NotNull(message = "O campo foto não pode ser nulo!")
-	private byte[] foto;
-
-	private Date dataDeCadastro;
-
-	@OrderColumn
-	private Date dataDeAtualizacao;
-
-	public Administrador() {}
-
-	public Administrador(Long idAdministrador, String nome, String usuario, String senha, byte[] foto) {
-		super();
-		this.idAdministrador = idAdministrador;
-		this.nome = nome;
-		this.usuario = usuario;
-		this.senha = senha;
-		this.foto = foto;
+	private Integer codigo = null;
+	private String nome = null;
+	private String usuario = null;
+	private String senha = null;
+	private String imagem = null;
+	private LocalDateTime dataDeCriacao = null;
+	private LocalDateTime dataDeAtualizacao = null;
+	
+	public Integer getCodigo() {
+		return codigo;
 	}
-
-	public Long getIdAdministrador() {
-		return idAdministrador;
+	public void setCodigo(Integer codigo) {
+		this.codigo = codigo;
 	}
-
-	public void setIdAdministrador(Long idAdministrador) {
-		this.idAdministrador = idAdministrador;
-	}
-
 	public String getNome() {
 		return nome;
 	}
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 	public String getUsuario() {
 		return usuario;
 	}
-
 	public void setUsuario(String usuario) {
 		this.usuario = usuario;
 	}
-
 	public String getSenha() {
 		return senha;
 	}
-
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-
-	public byte[] getFoto() {
-		return foto;
+	public String getImagem() {
+		return imagem;
 	}
-
-	public void setFoto(byte[] foto) {
-		this.foto = foto;
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
-
-	public Date getDataDeCadastro() {
-		return dataDeCadastro;
+	public LocalDateTime getDataDeCriacao() {
+		return dataDeCriacao;
 	}
-
-	public void setDataDeCadastro(Date dataDeCadastro) {
-		this.dataDeCadastro = dataDeCadastro;
+	public void setDataDeCriacao(LocalDateTime dataDeCriacao) {
+		this.dataDeCriacao = dataDeCriacao;
 	}
-
-	public Date getDataDeAtualizacao() {
+	public LocalDateTime getDataDeAtualizacao() {
 		return dataDeAtualizacao;
 	}
-
-	public void setDataDeAtualizacao(Date dataDeAtualizacao) {
+	public void setDataDeAtualizacao(LocalDateTime dataDeAtualizacao) {
 		this.dataDeAtualizacao = dataDeAtualizacao;
 	}
+	
 }
