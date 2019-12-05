@@ -39,7 +39,7 @@ public class EventoController {
 	
 	@RequestMapping(value = "/evento/categoria/{codigo}", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<Evento>> listarEventoPorCategoria(@PathVariable("codigo") Integer codigo) {
-		return ResponseEntity.status(HttpStatus.OK).body(persistence.findAll());
+		return ResponseEntity.status(HttpStatus.OK).body(persistence.listarEventosPorCategoria(codigo));
 	}
 
 	@RequestMapping(value = "/evento", produces = { "application/json" }, method = RequestMethod.GET)
