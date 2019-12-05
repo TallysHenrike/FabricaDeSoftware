@@ -34,49 +34,29 @@ public class AdministradorController {
 
 	@RequestMapping(value = "/administrador/{codigo}", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<Optional<Administrador>> buscar(@PathVariable("codigo") Integer codigo) throws IOException {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("application/json")) {
-			return ResponseEntity.status(HttpStatus.OK).body(persistence.findById(codigo));
-		}
-
-		return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+		return ResponseEntity.status(HttpStatus.OK).body(persistence.findById(codigo));
 	}
 
 	@RequestMapping(value = "/administrador", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<Administrador>> listarAdministradores(ServletResponse response) throws IOException {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("application/json")) {
-			List<Administrador> administradores = persistence.findAll();
-			HttpStatus status = administradores.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT;
-
-			return ResponseEntity.status(status).body(administradores);
-		}
-		return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+		List<Administrador> administradores = persistence.findAll();
+		HttpStatus status = administradores.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT;
+		return ResponseEntity.status(status).body(administradores);
 	}
 
 	@RequestMapping(value = "/administrador", produces = { "application/json" }, consumes = { "multipart/form-data" }, method = RequestMethod.POST)
 	public ResponseEntity<Administrador> inserirAdministrador(@Valid @RequestParam Administrador administrador) {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("multipart/form-data")) {
-			persistence.save(administrador);
-		}
-		return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+		persistence.save(administrador);
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 	
 	@RequestMapping(value = "/administrador", produces = { "application/json" }, consumes = { "multipart/form-data" }, method = RequestMethod.PUT)
 	public ResponseEntity<Administrador> alterarAdministrador(@Valid @RequestParam Administrador administrador) {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("multipart/form-data")) {
-			persistence.save(administrador);
-		}
-		return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 	@RequestMapping(value = "/administrador/{codigo}", method = RequestMethod.DELETE)
 	public void removerAdministrador(@PathVariable("codigo") Integer codigo) throws IOException {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("application/json")) {
-			persistence.deleteById(codigo);
-		}
+		persistence.deleteById(codigo);
 	}
 }

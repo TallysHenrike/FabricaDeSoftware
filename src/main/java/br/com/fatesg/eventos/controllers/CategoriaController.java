@@ -34,49 +34,30 @@ public class CategoriaController {
 
 	@RequestMapping(value = "/categoria/{codigo}", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<Optional<Categoria>> buscar(@PathVariable("codigo") Integer codigo) throws IOException {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("application/json")) {
-			return ResponseEntity.status(HttpStatus.OK).body(persistence.findById(codigo));
-		}
-
-		return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+		return ResponseEntity.status(HttpStatus.OK).body(persistence.findById(codigo));
 	}
 
 	@RequestMapping(value = "/categoria", produces = { "application/json" }, method = RequestMethod.GET)
 	public ResponseEntity<List<Categoria>> listarCategoria(ServletResponse response) throws IOException {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("application/json")) {
-			List<Categoria> categorias = persistence.findAll();
-			HttpStatus status = categorias.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT;
-
-			return ResponseEntity.status(status).body(categorias);
-		}
-		return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+		List<Categoria> categorias = persistence.findAll();
+		HttpStatus status = categorias.size() > 0 ? HttpStatus.OK : HttpStatus.NO_CONTENT;
+		return ResponseEntity.status(status).body(categorias);
 	}
 
 	@RequestMapping(value = "/categoria", produces = { "application/json" }, consumes = { "multipart/form-data" }, method = RequestMethod.POST)
 	public ResponseEntity<Categoria> inserirCategoria(@Valid @RequestParam Categoria categoria) {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("application/json")) {
-			persistence.save(categoria);
-		}
-		return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+		persistence.save(categoria);
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 	
 	@RequestMapping(value = "/categoria", produces = { "application/json" }, consumes = { "multipart/form-data" }, method = RequestMethod.PUT)
 	public ResponseEntity<Categoria> alterarCategoria(@Valid @RequestParam Categoria categoria) {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("application/json")) {
-			persistence.save(categoria);
-		}
-		return ResponseEntity.status(HttpStatus.NOT_IMPLEMENTED).build();
+		persistence.save(categoria);
+		return ResponseEntity.status(HttpStatus.OK).build();
 	}
 
 	@RequestMapping(value = "/categoria/{codigo}", method = RequestMethod.DELETE)
 	public void removerCategoria(@PathVariable("codigo") Integer codigo) throws IOException {
-		String accept = request.getHeader("Accept");
-		if (accept != null && accept.contains("application/json")) {
-			persistence.deleteById(codigo);
-		}
+		persistence.deleteById(codigo);
 	}
 }
